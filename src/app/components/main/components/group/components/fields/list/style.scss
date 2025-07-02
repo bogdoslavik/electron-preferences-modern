@@ -3,23 +3,23 @@
     min-width: 25%;
     font-size: 14px;
     border-radius: 8px;
-    border: 1px solid #606671;
+    border: 1px solid #e7e7e7;
     background-color: #ffffff;
     padding: 0;
     outline: none;
     margin: 1px;
     transition: border-color 0.3s ease-out;
-    
+
     &:active, &:focus {
       border: 2px solid #0084ff;
       margin: 0;
     }
-    
+
     option {
       padding: 2px 3px;
     }
   }
-  
+
   .ep-list-button-container {
     margin-top: 10px;
   }
@@ -33,13 +33,13 @@
     background-color: #fff;
     padding: 5px;
     font-size: 14px;
-    
+
     &:first-child {
       border: 1px solid;
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;
     }
-    
+
     &:last-child {
       border: 1px solid;
       border-left: none;
@@ -78,13 +78,13 @@
         width: 100%;
         font-size: 14px;
         border-radius: 8px;
-        border: 1px solid #606671;
+        border: 1px solid #e7e7e7;
         background-color: #ffffff;
         padding: 8px;
         outline: none;
         margin: 1px;
         transition: border-color 0.3s ease-out;
-  
+
         &:focus {
           border: 2px solid #0084ff;
           margin: 0;
@@ -110,11 +110,11 @@
   border: 2px solid #999;
   padding: 5px;
   margin: 3px;
-  
+
   &:disabled {
     border-color: #ddd;
   }
-  
+
   &:active {
     border-color: #0084ff;
   }
@@ -162,13 +162,13 @@
       background-color: #191919;
       color: white;
       border-color: #131313;
-      
+
       &:first-child, &:last-child {
         border-color: #131313;
       }
     }
   }
-  
+
   .ReactModal__Content {
     background-color: #212121 !important;
     border-color: #131313 !important;

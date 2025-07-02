@@ -1,4 +1,5 @@
 .sidebar {
+    list-style: none;
     height: 100%;
     min-height: 100%;
     width: 199px;
@@ -11,49 +12,60 @@
     cursor: default;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #f8f9fb;
+    background-color: #f3f3f3;
     padding: 0;
     margin: 0;
+    padding-top: 16px;
 
     .sidebar-section {
-        height: 40px;
-        min-height: 40px;
-        max-height: 40px;
-        width: 199px;
-        min-width: 199px;
-        max-width: 199px;
+        height: 32px;
+        min-height: 32px;
+        max-height: 32px;
+        //width: 199px;
+        //min-width: 199px;
+        //max-width: 199px;
+        box-sizing: border-box;
         overflow: hidden;
-        padding: 4px;
+        padding: 6px;
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-top: 2px;
+        margin-bottom: 2px;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        color: #8C8C8C;
-        font-weight: 600;
+        //font-weight: 600;
         cursor: pointer;
         outline: none;
 
+
+        border-radius: 4px;
+        transition: background .15s;
+
         &.active {
-            //background-color: #0084ff;
-            color: #0084ff;
-            font-weight: bold;
+            background-color: #eaeaea;
+            color: #2d2c2e;
+            //font-weight: bold;
 
             .section-icon {
-                background-color: #0084ff;
+                background-color: #2d2c2e;
             }
         }
 
         &:focus {
-            border: 2px solid #0084ff;
+            background-color: #eaeaea;
+            //border: 1px solid #464646;
         }
 
         &:hover {
-            background-color: rgba(0,0,0,0.1);
+            background-color: #eaeaea;
         }
 
         .section-icon {
-            background-color: #afb9c0;
-            margin-right: 4px;
+            background-color: #2d2c2e;
+            margin-left: 8px;
+            margin-right: 8px;
             width: 30px;
             max-width: 30px;
             min-width: 30px;
@@ -63,7 +75,7 @@
         }
 
         .section-label {
-            font-size: 12px;
+            font-size: 13px;
         }
 
     }
@@ -76,14 +88,34 @@
 
 @media (prefers-color-scheme: dark) {
     .sidebar {
-        background-color: #212121;
+        background-color: #202020;
 
         .sidebar-section {
-            color: #787878;
+            color: #fdfdfd;
 
             .section-icon {
-                background-color: #787878;
+                background-color: #fdfdfd;
             }
+
+          &.active {
+            background-color: #424246;
+            color: #ffffff;
+            //font-weight: bold;
+
+            .section-icon {
+              background-color: #ffffff;
+            }
+          }
+
+          &:focus {
+            background-color: #424246;
+            //border: 1px solid #464646;
+          }
+
+          &:hover {
+            background-color: #424246;
+          }
         }
+
     }
 }

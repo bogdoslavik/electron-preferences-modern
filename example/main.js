@@ -9,6 +9,7 @@ const path = require('path');
 const url = require('url');
 const preferences = require('./preferences');
 
+app.commandLine.appendSwitch('enable-smooth-scrolling');
 nativeTheme.themeSource = preferences.preferences?.theme?.theme ?? 'system';
 
 preferences.on('save', preferences => {
