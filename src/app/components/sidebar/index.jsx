@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Icons from 'lucide-react';
 import HideableComponent from '../generic/hideable';
 
 class Sidebar extends React.Component {
@@ -20,10 +21,7 @@ class Sidebar extends React.Component {
 
 			}
 
-			const style = {
-				mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
-				WebkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
-			};
+			const Icon = Icons[section.icon];
 
 			return (
 				<HideableComponent key={ section.id } allPreferences={ preferences } field={ section }>
@@ -31,7 +29,7 @@ class Sidebar extends React.Component {
 						aria-selected={ isActive } aria-controls={ `tabpanel-${section.id}` } tabIndex={ isActive ? 0 : -1 }
 						aria-label={ section.label }
 						onClick={ this.selectSection.bind(this, section.id) }>
-						<div className='section-icon' style={ style } />
+						{ Icon && <Icon className='section-icon' size={ 30 } /> }
 						<span className='section-label'>{ section.label }</span>
 					</li>
 				</HideableComponent>
