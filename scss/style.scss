@@ -1,3 +1,17 @@
+@use "../src/app/components/main/style" as *;
+@use "../src/app/components/main/components/group/style" as *;
+@use "../src/app/components/main/components/group/components/fields/accelerator/style" as *;
+@use "../src/app/components/main/components/group/components/fields/checkbox/style" as *;
+@use "../src/app/components/main/components/group/components/fields/color/style" as *;
+@use "../src/app/components/main/components/group/components/fields/dropdown/style" as *;
+@use "../src/app/components/main/components/group/components/fields/list/style" as *;
+@use "../src/app/components/main/components/group/components/fields/message/style" as *;
+@use "../src/app/components/main/components/group/components/fields/radio/style" as *;
+@use "../src/app/components/main/components/group/components/fields/slider/style" as *;
+@use "../src/app/components/main/components/group/components/fields/text/style" as *;
+@use "../src/app/components/main/components/group/components/fields/secret/style" as *;
+@use "../src/app/components/sidebar/style" as *;
+
 html {
     margin: 0;
     padding: 0;
@@ -51,17 +65,3 @@ body {
     }
 }
 
-// Import all the styles
-@import "../src/app/components/main/style";
-@import "../src/app/components/main/components/group/style";
-@import "../src/app/components/main/components/group/components/fields/accelerator/style";
-@import "../src/app/components/main/components/group/components/fields/checkbox/style";
-@import "../src/app/components/main/components/group/components/fields/color/style";
-@import "../src/app/components/main/components/group/components/fields/dropdown/style";
-@import "../src/app/components/main/components/group/components/fields/list/style";
-@import "../src/app/components/main/components/group/components/fields/message/style";
-@import "../src/app/components/main/components/group/components/fields/radio/style";
-@import "../src/app/components/main/components/group/components/fields/slider/style";
-@import "../src/app/components/main/components/group/components/fields/text/style";
-@import "../src/app/components/main/components/group/components/fields/secret/style";
-@import "../src/app/components/sidebar/style";

@@ -5,43 +5,52 @@ import PropTypes from 'prop-types';
 
 class HideableComponent extends React.Component {
 
-  render() {
-    const { isHidden } = this;
+	render() {
 
-    if (isHidden) return null;
+		const { isHidden } = this;
 
-    return this.props.children;
+		if (isHidden) {
 
-  }
+			return null;
 
-  get field() {
+		}
 
-    return this.props.field;
+		return this.props.children;
 
-  }
-  
-  get isHidden() {
-    
-    const { allPreferences } = this.props;
-    try {
-      return typeof (this.field.hideFunction) !== 'undefined'
+	}
+
+	get field() {
+
+		return this.props.field;
+
+	}
+
+	get isHidden() {
+
+		const { allPreferences } = this.props;
+		try {
+
+			return typeof (this.field.hideFunction) !== 'undefined'
         && typeof (this.field.hideFunction) === 'function'
         && this.field.hideFunction(allPreferences);
-    }
-    catch (e) {
-      console.error("Seems like there's an error within your hideFunction. Please investigate: " + e.message, e);
-      console.error("These were the current preferences: ", allPreferences);
-    }
 
-    return false;
+		} catch (e) {
 
-  }
+			console.error('Seems like there\'s an error within your hideFunction. Please investigate: ' + e.message, e);
+			console.error('These were the current preferences: ', allPreferences);
+
+		}
+
+		return false;
+
+	}
 
 }
 
 HideableComponent.propTypes = {
-  field: PropTypes.object,
-  allPreferences: PropTypes.object,
+	field: PropTypes.object,
+	allPreferences: PropTypes.object,
+	children: PropTypes.node,
 };
 
 export default HideableComponent;
