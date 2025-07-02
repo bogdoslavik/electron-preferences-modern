@@ -2,23 +2,29 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Select, Label } from '@radix-ui/themes';
 
 class DropdownField extends React.Component {
 
 	render() {
 
-		const options = this.options.map((option, idx) => (
-			<option value={option.value} key={idx} aria-label={ option.label }>{option.label}</option>
+		const options = this.options.map(option => (
+			<Select.Item value={ option.value } key={ option.value }>
+				{ option.label }
+			</Select.Item>
 		));
 
 		return (
 			<div className={`field field-dropdown key-${this.field.key}`}>
-				<div className="field-label">{ this.label }</div>
-				<select onChange={ this.onChange.bind(this) } value={ this.value } aria-label={ this.label }>
-					<option value="">-- Select One --</option>
-					{ options }
-				</select>
-				{ this.help && <span className="help">{ this.help }</span> }
+				<Label>{ this.label }</Label>
+				<Select.Root value={ this.value } onValueChange={ value => this.onChange(value) }>
+					<Select.Trigger />
+					<Select.Content>
+						<Select.Item value=''>-- Select One --</Select.Item>
+						{ options }
+					</Select.Content>
+				</Select.Root>
+				{ this.help && <span className='help'>{ this.help }</span> }
 			</div>
 		);
 
@@ -54,9 +60,9 @@ class DropdownField extends React.Component {
 
 	}
 
-	onChange(e) {
+	onChange(value) {
 
-		return this.props.onChange(e.target.value);
+		return this.props.onChange(value);
 
 	}
 

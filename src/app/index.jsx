@@ -1,10 +1,12 @@
-/* global api, document */
+/* global api, document, window */
 
 /* Electron Renderer Process */
 'use strict';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { Theme } from '@radix-ui/themes';
+import '@radix-ui/themes/styles.css';
 import _ from 'lodash';
 import debounce from './utils/debounce.js';
 import Sidebar from './components/sidebar';
@@ -14,6 +16,17 @@ import '../../scss/style.scss';
 const allSections = api.getSections();
 const preferences = api.getPreferences();
 const config = api.getConfig();
+const accentColor = config.accentColor || 'indigo';
+let appearance = 'light';
+if (config.appearance === 'dark') {
+
+	appearance = 'dark';
+
+} else if (config.appearance === 'system') {
+
+	appearance = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+}
 
 const sections = allSections.filter(section => _.isBoolean(section.enabled) ? section.enabled : true);
 
@@ -83,4 +96,8 @@ class App extends React.Component {
 }
 
 const root = createRoot(document.querySelector('#window'));
-root.render(<App />);
+root.render(
+	<Theme accentColor={accentColor} appearance={appearance}>
+		<App />
+	</Theme>,
+);
