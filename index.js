@@ -8,8 +8,8 @@ const url = require('url');
 const fs = require('fs');
 const _ = require('lodash');
 const { EventEmitter2 } = require('eventemitter2');
-const loadJsonFile = require('load-json-file');
-const writeJsonFile = require('write-json-file');
+const {loadJsonFileSync} = require('load-json-file');
+const {writeJsonFile} = require('write-json-file');
 const jsonSerializer = require('serialize-javascript'); //also serializes functions etc.
 
 class ElectronPreferences extends EventEmitter2 {
@@ -73,7 +73,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 			if (fs.existsSync(this.dataStore)) {
 
-				this.preferences = loadJsonFile.sync(this.dataStore);
+                                this.preferences = loadJsonFileSync(this.dataStore);
 
 			}
 
