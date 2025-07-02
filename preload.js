@@ -5,8 +5,9 @@ const electron = require('electron');
 const { contextBridge } = electron;
 const { ipcRenderer } = electron;
 
-const deserializeJson = (serializedJavascript) => eval('(' + serializedJavascript + ')'); //deserialize function for 'serialize-javascript' library
-let onPreferencesUpdatedHandler; 
+// eslint-disable-next-line no-eval -- deserialize function for 'serialize-javascript' library
+const deserializeJson = serializedJavascript => eval('(' + serializedJavascript + ')');
+let onPreferencesUpdatedHandler;
 
 contextBridge.exposeInMainWorld('api', {
 	getSections: () => deserializeJson(ipcRenderer.sendSync('getSections')),
@@ -17,8 +18,18 @@ contextBridge.exposeInMainWorld('api', {
 	showOpenDialog: dialogOptions => ipcRenderer.sendSync('showOpenDialog', dialogOptions),
 	sendButtonClick: channel => ipcRenderer.send('sendButtonClick', channel),
 	encrypt: secret => ipcRenderer.sendSync('encrypt', secret),
-	onPreferencesUpdated: handler => { onPreferencesUpdatedHandler = handler; },
+	onPreferencesUpdated(handler) {
+
+		onPreferencesUpdatedHandler = handler;
+
+	},
 });
 ipcRenderer.on('preferencesUpdated', (e, preferences) => {
-	typeof onPreferencesUpdatedHandler === "function" && onPreferencesUpdatedHandler(preferences);
+
+	if (typeof onPreferencesUpdatedHandler === 'function') {
+
+		onPreferencesUpdatedHandler(preferences);
+
+	}
+
 });

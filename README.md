@@ -116,11 +116,13 @@ const preferences = new ElectronPreferences({
 	// Create an optional menu bar
 	menu: Menu.buildFromTemplate(/* ... */),
 	
-	// Provide a custom CSS file, relative to your appPath.
-	css: 'preference-styles.css',
+        config: {
+                // Provide a custom CSS file, relative to your appPath.
+                css: 'preference-styles.css',
 
-	// Preference file path. Where your preferences are saved (required)
-	dataStore: path.join(app.getPath("userData"), 'preferences.json'),
+                // Preference file path. Where your preferences are saved (required)
+                dataStore: path.join(app.getPath('userData'), 'preferences.json'),
+        },
 
 	// Preference default values
 	defaults: { 
@@ -866,9 +868,11 @@ const preferences = new ElectronPreferences({
       ],
     },
   ]),
-  /**
-   * If you want to apply your own CSS. The path should be relative to your appPath.
-   */
-  css: 'custom-style.css',
+  config: {
+    /**
+     * If you want to apply your own CSS. The path should be relative to your appPath.
+     */
+    css: 'custom-style.css',
+  },
 });
 ```

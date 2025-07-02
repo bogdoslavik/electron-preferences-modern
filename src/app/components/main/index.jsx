@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Group from './components/group';
-import HideableComponent from "../generic/hideable";
+import HideableComponent from '../generic/hideable';
 
 class Main extends React.Component {
 
@@ -26,22 +26,23 @@ class Main extends React.Component {
 	}
 
 	render() {
-    const { preferences, section, onFieldChange } = this;
+
+		const { preferences, section, onFieldChange } = this;
 
 		const groups = this.form.groups.map((group, idx) => (
-      <HideableComponent field={ group } allPreferences={ preferences }>
-        <Group key={ idx }
-               groupId={section.id}
-               group={ group }
-               preferences={ preferences[section.id] }
-               allPreferences={ preferences }
-               onFieldChange={ onFieldChange.bind(this) }
-        />
-      </HideableComponent>
+			<HideableComponent key={ idx } field={ group } allPreferences={ preferences }>
+				<Group
+					groupId={section.id}
+					group={ group }
+					preferences={ preferences[section.id] }
+					allPreferences={ preferences }
+					onFieldChange={ onFieldChange.bind(this) }
+				/>
+			</HideableComponent>
 		));
 
 		return (
-			<div className="main" role="tabpanel" ref={ this.mainRef }>
+			<div className='main' role='tabpanel' ref={ this.mainRef }>
 				{ groups }
 			</div>
 		);
