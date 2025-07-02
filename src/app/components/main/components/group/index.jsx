@@ -15,7 +15,7 @@ import ListField from './components/fields/list';
 import FileField from './components/fields/file';
 import ButtonField from './components/fields/button';
 import SecretField from './components/fields/secret';
-import HideableComponent from "../../../generic/hideable";
+import HideableComponent from '../../../generic/hideable';
 
 const fieldMap = {
 	directory: DirectoryField,
@@ -31,16 +31,16 @@ const fieldMap = {
 	list: ListField,
 	file: FileField,
 	button: ButtonField,
-  secret: SecretField
+	secret: SecretField,
 };
 
 class Group extends React.Component {
 
 	render() {
 
-    const { allPreferences } = this;
-    
-		const label = this.label ? <div className="group-label">{ this.label }</div> : null;
+		const { allPreferences } = this;
+
+		const label = this.label ? <div className='group-label'>{ this.label }</div> : null;
 
 		const fields = this.fields.map((field, idx) => {
 
@@ -51,13 +51,14 @@ class Group extends React.Component {
 
 			}
 
-			return <HideableComponent field={ field } key={ idx } allPreferences={ allPreferences } >
-        <Field field={ field }
-               key={ idx }
-               value={ this.preferences[field.key] }
-               onChange={ this.onFieldChange.bind(this, field.key) }
-        />
-      </HideableComponent>;
+			return (
+				<HideableComponent key={ idx } field={ field } allPreferences={ allPreferences }>
+					<Field field={ field }
+						value={ this.preferences[field.key] }
+						onChange={ this.onFieldChange.bind(this, field.key) }
+					/>
+				</HideableComponent>
+			);
 
 		})
 			.filter(field => field);
@@ -94,12 +95,12 @@ class Group extends React.Component {
 		return this.props.preferences;
 
 	}
-  
-  get allPreferences() {
-    
-    return this.props.allPreferences;
-    
-  }
+
+	get allPreferences() {
+
+		return this.props.allPreferences;
+
+	}
 
 	get onFieldChange() {
 
@@ -113,6 +114,8 @@ Group.propTypes = {
 	preferences: PropTypes.object,
 	group: PropTypes.object,
 	onFieldChange: PropTypes.func,
+	groupId: PropTypes.string,
+	allPreferences: PropTypes.object,
 };
 
 export default Group;

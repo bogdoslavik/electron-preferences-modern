@@ -4,7 +4,7 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import _ from 'lodash';
 import debounce from './utils/debounce.js';
 import Sidebar from './components/sidebar';
@@ -82,7 +82,5 @@ class App extends React.Component {
 
 }
 
-ReactDOM.render(
-	<App />,
-	document.querySelector('#window'),
-);
+const root = createRoot(document.querySelector('#window'));
+root.render(<App />);
