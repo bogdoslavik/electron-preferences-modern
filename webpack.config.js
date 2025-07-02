@@ -13,6 +13,10 @@ module.exports = {
 		path: path.resolve(__dirname, 'build'),
 		filename: 'app.js',
 	},
+	performance: {
+		maxAssetSize: 512000,
+		maxEntrypointSize: 512000,
+	},
 	resolve: {
 		extensions: [
 			'.js', '.jsx', '.scss',
