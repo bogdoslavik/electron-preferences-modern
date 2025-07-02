@@ -52,7 +52,6 @@
     "eventemitter2": "^6.4.9",
     "load-json-file": "^7.0.1",
     "lodash": "^4.17.21",
-    "lucide-react": "^0.525.0",
     "prop-types": "^15.8.1",
     "react-color": "^2.19.3",
     "react-modal": "^3.16.3",
