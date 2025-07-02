@@ -8,9 +8,9 @@ const url = require('url');
 const fs = require('fs');
 const _ = require('lodash');
 const { EventEmitter2 } = require('eventemitter2');
-const {loadJsonFileSync} = require('load-json-file');
-const {writeJsonFile} = require('write-json-file');
-const jsonSerializer = require('serialize-javascript'); //also serializes functions etc.
+const { loadJsonFileSync } = require('load-json-file');
+const { writeJsonFile } = require('write-json-file');
+const jsonSerializer = require('serialize-javascript'); // Also serializes functions etc.
 
 class ElectronPreferences extends EventEmitter2 {
 
@@ -21,6 +21,8 @@ class ElectronPreferences extends EventEmitter2 {
 		_.defaultsDeep(options, {
 			config: {
 				debounce: 150,
+				accentColor: 'indigo',
+				appearance: 'system',
 			},
 			sections: [],
 			webPreferences: {
@@ -33,14 +35,14 @@ class ElectronPreferences extends EventEmitter2 {
 		// Legacy: Set config values
 		if (options.css && !options.config.css) {
 
-			console.warn("DEPRECATED: css option has been deprecated and will be removed in a future version. It now lives under config.css.");
+			console.warn('DEPRECATED: css option has been deprecated and will be removed in a future version. It now lives under config.css.');
 			this.options.config.css = options.css;
 
 		}
 
 		if (options.dataStore && !options.config.dataStore) {
 
-			console.warn("DEPRECATED: dataStore option has been deprecated and will be removed in a future version. It now lives under config.dataStore.");
+			console.warn('DEPRECATED: dataStore option has been deprecated and will be removed in a future version. It now lives under config.dataStore.');
 			this.options.config.dataStore = options.dataStore;
 
 		}
@@ -73,7 +75,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 			if (fs.existsSync(this.dataStore)) {
 
-                                this.preferences = loadJsonFileSync(this.dataStore);
+				this.preferences = loadJsonFileSync(this.dataStore);
 
 			}
 
@@ -138,7 +140,7 @@ class ElectronPreferences extends EventEmitter2 {
 		});
 
 		ipcMain.on('getSections', event => {
-			
+
 			event.returnValue = jsonSerializer(this.options.sections);
 
 		});
@@ -192,35 +194,37 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
-    ipcMain.on('encrypt', (event, secret) => {
-      
-      if (!safeStorage.isEncryptionAvailable()) {
-        
-        console.warn("Cannot encrypt secret as electron's safeStorage isn't available");
-        event.returnValue = "";
-        return;
-        
-      }
-      
-      event.returnValue = safeStorage.encryptString(secret).toString('base64');
-      
-    });
+		ipcMain.on('encrypt', (event, secret) => {
 
-    ipcMain.on('decrypt', (event, encryptedSecret) => {
-      
-      if (!safeStorage.isEncryptionAvailable()) {
-        
-        console.warn("Cannot decrypt encrypted secret as electron's safeStorage isn't available");
-        event.returnValue = "";
-        return;
-        
-      }
-      
-      const encryptedBuffer = Buffer.from(encryptedSecret, 'base64');
-      event.returnValue = safeStorage.decryptString(encryptedBuffer);
-      
-    });
-    
+			if (!safeStorage.isEncryptionAvailable()) {
+
+				console.warn('Cannot encrypt secret as electron\'s safeStorage isn\'t available');
+				event.returnValue = '';
+
+				return;
+
+			}
+
+			event.returnValue = safeStorage.encryptString(secret).toString('base64');
+
+		});
+
+		ipcMain.on('decrypt', (event, encryptedSecret) => {
+
+			if (!safeStorage.isEncryptionAvailable()) {
+
+				console.warn('Cannot decrypt encrypted secret as electron\'s safeStorage isn\'t available');
+				event.returnValue = '';
+
+				return;
+
+			}
+
+			const encryptedBuffer = Buffer.from(encryptedSecret, 'base64');
+			event.returnValue = safeStorage.decryptString(encryptedBuffer);
+
+		});
+
 		if (_.isFunction(options.afterLoad)) {
 
 			options.afterLoad(this);
@@ -359,18 +363,18 @@ class ElectronPreferences extends EventEmitter2 {
 	}
 
 	show(section) {
-    
-    if (typeof(section) !== 'undefined') {
 
-      const sectionIds = this.options.sections.map(section => section.id);
-      if (!sectionIds.includes(section)) {
+		if (typeof (section) !== 'undefined') {
 
-        console.warn(`Could not find a section with id '${section}'. Ignoring the parameter`);
-        section = undefined;
+			const sectionIds = this.options.sections.map(section => section.id);
+			if (!sectionIds.includes(section)) {
 
-      }
-      
-    }
+				console.warn(`Could not find a section with id '${section}'. Ignoring the parameter`);
+				section = undefined;
+
+			}
+
+		}
 
 		if (this.prefsWindow) {
 
@@ -382,12 +386,14 @@ class ElectronPreferences extends EventEmitter2 {
 
 			}
 
-      if (section) {
-          this.prefsWindow.webContents.executeJavaScript(` \
+			if (section) {
+
+				this.prefsWindow.webContents.executeJavaScript(` \
               document.getElementById("tab-${section}").click() \
               ;0
             `); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
-      }
+
+			}
 
 			return this.prefsWindow;
 
@@ -449,23 +455,23 @@ class ElectronPreferences extends EventEmitter2 {
 				}
 
 			}
-      
-      if (section) {
-        
-        try {
 
-          await this.prefsWindow.webContents.executeJavaScript(` \
+			if (section) {
+
+				try {
+
+					await this.prefsWindow.webContents.executeJavaScript(` \
 					  		document.getElementById("tab-${section}").click() \
 					  		;0
 					  	`); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
-          
-        } catch (error) {
-          
-          console.error(`Could not open the requested section ${section}: ${error}`);
-          
-        }
-        
-      }
+
+				} catch (error) {
+
+					console.error(`Could not open the requested section ${section}: ${error}`);
+
+				}
+
+			}
 
 		});
 
@@ -499,25 +505,26 @@ class ElectronPreferences extends EventEmitter2 {
 
 	resetToDefaults() {
 
-					this._preferences = this.defaults;
-					
-					this.save();
-					this.broadcast();
+		this._preferences = this.defaults;
+
+		this.save();
+		this.broadcast();
+
 	}
-  
-  decrypt(encryptedSecretString) {
-    
-    if (!safeStorage.isEncryptionAvailable()) {
-      
-      throw new Error("Cannot decrypt as electron's safeStorage isn't available yet");
-      
-    }
-    
-    const encryptedSecret = Buffer.from(encryptedSecretString, 'base64');
-    
-    return safeStorage.decryptString(encryptedSecret);
-    
-  }
+
+	decrypt(encryptedSecretString) {
+
+		if (!safeStorage.isEncryptionAvailable()) {
+
+			throw new Error('Cannot decrypt as electron\'s safeStorage isn\'t available yet');
+
+		}
+
+		const encryptedSecret = Buffer.from(encryptedSecretString, 'base64');
+
+		return safeStorage.decryptString(encryptedSecret);
+
+	}
 
 }
 

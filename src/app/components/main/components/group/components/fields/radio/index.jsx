@@ -2,33 +2,25 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { newGuid } from '../../../../../../../utils/newGuid.js';
+import { RadioGroup, Label } from '@radix-ui/themes';
 
 class RadioField extends React.Component {
 
 	render() {
 
-		const fieldID = `radio_${newGuid()}`;
-
-		const options = this.options.map((option, idx) => {
-
-			const id = `${fieldID}_${idx}`;
-
-			return (
-				<label htmlFor={ id } className="radio-option" key={ idx }>
-					{ option.label }
-					<input type="radio" id={ id } onChange={ this.onChange.bind(this) } checked={ option.value === this.value } name={ fieldID } aria-label={ option.label } />
-					<span className="check-circle" />
-				</label>
-			);
-
-		});
+		const options = this.options.map(option => (
+			<RadioGroup.Item value={ option.value } key={ option.value }>
+				{ option.label }
+			</RadioGroup.Item>
+		));
 
 		return (
 			<div className={`field field-radio key-${this.field.key}`}>
-				<div className="field-label">{ this.label }</div>
-				{ options }
-				{ this.help && <span className="help">{ this.help }</span> }
+				<Label>{ this.label }</Label>
+				<RadioGroup.Root value={ this.value } onValueChange={ value => this.onChange(value) }>
+					{ options }
+				</RadioGroup.Root>
+				{ this.help && <span className='help'>{ this.help }</span> }
 			</div>
 		);
 
@@ -64,12 +56,9 @@ class RadioField extends React.Component {
 
 	}
 
-	onChange(e) {
+	onChange(value) {
 
-		const idx = e.target.id.split('_')[2];
-		const option = this.options[idx];
-
-		return this.props.onChange(option.value);
+		return this.props.onChange(value);
 
 	}
 

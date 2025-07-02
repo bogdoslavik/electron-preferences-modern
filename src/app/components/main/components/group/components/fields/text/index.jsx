@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TextField as RadixTextField, Label } from '@radix-ui/themes';
 
 class TextField extends React.Component {
 
@@ -9,9 +10,11 @@ class TextField extends React.Component {
 
 		return (
 			<div className={`field field-text key-${this.field.key}`}>
-				<div className="field-label">{ this.label }</div>
-				<input type={ this.inputType } onChange={ this.onChange.bind(this) } value={ this.value } aria-label={ this.label }/>
-				{ this.help && <span className="help">{ this.help }</span> }
+				<Label>{ this.label }</Label>
+				<RadixTextField.Root>
+					<RadixTextField.Input type={ this.inputType } onChange={ this.onChange.bind(this) } value={ this.value } aria-label={ this.label } />
+				</RadixTextField.Root>
+				{ this.help && <span className='help'>{ this.help }</span> }
 			</div>
 		);
 

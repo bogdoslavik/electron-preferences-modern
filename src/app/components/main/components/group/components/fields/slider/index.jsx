@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Slider as RadixSlider, Label } from '@radix-ui/themes';
 
 class SliderField extends React.Component {
 
@@ -9,10 +10,16 @@ class SliderField extends React.Component {
 
 		return (
 			<div className={`field field-slider key-${this.field.key}`}>
-				<div className="field-label">{ this.label }</div>
-				<input type="range" onChange={ this.onChange.bind(this) } min={ this.min } max={ this.max } step={ this.step } value={ this.value } aria-label={ this.label }/>
+				<Label>{ this.label }</Label>
+				<RadixSlider
+					value={[ this.value ]}
+					onValueChange={([ val ]) => this.onChange({ target: { value: val } })}
+					min={ this.min }
+					max={ this.max }
+					step={ this.step }
+				/>
 				<label>{ this.value }</label>
-				{ this.help && <span className="help">{ this.help }</span> }
+				{ this.help && <span className='help'>{ this.help }</span> }
 			</div>
 		);
 

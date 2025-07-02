@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Checkbox as RadixCheckbox, Label } from '@radix-ui/themes';
 import { newGuid } from '../../../../../../../utils/newGuid.js';
 
 class CheckboxField extends React.Component {
@@ -31,10 +32,9 @@ class CheckboxField extends React.Component {
 			const checked = value.includes(option.value);
 
 			return (
-				<label htmlFor={ id } className="checkbox-option" key={idx}>
+				<label htmlFor={ id } className='checkbox-option' key={idx}>
+					<RadixCheckbox id={ id } checked={ checked } onCheckedChange={ checked => this.onOptionChange(option.value, checked) } />
 					{ option.label }
-					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ checked } aria-label={ option.label } />
-					<span className="check-square" />
 				</label>
 			);
 
@@ -42,9 +42,9 @@ class CheckboxField extends React.Component {
 
 		return (
 			<div className={`field field-checkbox key-${this.field.key}`}>
-				<div className="field-label" aria-label={ label }>{ label }</div>
+				<Label>{ label }</Label>
 				{ options }
-				{ help && <span className="help">{ help }</span> }
+				{ help && <span className='help'>{ help }</span> }
 			</div>
 		);
 
@@ -80,16 +80,15 @@ class CheckboxField extends React.Component {
 
 	}
 
-	onChange(e) {
+	onOptionChange(optionValue, checked) {
 
 		let { value } = this;
-		const idx = e.target.id.split('_')[2];
-		const option = this.options[idx];
+		const option = optionValue;
 
 		// Coerce values
 		if (typeof value === 'boolean' && this.options.length === 1) {
 
-			value = value ? [ option.value ] : [];
+			value = value ? [ option ] : [];
 
 		} else if (typeof value !== 'object') {
 
@@ -97,17 +96,17 @@ class CheckboxField extends React.Component {
 
 		}
 
-		if (e.target.checked) {
+		if (checked) {
 
-			if (!value.includes(option.value)) {
+			if (!value.includes(option)) {
 
-				value.push(option.value);
+				value.push(option);
 
 			}
 
 		} else {
 
-			const valueIdx = value.indexOf(option.value);
+			const valueIdx = value.indexOf(option);
 			if (valueIdx > -1) {
 
 				value.splice(valueIdx, 1);
