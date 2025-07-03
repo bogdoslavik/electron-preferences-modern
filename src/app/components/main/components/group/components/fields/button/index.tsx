@@ -12,17 +12,17 @@ class ButtonField extends React.Component {
 
 		};
 
-		const fieldLabel = this.hideLabel === 'true' ? '' : <div className="field-label">{ this.label }</div>;
+		const fieldLabel = this.hideLabel === 'true' ? '' : <div className='field-label'>{ this.label }</div>;
 
 		const btLabel = this.buttonLabel ? this.buttonLabel : 'Click Here';
 
 		return (
 			<div className={`field field-button key-${this.key}`}>
 				{ fieldLabel }
-				<button className="bt" onClick={ choose }>
+				<button className='bt' onClick={ choose }>
 					{ btLabel }
 				</button>
-				{ this.help && <span className="help">{ this.help }</span> }
+				{ this.help && <span className='help'>{ this.help }</span> }
 			</div>
 		);
 

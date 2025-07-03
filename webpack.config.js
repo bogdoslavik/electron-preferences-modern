@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
-	entry: './src/app/index.jsx',
+	entry: './src/app/index.tsx',
 	watchOptions: {
 		ignored: /node_modules/,
 	},
@@ -19,7 +19,7 @@ module.exports = {
 	},
 	resolve: {
 		extensions: [
-			'.js', '.jsx', '.scss',
+			'.js', '.jsx', '.ts', '.tsx', '.scss',
 		],
 		modules: [
 			path.resolve(__dirname, 'src'),
@@ -38,13 +38,13 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx)$/,
+				test: /\.(js|jsx|ts|tsx)$/,
 				exclude: /node_modules/,
 				use: [
 					{
 						loader: 'babel-loader',
 						options: {
-							presets: [ '@babel/preset-env', '@babel/preset-react' ],
+							presets: [ '@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript' ],
 						},
 					},
 				],

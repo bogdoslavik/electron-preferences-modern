@@ -1,9 +1,11 @@
 /* global api */
+'use strict';
+
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isArray } from '../../../../../../../utils/isArray.js';
+import { isArray } from '../../../../../../../utils/isArray';
 
-class DirectoryField extends React.Component {
+class FileField extends React.Component {
 
 	constructor(props) {
 
@@ -15,17 +17,17 @@ class DirectoryField extends React.Component {
 
 	render() {
 
-		const { multiSelections, value, help, label } = this;
+		const { multiSelections, value, help, label, buttonLabel } = this;
 
-		const btLabel = value && value.length > 0
-			? (multiSelections ? 'Choose other Folders' : 'Choose Another Folder')
-			: (multiSelections ? 'Choose Folders' : 'Choose a Folder');
+		const btLabel = buttonLabel || (value && value.length > 0
+			? (multiSelections ? 'Choose other Files' : 'Choose another File')
+			: (multiSelections ? 'Choose Files' : 'Choose a File'));
 
 		return (
-			<div className={`field field-directory key-${this.field.key}`}>
-				<div className="field-label" aria-label={ label }>{ label }</div>
-				<div className="value" onClick={ this.choose }>
-					{multiSelections ? 'Folders' : 'Folder'}:&nbsp;
+			<div className={`field field-file key-${this.field.key}`}>
+				<div className='field-label' aria-label={ label }>{label}</div>
+				<div className='value' onClick={this.choose}>
+					{multiSelections ? 'Files' : 'File'}:&nbsp;
 					{
 						value
 							? (
@@ -36,10 +38,10 @@ class DirectoryField extends React.Component {
 							: 'None'
 					}
 				</div>
-				<button className="bt" onClick={ this.choose } aria-label={ btLabel }>
-					{ btLabel }
+				<button className='bt' onClick={this.choose} aria-label={ btLabel }>
+					{btLabel}
 				</button>
-				{ help && <span className="help">{ help }</span> }
+				{help && <span className='help'>{help}</span>}
 			</div>
 		);
 
@@ -64,6 +66,12 @@ class DirectoryField extends React.Component {
 
 	}
 
+	get buttonLabel() {
+
+		return this.field.buttonLabel;
+
+	}
+
 	get label() {
 
 		return this.field.label;
@@ -82,9 +90,21 @@ class DirectoryField extends React.Component {
 
 	}
 
+	get filters() {
+
+		return this.field.filters || undefined;
+
+	}
+
 	get multiSelections() {
 
 		return this.field.multiSelections || false;
+
+	}
+
+	get showHiddenFiles() {
+
+		return this.field.showHiddenFiles || false;
 
 	}
 
@@ -114,11 +134,17 @@ class DirectoryField extends React.Component {
 
 	choose() {
 
-		const { multiSelections, noResolveAliases, treatPackageAsDirectory, dontAddToRecent } = this;
-		const properties = [ 'openDirectory', 'createDirectory' ];
+		const { multiSelections, showHiddenFiles, noResolveAliases, treatPackageAsDirectory, dontAddToRecent, filters } = this;
+		const properties = [ 'openFile' ];
 		if (multiSelections) {
 
 			properties.push('multiSelections');
+
+		}
+
+		if (showHiddenFiles) {
+
+			properties.push('showHiddenFiles');
 
 		}
 
@@ -142,6 +168,7 @@ class DirectoryField extends React.Component {
 
 		const result = api?.showOpenDialog({
 			properties,
+			filters,
 		});
 
 		if (!result) {
@@ -160,10 +187,10 @@ class DirectoryField extends React.Component {
 
 }
 
-DirectoryField.propTypes = {
+FileField.propTypes = {
 	field: PropTypes.object,
 	value: PropTypes.string,
 	onChange: PropTypes.func,
 };
 
-export default DirectoryField;
+export default FileField;

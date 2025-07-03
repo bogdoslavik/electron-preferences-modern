@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { newGuid } from '../../../../../../../utils/newGuid.js';
+import { newGuid } from '../../../../../../../utils/newGuid';
 
 class CheckboxField extends React.Component {
 
@@ -31,10 +31,10 @@ class CheckboxField extends React.Component {
 			const checked = value.includes(option.value);
 
 			return (
-				<label htmlFor={ id } className="checkbox-option" key={idx}>
+				<label htmlFor={ id } className='checkbox-option' key={idx}>
 					{ option.label }
-					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ checked } aria-label={ option.label } />
-					<span className="check-square" />
+					<input type='checkbox' id={ id } onChange={ this.onChange.bind(this) } checked={ checked } aria-label={ option.label } />
+					<span className='check-square' />
 				</label>
 			);
 
@@ -42,9 +42,9 @@ class CheckboxField extends React.Component {
 
 		return (
 			<div className={`field field-checkbox key-${this.field.key}`}>
-				<div className="field-label" aria-label={ label }>{ label }</div>
+				<div className='field-label' aria-label={ label }>{ label }</div>
 				{ options }
-				{ help && <span className="help">{ help }</span> }
+				{ help && <span className='help'>{ help }</span> }
 			</div>
 		);
 

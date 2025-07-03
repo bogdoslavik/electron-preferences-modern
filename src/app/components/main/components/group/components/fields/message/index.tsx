@@ -15,8 +15,8 @@ class MessageField extends React.Component {
 
 		return (
 			<div className={`field field-message key-${this.field.key}`}>
-				{ this.heading && <div className="field-heading">{ this.heading }</div> }
-				<div className="field-content" dangerouslySetInnerHTML={this.getContent()}/>
+				{ this.heading && <div className='field-heading'>{ this.heading }</div> }
+				<div className='field-content' dangerouslySetInnerHTML={this.getContent()}/>
 			</div>
 		);
 
