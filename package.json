@@ -2,7 +2,7 @@
   "name": "electron-preferences",
   "version": "2.8.2",
   "description": "A simple, consistent interface for managing user preferences within an Electron application.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/tkambler/electron-preferences.git"
@@ -12,8 +12,7 @@
     "preferences"
   ],
   "files": [
-    "index.js",
-    "preload.js",
+    "dist",
     "build"
   ],
   "scripts": {
@@ -21,8 +20,8 @@
     "test": "echo \"Error: argh, you called my bluff. We don't have any tests yet :(\" && exit 1",
     "example": "cd example && electron main.js",
     "prepare": "npm run build",
-    "build": "rimraf ./build && webpack",
-    "build:dev": "rimraf ./build && webpack --mode development",
+    "build": "rimraf ./dist && tsc && rimraf ./build && webpack",
+    "build:dev": "rimraf ./dist && tsc && rimraf ./build && webpack --mode development",
     "build:example": "npm run build && npm run example"
   },
   "author": "Tim Ambler <tkambler@gmail.com>",
@@ -31,6 +30,13 @@
     "@babel/core": "^7.27.7",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@types/electron": "^1.4.38",
+    "@types/node": "^24.0.10",
+    "@types/react": "^19.1.8",
+    "@types/react-color": "^3.0.13",
+    "@types/react-dom": "^19.1.6",
+    "@types/react-modal": "^3.16.3",
     "babel-core": "^6.26.3",
     "babel-loader": "^10.0.0",
     "copy-webpack-plugin": "^13.0.0",
@@ -44,6 +50,7 @@
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
+    "typescript": "^5.8.3",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
     "xo": "^0.52.4"

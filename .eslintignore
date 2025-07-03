@@ -1,1 +1,4 @@
 build
+dist
+index.ts
+preload.ts

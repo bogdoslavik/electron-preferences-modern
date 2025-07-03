@@ -9,9 +9,9 @@ class TextField extends React.Component {
 
 		return (
 			<div className={`field field-text key-${this.field.key}`}>
-				<div className="field-label">{ this.label }</div>
+				<div className='field-label'>{ this.label }</div>
 				<input type={ this.inputType } onChange={ this.onChange.bind(this) } value={ this.value } aria-label={ this.label }/>
-				{ this.help && <span className="help">{ this.help }</span> }
+				{ this.help && <span className='help'>{ this.help }</span> }
 			</div>
 		);
 

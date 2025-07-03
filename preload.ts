@@ -35,34 +35,34 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 
 // Accent
 function lightenWithWhite(hex, whitePart = 0.35) {
-  const k   = 1 - whitePart;
-  const rgb = [1, 3, 5].map(i => parseInt(hex.substr(i, 2), 16));
-  const lr  = rgb.map(c => Math.round(c * k + 255 * whitePart)
-    .toString(16).padStart(2, '0'));
-  return `#${lr.join('')}`;          // «бледный» оттенок Win-кнопки
+	const k = 1 - whitePart;
+	const rgb = [1, 3, 5].map(i => parseInt(hex.substr(i, 2), 16));
+	const lr = rgb.map(c => Math.round(c * k + 255 * whitePart)
+		.toString(16).padStart(2, '0'));
+	return `#${lr.join('')}`; // «бледный» оттенок Win-кнопки
 }
 
 /* ----------------------------------------------------------
  * записываем результат в  --accent                      *
  * ---------------------------------------------------------*/
 async function setAccentTint(rawHex) {
-  const base  = `#${(rawHex || '0078d4').slice(0, 6)}`;
-  const tint  = lightenWithWhite(base, 0.20);
-  document.documentElement.style.setProperty('--accent', tint);
-  return tint;
+	const base = `#${(rawHex || '0078d4').slice(0, 6)}`;
+	const tint = lightenWithWhite(base, 0.20);
+	document.documentElement.style.setProperty('--accent', tint);
+	return tint;
 }
 
-/* первый запуск */
+/* Первый запуск */
 window.addEventListener('DOMContentLoaded', async () =>
-  setAccentTint(await ipcRenderer.invoke('get-accent-color'))
+	setAccentTint(await ipcRenderer.invoke('get-accent-color')),
 );
 
-/* смена цвета в живую (Windows) */
+/* Смена цвета в живую (Windows) */
 ipcRenderer.on('accent-color-changed', (_e, clr) => setAccentTint(clr));
 
-/* отдаём в React, если нужно */
+/* Отдаём в React, если нужно */
 contextBridge.exposeInMainWorld('osAccent', {
-  get: async () => setAccentTint(await ipcRenderer.invoke('get-accent-color')),
-  onChange: h => ipcRenderer.on('accent-color-changed',
-    async (_e, clr) => h(await setAccentTint(clr)))
+	get: async () => setAccentTint(await ipcRenderer.invoke('get-accent-color')),
+	onChange: h => ipcRenderer.on('accent-color-changed',
+		async (_e, clr) => h(await setAccentTint(clr))),
 });

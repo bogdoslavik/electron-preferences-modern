@@ -1,16 +1,14 @@
 'use strict';
 
-const electron = require('electron');
-
-const { app, BrowserWindow, ipcMain, webContents, dialog, safeStorage, systemPreferences  } = electron;
-const path = require('path');
-const url = require('url');
-const fs = require('fs');
-const _ = require('lodash');
-const { EventEmitter2 } = require('eventemitter2');
-const {loadJsonFileSync} = require('load-json-file');
-const {writeJsonFile} = require('write-json-file');
-const jsonSerializer = require('serialize-javascript'); //also serializes functions etc.
+import { app, BrowserWindow, ipcMain, webContents, dialog, safeStorage, systemPreferences } from 'electron';
+import path from 'path';
+import url from 'url';
+import fs from 'fs';
+import _ from 'lodash';
+import { EventEmitter2 } from 'eventemitter2';
+import { loadJsonFileSync } from 'load-json-file';
+import { writeJsonFile } from 'write-json-file';
+import jsonSerializer from 'serialize-javascript'; //also serializes functions etc.
 
 
 /* 1) обработчик «дай цвет» */
@@ -29,8 +27,11 @@ if (process.platform === 'win32') {
 
 
 class ElectronPreferences extends EventEmitter2 {
+        prefsWindow?: BrowserWindow | null;
+        _preferences: any;
+        options: any;
 
-	constructor(options = {}) {
+        constructor(options: any = {}) {
 
 		super();
 

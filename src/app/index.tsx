@@ -6,7 +6,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import _ from 'lodash';
-import debounce from './utils/debounce.js';
+import debounce from './utils/debounce';
 import Sidebar from './components/sidebar';
 import Main from './components/main';
 import '../../scss/style.scss';

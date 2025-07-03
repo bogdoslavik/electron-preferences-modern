@@ -4,21 +4,21 @@
 		"xo"
 	],
 	"rules": {
-		"array-bracket-spacing": [
-			"ignore",
+                "array-bracket-spacing": [
+                        "off",
 			"always"
 		],
 		"indent": ["error", "tab"],
-		"padded-blocks": [
-			"ignore",
+                "padded-blocks": [
+                        "off",
 			{
 				"blocks": "always",
 				"switches": "always",
 				"classes": "always"
 			}
 		],
-		"padding-line-between-statements": [
-			"ignore",
+                "padding-line-between-statements": [
+                        "off",
 			{
 				"blankLine": "always",
 				"prev": "multiline-block-like",
@@ -30,8 +30,8 @@
 				"next": "return"
 			}
 		],
-		"object-curly-spacing": [
-			"ignore",
+                "object-curly-spacing": [
+                        "off",
 			"always"
 		],
 		"semi": [
