@@ -1,4 +1,5 @@
-// src/app/components/main/components/group/components/fields/radio/style.scss
+//:root { --accent: #f48024; }
+
 .field-radio {
 
   .radio-option {
@@ -7,107 +8,27 @@
     padding-left: 30px;
     margin-bottom: 12px;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
-    //transition: all ease-out 0.3s;
 
-    input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    .check-circle {
+    input[type='radio'] {
       position: absolute;
       top: 0;
       left: 0;
-      height: 20px;
       width: 20px;
-      background-color: rgba(0,0,0,0);
-      border: 1px solid #afb9c0;
-      border-radius: 50%;
-      //transition: all ease-out 0.3s;
+      height: 20px;
+      margin: 0;
+      appearance: auto;
+      accent-color: var(--accent);
+      cursor: pointer;
+      opacity: 1;
     }
 
-    &:hover input ~ .check-circle {
-      background-color: rgba(0,0,0,0.05);
-    }
-
-    input:checked ~ .check-circle {
-      background-color: #0084ff;
-      border-color: #0084ff;
-    }
-
-    input:focus ~ .check-circle {
-      background-color: #46a6ff;
-      border-color: #46a6ff;
-    }
-
-    &:hover input:checked ~ .check-circle {
-      background-color: #006dd9;
-      border-color: #006dd9;
-    }
-
-    .check-circle:after {
-      content: "";
-      position: absolute;
-      display: none;
-      transform: scale(1);
-      animation-delay: 0.3s;
-      //animation: zoom-in-check-circle 0.3s 1;
-      //-webkit-animation: zoom-in-check-circle 0.3s 1;
-    }
-
-    input:checked ~ .check-circle:after {
-      display: block;
-    }
-
-    .check-circle:after {
-      top: 1px;
-      left: 1px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: transparent;
-      border: 2px solid white;
-    }
-
-    @keyframes zoom-in-check-circle {
-      0%   {transform: scale(0.0);}
-      25%  {transform: scale(0.3);}
-      50%  {transform: scale(0.8);}
-      100% {transform: scale(1.0);}
-    }
+    .check-circle { display: none; }
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .field-radio {
-
-    .radio-option {
-
-      &:hover input ~ .check-circle {
-        background-color: rgba(0,0,0,0.1);
-      }
-
-      .check-circle {
-        border: 1px solid #0e0e0e;
-      }
-
-      .check-circle:after {
-        border: 2px solid #252525;
-      }
-    }
+  .field-radio .radio-option input[type='radio'] {
+    accent-color: var(--accent);
   }
 }
-
-.field-radio input[type="radio"] {
-  accent-color: var(--accent, Highlight);   // Win11-look, Fallback = system Highlight
-  appearance: auto;                         // вернём нативный кружок
-  width: 16px; height: 16px;                // чуть меньше кастомного (20)
-  margin-right: 8px;
-}
-
-

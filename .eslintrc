@@ -1,16 +1,16 @@
 {
 	"extends": [
 		"plugin:react/recommended",
-		"xo",
+		"xo"
 	],
 	"rules": {
 		"array-bracket-spacing": [
-			"error",
+			"ignore",
 			"always"
 		],
 		"indent": ["error", "tab"],
 		"padded-blocks": [
-			"error",
+			"ignore",
 			{
 				"blocks": "always",
 				"switches": "always",
@@ -18,7 +18,7 @@
 			}
 		],
 		"padding-line-between-statements": [
-			"error",
+			"ignore",
 			{
 				"blankLine": "always",
 				"prev": "multiline-block-like",
@@ -31,7 +31,7 @@
 			}
 		],
 		"object-curly-spacing": [
-			"error",
+			"ignore",
 			"always"
 		],
 		"semi": [

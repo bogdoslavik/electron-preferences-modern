@@ -15,7 +15,7 @@ contextBridge.exposeInMainWorld('api', {
 
 		onPreferencesChangedHandler = handler;
 
-	}, 
+	},
 	getDefaults: () => ipcRenderer.sendSync('getDefaults'),
 	resetToDefaults: () => ipcRenderer.send('resetToDefaults'),
   decrypt: encryptedSecret => ipcRenderer.sendSync('decrypt', encryptedSecret),

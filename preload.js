@@ -33,3 +33,21 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 	}
 
 });
+
+
+function getAccentHex(){
+  // "aabbccdd" → "#aabbcc"
+  return '#' + systemPreferences.getAccentColor().slice(0, 6);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.documentElement.style.setProperty('--accent', getAccentHex());
+});
+
+if (process.platform === 'win32') {
+  systemPreferences.on('accent-color-changed', (_e, newClr) => {
+    document.documentElement.style.setProperty('--accent', '#' + newClr.slice(0, 6));
+  });
+}
+
+contextBridge.exposeInMainWorld('osAccent', getAccentHex());
