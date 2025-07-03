@@ -9,6 +9,8 @@ const bt5 = document.querySelectorAll('.bt')[4];
 const prefsElement = document.querySelectorAll('.preferences')[0];
 prefsElement.innerHTML = JSON.stringify(api.getPreferences(), null, 4);
 
+// api.showPreferences();
+
 bt.addEventListener('click', () => {
 
 	api.showPreferences();

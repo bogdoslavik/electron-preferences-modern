@@ -1,3 +1,4 @@
+// src/app/components/main/components/group/components/fields/radio/style.scss
 .field-radio {
 
   .radio-option {
@@ -10,7 +11,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    transition: all ease-out 0.3s;
+    //transition: all ease-out 0.3s;
 
     input {
       position: absolute;
@@ -27,7 +28,7 @@
       background-color: rgba(0,0,0,0);
       border: 1px solid #afb9c0;
       border-radius: 50%;
-      transition: all ease-out 0.3s;
+      //transition: all ease-out 0.3s;
     }
 
     &:hover input ~ .check-circle {
@@ -55,8 +56,8 @@
       display: none;
       transform: scale(1);
       animation-delay: 0.3s;
-      animation: zoom-in-check-circle 0.3s 1;
-      -webkit-animation: zoom-in-check-circle 0.3s 1;
+      //animation: zoom-in-check-circle 0.3s 1;
+      //-webkit-animation: zoom-in-check-circle 0.3s 1;
     }
 
     input:checked ~ .check-circle:after {
@@ -101,3 +102,12 @@
     }
   }
 }
+
+.field-radio input[type="radio"] {
+  accent-color: var(--accent, Highlight);   // Win11-look, Fallback = system Highlight
+  appearance: auto;                         // вернём нативный кружок
+  width: 16px; height: 16px;                // чуть меньше кастомного (20)
+  margin-right: 8px;
+}
+
+

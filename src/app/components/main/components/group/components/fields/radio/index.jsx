@@ -1,3 +1,4 @@
+// Source of src/app/components/main/components/group/components/fields/radio/index.jsx
 'use strict';
 
 import React from 'react';

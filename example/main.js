@@ -20,10 +20,14 @@ preferences.on('save', preferences => {
 
 });
 
-preferences.on('click', (key) => {
-				if (key === 'do-action-on-main') {
-								console.log('We are logging something in the main process because of a button click in the preferences window!');
-				}
+preferences.on('click', key => {
+
+	if (key === 'do-action-on-main') {
+
+		console.log('We are logging something in the main process because of a button click in the preferences window!');
+
+	}
+
 });
 
 let mainWindow;
@@ -31,7 +35,7 @@ let mainWindow;
 function createWindow() {
 
 	mainWindow = new BrowserWindow({
-		width: 1200,
+		width: 732,
 		height: 700,
 		'accept-first-mouse': true,
 		webPreferences: {
