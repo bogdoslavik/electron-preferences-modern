@@ -9,10 +9,10 @@ module.exports = {
 	watchOptions: {
 		ignored: /node_modules/,
 	},
-	output: {
-		path: path.resolve(__dirname, 'build'),
-		filename: 'app.js',
-	},
+        output: {
+                path: path.resolve(__dirname, 'dist', 'build'),
+                filename: 'app.js',
+        },
 	performance: {
 		maxAssetSize: 512000,
 		maxEntrypointSize: 512000,
