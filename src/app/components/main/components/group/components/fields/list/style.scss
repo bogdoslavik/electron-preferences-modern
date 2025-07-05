@@ -1,23 +1,8 @@
+@use "@microsoft/atlas-css/src/index.scss" as *;
 .field-list {
   .ep-list {
+    @extend .select;
     min-width: 25%;
-    font-size: 14px;
-    border-radius: 8px;
-    border: 1px solid #e7e7e7;
-    background-color: #ffffff;
-    padding: 0;
-    outline: none;
-    margin: 1px;
-    transition: border-color 0.3s ease-out;
-
-    &:active, &:focus {
-      border: 2px solid #0084ff;
-      margin: 0;
-    }
-
-    option {
-      padding: 2px 3px;
-    }
   }
 
   .ep-list-button-container {
@@ -25,37 +10,7 @@
   }
 
   .ep-list-button {
-    cursor: pointer;
-    border-top: 1px solid;
-    border-right: 1px solid;
-    border-bottom: 1px solid;
-    border-color: black;
-    background-color: #fff;
-    padding: 5px;
-    font-size: 14px;
-
-    &:first-child {
-      border: 1px solid;
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-    }
-
-    &:last-child {
-      border: 1px solid;
-      border-left: none;
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-    }
-  }
-
-  .ep-list-button:active {
-    border-color: #0084ff;
-    color: #0084ff;
-  }
-
-  .ep-list-button:disabled {
-    color: #bbb;
-    background-color: #666;
+    @extend .button;
   }
 
   .ep-list-button-text {
@@ -73,27 +28,15 @@
 }
 
 .ep-list-modal-input-container {
-    .ep-list-modal-input {
-        display: block;
-        width: 100%;
-        font-size: 14px;
-        border-radius: 8px;
-        border: 1px solid #e7e7e7;
-        background-color: #ffffff;
-        padding: 8px;
-        outline: none;
-        margin: 1px;
-        transition: border-color 0.3s ease-out;
-
-        &:focus {
-          border: 2px solid #0084ff;
-          margin: 0;
-        }
-    }
-    .ep-list-modal-input-label {
-        display: block;
-        font-weight: bold;
-    }
+  .ep-list-modal-input {
+    @extend .input;
+    display: block;
+    width: 100%;
+  }
+  .ep-list-modal-input-label {
+    display: block;
+    font-weight: bold;
+  }
 }
 
 .ep-list-modal-button-container {
@@ -105,19 +48,9 @@
 }
 
 .ep-list-modal-button {
+  @extend .button;
   flex: 0 1 auto;
-  border-radius: 8px;
-  border: 2px solid #999;
-  padding: 5px;
   margin: 3px;
-
-  &:disabled {
-    border-color: #ddd;
-  }
-
-  &:active {
-    border-color: #0084ff;
-  }
 }
 
 .ReactModalPortal {
@@ -148,51 +81,4 @@
 
 .ReactModal__Content {
   border-radius: 8px !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .field-list {
-    .ep-list {
-      color: white;
-      background-color: #191919;
-      border-color: #131313;
-    }
-
-    .ep-list-button {
-      background-color: #191919;
-      color: white;
-      border-color: #131313;
-
-      &:first-child, &:last-child {
-        border-color: #131313;
-      }
-    }
-  }
-
-  .ReactModal__Content {
-    background-color: #212121 !important;
-    border-color: #131313 !important;
-  }
-
-  .ep-list-modal-input-container {
-    .ep-list-modal-input {
-      color: #e4e4e4;
-      background-color: #191919;
-      border: 1px solid #131313;
-    }
-
-    .ep-list-modal-input-label {
-      color: white;
-    }
-  }
-
-  .ep-list-modal-button {
-    color: white;
-    background: #191919;
-    border: 2px solid grey;
-
-    &:disabled {
-      opacity: 0.7;
-    }
-  }
 }

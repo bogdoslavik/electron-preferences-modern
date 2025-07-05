@@ -1,3 +1,4 @@
+@use "@microsoft/atlas-css/src/index.scss" as *;
 @use "../src/app/components/main/style" as *;
 @use "../src/app/components/main/components/group/style" as *;
 @use "../src/app/components/main/components/group/components/fields/accelerator/style" as *;
@@ -11,6 +12,11 @@
 @use "../src/app/components/main/components/group/components/fields/text/style" as *;
 @use "../src/app/components/main/components/group/components/fields/secret/style" as *;
 @use "../src/app/components/sidebar/style" as *;
+
+:root {
+    accent-color: var(--accent, #0078d4);
+    color-scheme: light dark;
+}
 
 html {
     margin: 0;
