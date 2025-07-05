@@ -2,13 +2,13 @@
  *  Цветовые токены
  * ───────────────────────────────────────────────*/
 :root {
-  --switch-off-border : #5d5d5d;    /* OFF-рамка (light) */
-  --switch-off-thumb  : #5d5d5d;    /* OFF-шар   (light) */
+  --switch-off-border : #5d5d5d;    /* рамка OFF (light)  */
+  --switch-off-thumb  : #5d5d5d;    /* шар   OFF (light)  */
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --switch-off-border : #cecece;  /* OFF-рамка (dark)  */
-    --switch-off-thumb  : #9c9c9c;  /* OFF-шар   (dark)  */
+    --switch-off-border : #cecece;  /* рамка OFF (dark)   */
+    --switch-off-thumb  : #9c9c9c;  /* шар   OFF (dark)   */
   }
 }
 
@@ -20,8 +20,8 @@
   .checkbox-option {
     display: flex;
     align-items: center;
-    gap: 10px;           /* расстояние между подписью и контролом */
-    margin: 8px 0;       /* как в Win11 */
+    gap: 10px;
+    margin: 8px 0;
 
     input[type='checkbox'] {
       /* трек -------------------------------------------------- */
@@ -38,41 +38,36 @@
       &::before {
         content: "";
         position: absolute;
-        top: 50%;
-        left: 9px;                /* === центр OFF-положения */
+        top: 50%; left: 9px;                 /* центр OFF */
         transform: translate(-50%, -50%);
-        width: 12px; height: 12px; /* базовый Ø12 */
+        width: 12px; height: 12px;
         border-radius: 50%;
         background: var(--switch-off-thumb);
       }
 
-      /* hover — шар просто растёт, НЕ смещается ---------------- */
-      &:hover::before {
-        width: 13px; height: 13px;
-      }
-
-      /* OFF-hover рамка чуть светлее, фон не меняем ------------- */
+      /* ── HOVER  (OFF) ─────────────────────────── */
       &:hover:not(:checked) {
         border-color: color-mix(in srgb, var(--switch-off-border) 85%, white);
       }
 
-      /* ON-состояние ------------------------------------------- */
+      /* шар растёт, НЕ смещается */
+      &:hover::before { width: 13px; height: 13px; }
+
+      /* ── ON ───────────────────────────────────── */
       &:checked {
         border-color: var(--accent);
         background:   var(--accent);
 
         &::before {
-          background: #fff;
-          left: calc(100% - 10px);      /* центр в правой точке */
+          background: #fff;                         /* белый шар */
+          left: calc(100% - 10px);                 /* центр справа */
         }
 
-        /* hover: увеличиваем, но не двигаем */
-        &:hover::before {
-          width: 14px; height: 14px;
-        }
+        /* hover: Ø14, цвет трека чуть изменяем  */
+        &:hover::before { width: 14px; height: 14px; }
       }
 
-      /* клавиатурный фокус ------------------------------------ */
+      /* ── клавиатурный фокус ──────────────────── */
       &:focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 2px;
@@ -81,16 +76,26 @@
   }
 }
 
+/* ───────────────────────────────────────────────
+ *  Hover-фон: • light  → темнее на 20 %
+ *             • dark   → светлее на 20 %
+ *  Работает только в ON-состоянии (трека OFF прозрачный)
+ * ───────────────────────────────────────────────*/
+.field-checkbox .checkbox-option
+input[type='checkbox']:checked:hover {
+  /* светлая тема: затемняем 20 % */
+  background: color-mix(in srgb, var(--accent) 90%, black);
+}
 @media (prefers-color-scheme: dark) {
-
-  /* рамка OFF и трек OFF мы задали раньше */
-  :root {
-    --switch-off-border : #cecece;
-    --switch-off-thumb  : #9c9c9c;
+  .field-checkbox .checkbox-option
+  input[type='checkbox']:checked:hover {
+    /* тёмная тема: осветляем 20 % */
+    background: color-mix(in srgb, var(--accent) 90%, white);
   }
 
-  /* ── правим цвет внутреннего круга, когда переключатель ВКЛ ── */
-  .field-checkbox .checkbox-option input[type='checkbox']:checked::before {
-    background: #000;   /* чёрный кружок в тёмной теме */
+  /* чёрный шар ON (тёмная тема) */
+  .field-checkbox .checkbox-option
+  input[type='checkbox']:checked::before {
+    background: #000;
   }
 }
