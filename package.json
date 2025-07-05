@@ -57,6 +57,7 @@
     "xo": "^0.52.4"
   },
   "dependencies": {
+    "@microsoft/atlas-css": "^3.67.0",
     "eventemitter2": "^6.4.9",
     "load-json-file": "^7.0.1",
     "lodash": "^4.17.21",
