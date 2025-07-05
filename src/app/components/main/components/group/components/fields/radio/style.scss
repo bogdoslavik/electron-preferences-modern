@@ -1,15 +1,59 @@
-@use "@microsoft/atlas-css/src/index.scss" as *;
+/* общие токены для OFF-рамок (уже есть у switch)  */
+:root {
+  --switch-off-border : #5d5d5d;   /* светлая тема */
+  --radio-bg          : #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --switch-off-border : #cecece; /* тёмная тема  */
+    --radio-bg          : #000000;
+  }
+}
+
+/* ───────────────────────────────────────────────
+ *  Радио-кнопка
+ * ───────────────────────────────────────────────*/
 .field-radio {
+
   .radio-option {
-    @extend .radio;
     display: block;
     position: relative;
     padding-left: 30px;
     margin-bottom: 12px;
+    cursor: pointer;
     user-select: none;
 
-    .check-circle {
-      @extend .radio-dot;
+    input[type='radio'] {
+      appearance: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 20px; height: 20px;
+      margin: 0;
+
+      /* ▼ OFF-рамка берёт тот же цвет, что чекбокс / свитч */
+      border: 1px solid var(--switch-off-border);
+      border-radius: 50%;
+      background: var(--radio-bg);
+      cursor: pointer;
+
+      /* внутренняя точка */
+      &::before {
+        content: "";
+        position: absolute;
+        width: 12px; height: 12px;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: var(--accent);
+        display: none;
+      }
+
+      &:checked::before { display: block; }
+
+      &:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
     }
   }
 }
