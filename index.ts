@@ -16,14 +16,14 @@ import _ from "lodash";
 import { EventEmitter2 } from "eventemitter2";
 import { loadJsonFileSync } from "load-json-file";
 import { writeJsonFile } from "write-json-file";
-import jsonSerializer from "serialize-javascript"; //also serializes functions etc.
+import jsonSerializer from "serialize-javascript"; // also serializes functions etc.
 
-/* 1) обработчик «дай цвет» */
+/* 1) handler to fetch OS accent color */
 ipcMain.handle("get-accent-color", () => {
     return systemPreferences.getAccentColor(); // "aabbccdd"
 });
 
-/* 2) пушим событие при смене цвета (только Windows) */
+/* 2) forward accent color changes (Windows only) */
 if (process.platform === "win32") {
     systemPreferences.on("accent-color-changed", (_e, newClr) => {
         BrowserWindow.getAllWindows().forEach((win) => {

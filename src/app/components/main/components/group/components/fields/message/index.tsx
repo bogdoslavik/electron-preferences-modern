@@ -2,8 +2,14 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { PreferenceField } from "../../../../../../../types";
 
-class MessageField extends React.Component {
+interface MessageFieldProps {
+    field: PreferenceField;
+    value?: string;
+    onChange?: (value: string) => void;
+}
+class MessageField extends React.Component<MessageFieldProps> {
     render() {
         if (!this.heading && !this.content) {
             return null;

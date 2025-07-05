@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Maximum and minimum list size via `min` and `max` list properties (#164)
 - `resetToDefaults` endpoint to the preferences object which removes any non-default properties and set all default properties to their default values (#97)
 
+- Added TypeScript prop interfaces and translated non-English comments
 ### Changed
 
 - bump dependencies to their latest version

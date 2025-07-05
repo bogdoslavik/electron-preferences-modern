@@ -2,8 +2,14 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { PreferenceField } from "../../../../../../../types";
 
-class SliderField extends React.Component {
+interface SliderFieldProps {
+    field: PreferenceField;
+    value?: number;
+    onChange: (value: number) => void;
+}
+class SliderField extends React.Component<SliderFieldProps> {
     render() {
         return (
             <div className={`field field-slider key-${this.field.key}`}>

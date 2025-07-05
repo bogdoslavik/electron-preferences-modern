@@ -5,8 +5,15 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import Group from "./components/group";
 import HideableComponent from "../generic/hideable";
+import { PreferenceField } from "../types";
 
-class Main extends React.Component {
+interface MainProps {
+    sections: PreferenceField[];
+    preferences: Record<string, any>;
+    activeSection: string;
+    onFieldChange: (key: string, value: any) => void;
+}
+class Main extends React.Component<MainProps> {
     constructor() {
         super();
         this.mainRef = React.createRef();

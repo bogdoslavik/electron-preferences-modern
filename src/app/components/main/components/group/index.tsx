@@ -2,6 +2,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { PreferenceField } from "../../../types";
 import DirectoryField from "./components/fields/directory";
 import TextField from "./components/fields/text";
 import MessageField from "./components/fields/message";
@@ -34,7 +35,14 @@ const fieldMap = {
     secret: SecretField,
 };
 
-class Group extends React.Component {
+interface GroupProps {
+    group: any;
+    preferences: Record<string, any>;
+    groupId: string;
+    allPreferences: Record<string, any>;
+    onFieldChange: (key: string, value: any) => void;
+}
+class Group extends React.Component<GroupProps> {
     render() {
         const { allPreferences } = this;
 

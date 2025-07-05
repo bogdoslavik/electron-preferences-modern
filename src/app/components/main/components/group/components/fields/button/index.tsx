@@ -1,8 +1,14 @@
 /* global api */
 import React from "react";
 import PropTypes from "prop-types";
+import { PreferenceField } from "../../../../../../../types";
 
-class ButtonField extends React.Component {
+interface ButtonFieldProps {
+    field: PreferenceField;
+    value?: unknown;
+    onChange?: (value: unknown) => void;
+}
+class ButtonField extends React.Component<ButtonFieldProps> {
     render() {
         const choose = () => {
             api.sendButtonClick(this.key);

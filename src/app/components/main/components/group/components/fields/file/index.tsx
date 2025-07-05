@@ -4,8 +4,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { isArray } from "../../../../../../../utils/isArray";
+import { PreferenceField } from "../../../../../../../types";
 
-class FileField extends React.Component {
+interface FileFieldProps {
+    field: PreferenceField;
+    value?: string | string[];
+    onChange: (value: string | string[]) => void;
+}
+class FileField extends React.Component<FileFieldProps> {
     constructor(props) {
         super(props);
 

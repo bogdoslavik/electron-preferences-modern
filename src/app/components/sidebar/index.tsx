@@ -3,8 +3,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import HideableComponent from "../generic/hideable";
+import { PreferenceField } from "../types";
 
-class Sidebar extends React.Component {
+interface SidebarProps {
+    sections: PreferenceField[];
+    activeSection: string;
+    onSelectSection: (id: string) => void;
+    preferences: Record<string, any>;
+}
+class Sidebar extends React.Component<SidebarProps> {
     render() {
         const { preferences } = this;
 

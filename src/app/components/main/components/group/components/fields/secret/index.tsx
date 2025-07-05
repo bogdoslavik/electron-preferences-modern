@@ -4,8 +4,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
+import { PreferenceField } from "../../../../../../../types";
 
-class SecretField extends React.Component {
+interface SecretFieldProps {
+    field: PreferenceField;
+    value?: string;
+    onChange: (value: string) => void;
+}
+class SecretField extends React.Component<SecretFieldProps> {
     constructor(props) {
         super(props);
         this.state = {

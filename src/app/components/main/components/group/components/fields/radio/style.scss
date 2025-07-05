@@ -1,17 +1,17 @@
-/* общие токены для OFF-рамок (уже есть у switch)  */
+/* shared tokens for OFF borders (also used by switch) */
 :root {
-  --switch-off-border : #5d5d5d;   /* светлая тема */
+  --switch-off-border : #5d5d5d;   /* light theme */
   --radio-bg          : #ffffff;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --switch-off-border : #cecece; /* тёмная тема  */
+    --switch-off-border : #cecece; /* dark theme  */
     --radio-bg          : #000000;
   }
 }
 
 /* ───────────────────────────────────────────────
- *  Радио-кнопка
+ *  Radio button
  * ───────────────────────────────────────────────*/
 .field-radio {
 
@@ -31,13 +31,13 @@
       width: 20px; height: 20px;
       margin: 0;
 
-      /* ▼ OFF-рамка берёт тот же цвет, что чекбокс / свитч */
+      /* OFF border uses same color as checkbox/switch */
       border: 1px solid var(--switch-off-border);
       border-radius: 50%;
       background: var(--radio-bg);
       cursor: pointer;
 
-      /* внутренняя точка */
+      /* inner dot */
       &::before {
         content: "";
         position: absolute;

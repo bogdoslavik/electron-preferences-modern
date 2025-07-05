@@ -4,8 +4,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import keycodeToChar from "../../../../../../../utils/keycodeToChar";
+import { PreferenceField } from "../../../../../../../types";
 
-const AcceleratorField = ({ field, value, onChange }) => {
+interface AcceleratorFieldProps {
+    field: PreferenceField;
+    value?: string;
+    onChange: (value: string) => void;
+}
+const AcceleratorField: React.FC<AcceleratorFieldProps> = ({ field, value, onChange }) => {
     /*
 		AcceleratorField
 

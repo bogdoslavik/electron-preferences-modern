@@ -2,8 +2,14 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { PreferenceField } from "../../types";
 
-class HideableComponent extends React.Component {
+interface HideableProps {
+    field: PreferenceField;
+    allPreferences: Record<string, any>;
+    children: React.ReactNode;
+}
+class HideableComponent extends React.Component<HideableProps> {
     render() {
         const { isHidden } = this;
 

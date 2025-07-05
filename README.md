@@ -1,6 +1,7 @@
 # Electron Preferences
 
 > An Electron store with built-in preferences management
+This fork adds TypeScript type definitions for the React components.
 
 <img src="misc/demo.png" />
 
@@ -876,3 +877,4 @@ const preferences = new ElectronPreferences({
   },
 });
 ```
+\n## Contributing\nContributions are welcome! Please open issues or submit pull requests.\n
