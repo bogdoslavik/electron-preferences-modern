@@ -1,121 +1,84 @@
 .sidebar {
-    list-style: none;
-    height: 100%;
-    min-height: 100%;
-    width: 199px;
-    min-width: 199px;
-    max-width: 199px;
-    //border-right: 1px solid #B8B8B9;
+  list-style: none;
+  height: 100%;
+  width: 199px;
+  min-width: 199px;
+  max-width: 199px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #f3f3f3;
+  padding: 16px 0 0;
+  margin: 0;
+
+  .sidebar-section {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    cursor: default;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #f3f3f3;
-    padding: 0;
-    margin: 0;
-    padding-top: 16px;
+    align-items: center;
+    box-sizing: border-box;
+    height: 30px;
+    margin: 2px 16px;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background .15s;
+    color: #2d2c2e;
 
-    .sidebar-section {
-        height: 32px;
-        min-height: 32px;
-        max-height: 32px;
-        //width: 199px;
-        //min-width: 199px;
-        //max-width: 199px;
-        box-sizing: border-box;
-        overflow: hidden;
-        padding: 6px;
-        margin-left: 16px;
-        margin-right: 16px;
-        margin-top: 2px;
-        margin-bottom: 2px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        //font-weight: 600;
-        cursor: pointer;
-        outline: none;
-
-
-        border-radius: 4px;
-        transition: background .15s;
-
-        &.active {
-            background-color: #eaeaea;
-            color: #2d2c2e;
-            //font-weight: bold;
-
-            .section-icon {
-                background-color: #2d2c2e;
-            }
-        }
-
-        &:focus {
-            background-color: #eaeaea;
-            //border: 1px solid #464646;
-        }
-
-        &:hover {
-            background-color: #eaeaea;
-        }
-
-        .section-icon {
-            background-color: #2d2c2e;
-            margin-left: 8px;
-            margin-right: 8px;
-            width: 30px;
-            max-width: 30px;
-            min-width: 30px;
-            height: 30px;
-            max-height: 30px;
-            min-height: 30px;
-        }
-
-        .section-label {
-            font-size: 13px;
-        }
-
+    .section-icon {
+      background: #2d2c2e;
+      width: 30px; height: 30px;
+      margin: 0 8px;
     }
 
-    &::-webkit-scrollbar
-    {
-        width: 8px;
+    .section-label { font-size: 13px; }
+
+    &:hover,
+    &:focus { background: #eaeaea; }
+
+    &.active {
+      background: #eaeaea;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 2px;
+        height: 40%;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 1px;
+        background: var(--accent, #0078d4);
+      }
+
+      .section-icon { background: #2d2c2e; }
     }
+  }
+
+  &::-webkit-scrollbar { width: 8px; }
 }
 
 @media (prefers-color-scheme: dark) {
-    .sidebar {
-        background-color: #202020;
+  .sidebar {
+    background: #202020;
 
-        .sidebar-section {
-            color: #fdfdfd;
+    .sidebar-section {
+      color: #fdfdfd;
 
-            .section-icon {
-                background-color: #fdfdfd;
-            }
+      .section-icon { background: #fdfdfd; }
 
-          &.active {
-            background-color: #424246;
-            color: #ffffff;
-            //font-weight: bold;
+      &:hover,
+      &:focus { background: #424246; }
 
-            .section-icon {
-              background-color: #ffffff;
-            }
-          }
+      &.active {
+        background: #424246;
 
-          &:focus {
-            background-color: #424246;
-            //border: 1px solid #464646;
-          }
-
-          &:hover {
-            background-color: #424246;
-          }
+        &::before {
+          background: var(--accent, #0078d4); /* тот же акцент */
         }
 
+        .section-icon { background: #ffffff; }
+      }
     }
+  }
 }
