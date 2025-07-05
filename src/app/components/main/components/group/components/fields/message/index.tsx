@@ -1,57 +1,48 @@
-'use strict';
+"use strict";
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 class MessageField extends React.Component {
+    render() {
+        if (!this.heading && !this.content) {
+            return null;
+        }
 
-	render() {
+        return (
+            <div className={`field field-message key-${this.field.key}`}>
+                {this.heading && (
+                    <div className="field-heading">{this.heading}</div>
+                )}
+                <div
+                    className="field-content"
+                    dangerouslySetInnerHTML={this.getContent()}
+                />
+            </div>
+        );
+    }
 
-		if (!this.heading && !this.content) {
+    get field() {
+        return this.props.field;
+    }
 
-			return null;
+    get content() {
+        return this.field.content;
+    }
 
-		}
+    get heading() {
+        return this.field.heading;
+    }
 
-		return (
-			<div className={`field field-message key-${this.field.key}`}>
-				{ this.heading && <div className='field-heading'>{ this.heading }</div> }
-				<div className='field-content' dangerouslySetInnerHTML={this.getContent()}/>
-			</div>
-		);
-
-	}
-
-	get field() {
-
-		return this.props.field;
-
-	}
-
-	get content() {
-
-		return this.field.content;
-
-	}
-
-	get heading() {
-
-		return this.field.heading;
-
-	}
-
-	getContent() {
-
-		return {
-			__html: this.content,
-		};
-
-	}
-
+    getContent() {
+        return {
+            __html: this.content,
+        };
+    }
 }
 
 MessageField.propTypes = {
-	field: PropTypes.object,
+    field: PropTypes.object,
 };
 
 export default MessageField;

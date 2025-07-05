@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const path = require('path');
-const Handlebars = require('handlebars');
-const glob = require('glob');
+const path = require("path");
+const Handlebars = require("handlebars");
+const glob = require("glob");
 
-const srcFolder = path.resolve(__dirname, '../assets/svg');
+const srcFolder = path.resolve(__dirname, "../assets/svg");
 
 const tpl = Handlebars.compile(`
 <table style="width: 100%;">
@@ -25,16 +25,17 @@ const tpl = Handlebars.compile(`
 </table>
 `);
 
-const icons = glob.sync('*.svg', {
-	cwd: srcFolder,
-})
-	.map(icon => ({
-		path: `assets/svg/${icon}`,
-		name: path.basename(icon, '.svg'),
-	}));
+const icons = glob
+    .sync("*.svg", {
+        cwd: srcFolder,
+    })
+    .map((icon) => ({
+        path: `assets/svg/${icon}`,
+        name: path.basename(icon, ".svg"),
+    }));
 
 const rendered = tpl({
-	icons,
+    icons,
 });
 
 console.log(rendered);

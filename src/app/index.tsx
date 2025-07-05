@@ -1,86 +1,81 @@
 /* global api, document */
 
 /* Electron Renderer Process */
-'use strict';
+"use strict";
 
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import _ from 'lodash';
-import debounce from './utils/debounce';
-import Sidebar from './components/sidebar';
-import Main from './components/main';
-import '../../scss/style.scss';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import _ from "lodash";
+import debounce from "./utils/debounce";
+import Sidebar from "./components/sidebar";
+import Main from "./components/main";
+import "../../scss/style.scss";
 
 const allSections = api.getSections();
 const preferences = api.getPreferences();
 const config = api.getConfig();
 
-const sections = allSections.filter(section => _.isBoolean(section.enabled) ? section.enabled : true);
+const sections = allSections.filter((section) =>
+    _.isBoolean(section.enabled) ? section.enabled : true,
+);
 
-const savePreferences = preferences => {
-
-	api.setPreferences(preferences);
-
+const savePreferences = (preferences) => {
+    api.setPreferences(preferences);
 };
 
-const debounceDelay = (!isNaN(config.debounce) && config.debounce);
-const savePreferencesDebounced = debounce(preferences => savePreferences(preferences), debounceDelay ?? 150);
+const debounceDelay = !isNaN(config.debounce) && config.debounce;
+const savePreferencesDebounced = debounce(
+    (preferences) => savePreferences(preferences),
+    debounceDelay ?? 150,
+);
 
 for (const section of sections) {
-
-	if (!preferences[section.id]) {
-
-		preferences[section.id] = {};
-
-	}
-
+    if (!preferences[section.id]) {
+        preferences[section.id] = {};
+    }
 }
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            sections,
+            activeSection: sections[0].id,
+            preferences,
+        };
+    }
 
-	constructor(props) {
+    render() {
+        return (
+            <React.Fragment>
+                <Sidebar
+                    {...this.state}
+                    onSelectSection={this.onSelectSection.bind(this)}
+                />
+                <Main
+                    {...this.state}
+                    onFieldChange={this.onFieldChange.bind(this)}
+                />
+            </React.Fragment>
+        );
+    }
 
-		super(props);
-		this.state = {
-			sections,
-			activeSection: sections[0].id,
-			preferences,
-		};
+    onSelectSection(sectionId) {
+        this.setState({
+            activeSection: sectionId,
+        });
+    }
 
-	}
+    onFieldChange(key, value) {
+        preferences[this.state.activeSection][key] = value;
 
-	render() {
+        this.setState({
+            preferences,
+        });
 
-		return (
-			<React.Fragment>
-				<Sidebar { ...this.state } onSelectSection={ this.onSelectSection.bind(this) } />
-				<Main { ...this.state } onFieldChange={ this.onFieldChange.bind(this) } />
-			</React.Fragment>
-		);
-
-	}
-
-	onSelectSection(sectionId) {
-
-		this.setState({
-			activeSection: sectionId,
-		});
-
-	}
-
-	onFieldChange(key, value) {
-
-		preferences[this.state.activeSection][key] = value;
-
-		this.setState({
-			preferences,
-		});
-
-		savePreferencesDebounced(preferences);
-
-	}
-
+        savePreferencesDebounced(preferences);
+    }
 }
 
-const root = createRoot(document.querySelector('#window'));
+const root = createRoot(document.querySelector("#window"));
 root.render(<App />);
