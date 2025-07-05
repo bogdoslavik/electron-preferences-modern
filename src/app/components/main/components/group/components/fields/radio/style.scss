@@ -1,8 +1,18 @@
-:root { --radio-bg: #ffffff; }                 /* светлая тема */
+/* общие токены для OFF-рамок (уже есть у switch)  */
+:root {
+  --switch-off-border : #5d5d5d;   /* светлая тема */
+  --radio-bg          : #ffffff;
+}
 @media (prefers-color-scheme: dark) {
-  :root { --radio-bg: #000000; }               /* тёмная тема */
+  :root {
+    --switch-off-border : #cecece; /* тёмная тема  */
+    --radio-bg          : #000000;
+  }
 }
 
+/* ───────────────────────────────────────────────
+ *  Радио-кнопка
+ * ───────────────────────────────────────────────*/
 .field-radio {
 
   .radio-option {
@@ -16,24 +26,22 @@
     input[type='radio'] {
       appearance: none;
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 20px;          /* внешний круг */
-      height: 20px;
+      top: 0; left: 0;
+      width: 20px; height: 20px;
       margin: 0;
-      border: 2px solid #8c8c8c;
+
+      /* ▼ OFF-рамка берёт тот же цвет, что чекбокс / свитч */
+      border: 1px solid var(--switch-off-border);
       border-radius: 50%;
       background: var(--radio-bg);
       cursor: pointer;
 
-      /* внутренняя точка: жёсткие 10 × 10 px */
+      /* внутренняя точка */
       &::before {
         content: "";
         position: absolute;
-        width: 12px;
-        height: 12px;
-        top: 50%;
-        left: 50%;
+        width: 12px; height: 12px;
+        top: 50%; left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 50%;
         background: var(--accent);
@@ -49,4 +57,3 @@
     }
   }
 }
-
