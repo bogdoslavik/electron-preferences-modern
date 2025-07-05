@@ -3,8 +3,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
+import { PreferenceField } from "../../../../../../../types";
 
-class ListField extends React.Component {
+interface ListFieldProps {
+    field: PreferenceField;
+    value?: string[];
+    onChange: (value: string[]) => void;
+}
+class ListField extends React.Component<ListFieldProps> {
     constructor(props) {
         super(props);
         this.state = {

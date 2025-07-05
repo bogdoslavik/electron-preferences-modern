@@ -4,8 +4,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { newGuid } from "../../../../../../../utils/newGuid";
+import { PreferenceField } from "../../../../../../../types";
 
-class RadioField extends React.Component {
+interface RadioFieldProps {
+    field: PreferenceField;
+    value?: string;
+    onChange: (value: string) => void;
+}
+class RadioField extends React.Component<RadioFieldProps> {
     render() {
         const fieldID = `radio_${newGuid()}`;
 

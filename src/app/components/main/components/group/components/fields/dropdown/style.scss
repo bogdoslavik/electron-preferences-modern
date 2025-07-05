@@ -11,15 +11,15 @@
     margin: 1px;
     transition: border-color .2s ease-out;
 
-    /* ── FOCUS: рамка = системный accent ── */
+    /* ── FOCUS: border uses system accent ── */
     &:focus {
-      border: 2px solid var(--accent, #0084ff);   /* fallback = прежний синий */
-      margin: 0;                                  /* компенсируем толщину     */
+      border: 2px solid var(--accent, #0084ff);   /* fallback = old blue */
+      margin: 0;                                  /* compensate thickness    */
     }
   }
 }
 
-/* ── тёмная тема ───────────────────────────── */
+/* ── dark theme ───────────────────────────── */
 @media (prefers-color-scheme: dark) {
   .field-dropdown select {
     color: #e4e4e4;

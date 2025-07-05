@@ -39,11 +39,11 @@ function lightenWithWhite(hex, whitePart = 0.35) {
             .toString(16)
             .padStart(2, "0"),
     );
-    return `#${lr.join("")}`; // «бледный» оттенок Win-кнопки
+    return `#${lr.join("")}`; // lightened shade of the Windows accent
 }
 
 /* ----------------------------------------------------------
- * записываем результат в  --accent                      *
+ * store the result in the --accent CSS variable
  * ---------------------------------------------------------*/
 async function setAccentTint(rawHex) {
     const base = `#${(rawHex || "0078d4").slice(0, 6)}`;
@@ -52,15 +52,15 @@ async function setAccentTint(rawHex) {
     return tint;
 }
 
-/* Первый запуск */
+/* Initial run */
 window.addEventListener("DOMContentLoaded", async () =>
     setAccentTint(await ipcRenderer.invoke("get-accent-color")),
 );
 
-/* Смена цвета в живую (Windows) */
+/* Live accent color updates (Windows) */
 ipcRenderer.on("accent-color-changed", (_e, clr) => setAccentTint(clr));
 
-/* Отдаём в React, если нужно */
+/* Expose accent utilities to React if needed */
 contextBridge.exposeInMainWorld("osAccent", {
     get: async () =>
         setAccentTint(await ipcRenderer.invoke("get-accent-color")),

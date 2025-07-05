@@ -2,8 +2,14 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { PreferenceField } from "../../../../../../../types";
 
-class DropdownField extends React.Component {
+interface DropdownFieldProps {
+    field: PreferenceField;
+    value?: string;
+    onChange: (value: string) => void;
+}
+class DropdownField extends React.Component<DropdownFieldProps> {
     render() {
         const options = this.options.map((option, idx) => (
             <option value={option.value} key={idx} aria-label={option.label}>

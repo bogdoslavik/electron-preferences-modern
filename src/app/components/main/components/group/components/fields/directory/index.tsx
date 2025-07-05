@@ -2,8 +2,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { isArray } from "../../../../../../../utils/isArray";
+import { PreferenceField } from "../../../../../../../types";
 
-class DirectoryField extends React.Component {
+interface DirectoryFieldProps {
+    field: PreferenceField;
+    value?: string | string[];
+    onChange: (value: string | string[]) => void;
+}
+class DirectoryField extends React.Component<DirectoryFieldProps> {
     constructor(props) {
         super(props);
 

@@ -1,19 +1,19 @@
 /* ───────────────────────────────────────────────
- *  Цветовые токены
+ *  Color tokens
  * ───────────────────────────────────────────────*/
 :root {
-  --switch-off-border : #5d5d5d;    /* рамка OFF (light)  */
-  --switch-off-thumb  : #5d5d5d;    /* шар   OFF (light)  */
+  --switch-off-border : #5d5d5d;    /* OFF border (light) */
+  --switch-off-thumb  : #5d5d5d;    /* OFF thumb  (light) */
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --switch-off-border : #cecece;  /* рамка OFF (dark)   */
-    --switch-off-thumb  : #9c9c9c;  /* шар   OFF (dark)   */
+    --switch-off-border : #cecece;  /* OFF border (dark)  */
+    --switch-off-thumb  : #9c9c9c;  /* OFF thumb  (dark)  */
   }
 }
 
 /* ───────────────────────────────────────────────
- *  Переключатель
+ *  Switch
  * ───────────────────────────────────────────────*/
 .field-checkbox {
 
@@ -25,7 +25,7 @@
     transition: width .1s, height .1s;
 
     input[type='checkbox'] {
-      /* трек -------------------------------------------------- */
+      /* track ------------------------------------------------- */
       appearance: none;
       width: 40px; height: 18px;
       border-radius: 20px;
@@ -39,7 +39,7 @@
       &::before {
         content: "";
         position: absolute;
-        top: 50%; left: 9px;                 /* центр OFF */
+        top: 50%; left: 9px;                 /* center when OFF */
         transform: translate(-50%, -50%);
         width: 12px; height: 12px;
         border-radius: 50%;
@@ -51,7 +51,7 @@
         border-color: color-mix(in srgb, var(--switch-off-border) 85%, white);
       }
 
-      /* шар растёт, НЕ смещается */
+      /* thumb grows without moving */
       &:hover::before {
         width: 13px; height: 13px;
         transition: width .1s, height .1s;
@@ -63,15 +63,15 @@
         background:   var(--accent);
 
         &::before {
-          background: #fff;                         /* белый шар */
-          left: calc(100% - 10px);                 /* центр справа */
+          background: #fff;                         /* white thumb */
+          left: calc(100% - 10px);                 /* center right */
         }
 
-        /* hover: Ø14, цвет трека чуть изменяем  */
+        /* hover: Ø14, slightly change track color */
         &:hover::before { width: 14px; height: 14px; }
       }
 
-      /* ── клавиатурный фокус ──────────────────── */
+      /* ── keyboard focus ──────────────────────── */
       &:focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 2px;
@@ -81,21 +81,21 @@
 }
 
 /* ───────────────────────────────────────────────
- *  Hover-фон: • light  → темнее на 20 %
- *             • dark   → светлее на 20 %
- *  Работает только в ON-состоянии (трека OFF прозрачный)
+ *  Hover background: light → 20% darker
+ *                     dark  → 20% lighter
+ *  Works only when ON (OFF track is transparent)
  * ───────────────────────────────────────────────*/
 .field-checkbox .checkbox-option input[type='checkbox']:checked:hover {
-  /* светлая тема: затемняем 20 % */
+  /* light theme: darken 20% */
   background: color-mix(in srgb, var(--accent) 90%, black);
 }
 @media (prefers-color-scheme: dark) {
   .field-checkbox .checkbox-option input[type='checkbox']:checked:hover {
-    /* тёмная тема: осветляем 20 % */
+    /* dark theme: lighten 20% */
     background: color-mix(in srgb, var(--accent) 90%, white);
   }
 
-  /* чёрный шар ON (тёмная тема) */
+  /* black thumb when ON (dark theme) */
   .field-checkbox .checkbox-option input[type='checkbox']:checked::before {
     background: #000;
   }

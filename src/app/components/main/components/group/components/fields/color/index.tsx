@@ -4,8 +4,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ChromePicker } from "react-color";
+import { PreferenceField } from "../../../../../../../types";
 
-class ColorField extends React.Component {
+interface ColorFieldProps {
+    field: PreferenceField;
+    value?: string;
+    onChange: (value: string) => void;
+}
+class ColorField extends React.Component<ColorFieldProps> {
     constructor(props) {
         super(props);
         this.wrapperRef = React.createRef();

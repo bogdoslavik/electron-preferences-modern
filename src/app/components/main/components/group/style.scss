@@ -2,7 +2,7 @@
  *  VARIABLES
  * -----------------------------------------------------------------*/
 :root {
-  /* fallback на Fluent-blue, если preload ещё не успел проставить цвет */
+  /* fallback to Fluent-blue if preload hasn't set the accent yet */
   --accent: #0078d4;
 }
 
@@ -23,7 +23,7 @@
 
     .field-label   { font-size: 15px; margin-bottom: 10px; }
     .help          { display: block; padding: 5px 0; font-size: 12px; color: #606671; }
-    .value         { /* оставил без изменений */ }
+    .value         { /* left unchanged */ }
 
     /* --------------------------------------------------------------
      *  BUTTON (Fluent–style)    «.bt»
@@ -40,7 +40,7 @@
       border: 1px solid transparent;
       box-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
       border-radius: 4px;            /* Win11 radii = 4-8 px */
-      text-transform: none;          /* Fluent не использует uppercase */
+      text-transform: none;          /* Fluent UI doesn't use uppercase */
       transition: background .15s, border-color .15s, box-shadow .15s;
       cursor: pointer;
       user-select: none;

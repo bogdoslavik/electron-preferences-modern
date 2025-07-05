@@ -1,31 +1,31 @@
-/* ═════════════════ 1. Цвета ═════════════════ */
+/* ═════════════════ 1. Colors ═════════════════ */
 :root {
-  /* пустая часть трека */
+  /* empty part of track */
   --slider-empty: #9a9a9a;
-  /* внешний кружок (thumb-bg) и его рамка - светлая тема */
+  /* outer circle (thumb-bg) and border - light theme */
   --thumb-bg     : #ffffff;
   --thumb-border : #d0d0d0;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --slider-empty: #606060;
-    --thumb-bg    : #484848;  /* внеш. серый круг */
-    --thumb-border: #484848;  /* почти сливается, но есть контур */
+    --thumb-bg    : #484848;  /* outer gray circle */
+    --thumb-border: #484848;  /* almost blends but keeps outline */
   }
 }
 
-/* ═════════════════ 2. Слайдер ════════════════ */
+/* ═════════════════ 2. Slider ════════════════ */
 .field-slider {
 
   input[type='range'] {
     -webkit-appearance: none;
     width: 100%;
-    height: 4px;                        /* высота трека */
+    height: 4px;                        /* track height */
     background: transparent;
     cursor: pointer;
-    margin: 18px 0;                     /* место под крупный thumb */
+    margin: 18px 0;                     /* space for big thumb */
 
-    accent-color: var(--accent);        /* закраска левой части */
+    accent-color: var(--accent);        /* fill left part */
 
     /* ─── трек ─── */
     &::-webkit-slider-runnable-track {
@@ -40,7 +40,7 @@
       -webkit-appearance: none;
       width: 20px;
       height: 20px;
-      margin-top: -9px;                 /* центр по треку ( (4-22)/2 ) */
+      margin-top: -9px;                 /* center on track ((4-22)/2) */
       border-radius: 50%;
       background: var(--accent);
       box-shadow: 0 0 0 4px var(--thumb-bg) inset;
@@ -49,7 +49,7 @@
     }
 
 
-    /* ─── hover → увеличение, позиция НЕ меняется ─── */
+    /* ─── hover → enlarge without shifting ─── */
     &:hover::-webkit-slider-thumb {
       box-shadow: 0 0 0 3px var(--thumb-bg) inset;
 

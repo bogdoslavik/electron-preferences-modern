@@ -2,8 +2,14 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { PreferenceField } from "../../../../../../../types";
 
-class TextField extends React.Component {
+interface TextFieldProps {
+    field: PreferenceField;
+    value?: string;
+    onChange: (value: string) => void;
+}
+class TextField extends React.Component<TextFieldProps> {
     render() {
         return (
             <div className={`field field-text key-${this.field.key}`}>

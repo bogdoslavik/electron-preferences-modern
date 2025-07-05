@@ -3,8 +3,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { newGuid } from "../../../../../../../utils/newGuid";
+import { PreferenceField } from "../../../../../../../types";
 
-class CheckboxField extends React.Component {
+interface CheckboxFieldProps {
+    field: PreferenceField;
+    value?: any[] | boolean;
+    onChange: (value: any[] | boolean) => void;
+}
+class CheckboxField extends React.Component<CheckboxFieldProps> {
     render() {
         let { value } = this;
         const { help, label } = this;
