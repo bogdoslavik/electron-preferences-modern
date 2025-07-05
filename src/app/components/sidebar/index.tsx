@@ -10,34 +10,41 @@ class Sidebar extends React.Component {
 
 		const { preferences } = this;
 
-		const sections = this.sections.map(section => {
+    const sections = this.sections.map(section => {
 
-			const isActive = this.activeSection === section.id;
-			let className = 'sidebar-section';
-			if (isActive) {
+      const isActive  = this.activeSection === section.id;
+      let   className = 'sidebar-section' + (isActive ? ' active' : '');
 
-				className += ' active';
+      /* ——— 1.  SVG-маска для иконки (как было) ——— */
+      const iconStyle = {
+        mask:        `url("svg/${section.icon}.svg") no-repeat center / contain`,
+        WebkitMask:  `url("svg/${section.icon}.svg") no-repeat center / contain`,
+      };
 
-			}
+      /* ——— 2.  Если в конфиге задан iconColor — кладём в CSS-переменную ——— */
+      const liStyle = section.iconColor
+        ? { '--icon-clr': section.iconColor }   // <-- будет доступна в CSS
+        : {};                                   // иначе ничего не пишем
 
-			const style = {
-				mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
-				WebkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
-			};
+      return (
+        <HideableComponent key={section.id} allPreferences={preferences} field={section}>
+          <li  className={className}
+               style={liStyle}
+               role='tab'
+               id={`tab-${section.id}`}
+               aria-selected={isActive}
+               aria-controls={`tabpanel-${section.id}`}
+               tabIndex={isActive ? 0 : -1}
+               aria-label={section.label}
+               onClick={this.selectSection.bind(this, section.id)}>
 
-			return (
-				<HideableComponent key={ section.id } allPreferences={ preferences } field={ section }>
-					<li className={ className } role='tab' id={ `tab-${section.id}` }
-						aria-selected={ isActive } aria-controls={ `tabpanel-${section.id}` } tabIndex={ isActive ? 0 : -1 }
-						aria-label={ section.label }
-						onClick={ this.selectSection.bind(this, section.id) }>
-						<div className='section-icon' style={ style } />
-						<span className='section-label'>{ section.label }</span>
-					</li>
-				</HideableComponent>
-			);
+            <div className='section-icon' style={iconStyle} />
+            <span className='section-label'>{section.label}</span>
+          </li>
+        </HideableComponent>
+      );
+    });
 
-		});
 
 		return (
 			<ul className='sidebar' role='tablist' aria-label='Side bar' onKeyDown={ this.onTablistKeyDown }>

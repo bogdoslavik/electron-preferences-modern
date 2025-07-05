@@ -1,54 +1,32 @@
 {
-	"extends": [
-		"plugin:react/recommended",
-		"xo"
-	],
-	"rules": {
-                "array-bracket-spacing": [
-                        "off",
-			"always"
-		],
-		"indent": ["error", "tab"],
-                "padded-blocks": [
-                        "off",
-			{
-				"blocks": "always",
-				"switches": "always",
-				"classes": "always"
-			}
-		],
-                "padding-line-between-statements": [
-                        "off",
-			{
-				"blankLine": "always",
-				"prev": "multiline-block-like",
-				"next": "*"
-			},
-			{
-				"blankLine": "always",
-				"prev": "*",
-				"next": "return"
-			}
-		],
-                "object-curly-spacing": [
-                        "off",
-			"always"
-		],
-		"semi": [
-			2,
-			"always"
-		],
-		"space-in-parens": [
-			"error",
-			"never"
-		],
-		"unicorn/prefer-module": 0
-	},
-	"settings": {
-		"react": {
-			"pragma": "React",
-			"fragment": "Fragment",
-			"version": "detect"
-		}
-	}
+  "extends": [
+    "plugin:react/recommended",
+    "xo"
+  ],
+
+  "rules": {
+    /* ─── базовые (оставляем) ─── */
+    "indent": ["error", 2],
+    "semi": ["error", "always"],
+
+    /* ─── отключённые стилистические ─── */
+    "array-bracket-spacing": "off",
+    "arrow-parens": "off",
+    "arrow-body-style": "off",          // ← не требует убирать фигурные скобки
+    "capitalized-comments": "off",
+    "object-curly-spacing": "off",
+    "object-shorthand": "off",
+    "padded-blocks": "off",
+    "padding-line-between-statements": "off",
+    "space-in-parens": "off",
+    "unicorn/prefer-module": "off"
+  },
+
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "fragment": "Fragment",
+      "version": "detect"
+    }
+  }
 }

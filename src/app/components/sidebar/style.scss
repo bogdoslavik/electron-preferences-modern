@@ -29,6 +29,8 @@
       background: #2d2c2e;
       width: 30px; height: 30px;
       margin: 0 8px;
+      color: var(--icon-clr, inherit);
+      background: var(--icon-clr, currentColor);
     }
 
     .section-label { font-size: 13px; }
@@ -51,7 +53,6 @@
         background: var(--accent, #0078d4);
       }
 
-      .section-icon { background: #2d2c2e; }
     }
   }
 
