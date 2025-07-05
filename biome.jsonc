@@ -15,5 +15,12 @@
                 "organizeImports": "off"
             }
         }
+    },
+    "files": {
+        "includes": [
+            "**", // process everything…
+            "!**/build/**", // …except compiled output
+            "!**/dist/**" // …and release bundles
+        ]
     }
 }

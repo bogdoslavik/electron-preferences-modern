@@ -1,4 +1,4 @@
-/* global api */
+/*global api*/
 "use strict";
 
 import React from "react";

@@ -11,7 +11,11 @@ interface AcceleratorFieldProps {
     value?: string;
     onChange: (value: string) => void;
 }
-const AcceleratorField: React.FC<AcceleratorFieldProps> = ({ field, value, onChange }) => {
+const AcceleratorField: React.FC<AcceleratorFieldProps> = ({
+    field,
+    value,
+    onChange,
+}) => {
     /*
 		AcceleratorField
 

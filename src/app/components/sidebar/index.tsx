@@ -1,9 +1,9 @@
 "use strict";
 
-import React from "react";
+import React, {CSSProperties} from "react";
 import PropTypes from "prop-types";
 import HideableComponent from "../generic/hideable";
-import { PreferenceField } from "../types";
+import {PreferenceField} from "../../types";
 
 interface SidebarProps {
     sections: PreferenceField[];
@@ -24,9 +24,7 @@ class Sidebar extends React.Component<SidebarProps> {
                 WebkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
             };
 
-            const liStyle = section.iconColor
-                ? { "--icon-clr": section.iconColor }
-                : {};
+            const liStyle: CSSProperties = section.iconColor ? {"--icon-clr": section.iconColor} as CSSProperties : {};
 
             return (
                 <HideableComponent

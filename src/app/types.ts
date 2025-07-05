@@ -6,3 +6,7 @@ export interface PreferenceField {
     options?: Array<{ label: string; value: any }>;
     [key: string]: any;
 }
+
+declare global {
+    const api: any;
+}
