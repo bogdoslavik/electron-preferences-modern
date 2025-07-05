@@ -66,11 +66,6 @@
     .sidebar-section {
       color: #fdfdfd;
 
-      //.section-icon {
-      //  color: var(--icon-clr, inherit);
-      //  background: var(--icon-clr, currentColor);
-      //}
-
       &:hover,
       &:focus { background: #424246; }
 
@@ -81,10 +76,6 @@
           background: var(--accent, #0078d4); /* тот же акцент */
         }
 
-        //.section-icon {
-        //  color: var(--icon-clr, inherit);
-        //  background: var(--icon-clr, currentColor);
-        //}
       }
     }
   }
