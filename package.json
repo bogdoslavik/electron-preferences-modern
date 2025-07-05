@@ -1,11 +1,11 @@
 {
-  "name": "electron-preferences",
-  "version": "2.8.2",
-  "description": "A simple, consistent interface for managing user preferences within an Electron application.",
+  "name": "electron-preferences-modern",
+  "version": "3.0.2",
+  "description": "A simple, consistent interface for managing user preferences within an Electron application. Based on electron-preferences by Tim Ambler.",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tkambler/electron-preferences.git"
+    "url": "https://github.com/bogdoslavik/electron-preferences-modern"
   },
   "keywords": [
     "electron",
@@ -16,6 +16,7 @@
     "build"
   ],
   "scripts": {
+    "clean": "rimraf ./dist && tsc && rimraf ./build",
     "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
     "test": "echo \"Error: argh, you called my bluff. We don't have any tests yet :(\" && exit 1",
     "example": "cd example && electron main.js",
