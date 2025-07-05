@@ -1,76 +1,65 @@
-.field-slider {
-
-  input {
-    width: 88%;
-    margin: 10px 0;
-    background-color: transparent;
-    -webkit-appearance: none;
-    outline: none;
-    opacity: 0.85;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  input::-webkit-slider-runnable-track {
-    background: rgba(0, 0, 0, 0.1);
-    border: 0;
-    border-radius: 5px;
-    width: 100%;
-    height: 10px;
-    cursor: pointer;
-  }
-
-  input::-webkit-slider-thumb {
-    margin-top: -10px;
-    width: 15px;
-    height: 30px;
-    background: #006dd9;
-    border: 0;
-    border-radius: 10px;
-    cursor: pointer;
-    -webkit-appearance: none;
-  }
-
-  input:focus::-webkit-slider-runnable-track {
-    background: rgba(0, 0, 0, 0.15);
-  }
-
-  input:focus::-webkit-slider-thumb {
-    background: #46a6ff;
-  }
-
-  label {
-    width: 8%;
-    font-size: 14px;
-    padding: 4px;
+/* ═════════════════ 1. Цвета ═════════════════ */
+:root {
+  /* пустая часть трека */
+  --slider-empty: #9a9a9a;
+  /* внешний кружок (thumb-bg) и его рамка - светлая тема */
+  --thumb-bg     : #ffffff;
+  --thumb-border : #d0d0d0;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --slider-empty: #606060;
+    --thumb-bg    : #484848;  /* внеш. серый круг */
+    --thumb-border: #484848;  /* почти сливается, но есть контур */
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .field-slider {
+/* ═════════════════ 2. Слайдер ════════════════ */
+.field-slider {
 
-    input {
-      opacity: 1;
+  input[type='range'] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;                        /* высота трека */
+    background: transparent;
+    cursor: pointer;
+    margin: 18px 0;                     /* место под крупный thumb */
 
-      &:hover {
-        opacity: 0.85;
-      }
+    accent-color: var(--accent);        /* закраска левой части */
+
+    /* ─── трек ─── */
+    &::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 4px;
+      background: var(--slider-empty);
     }
 
-    input::-webkit-slider-runnable-track {
-      background: rgba(255, 255, 255, 0.05);
+
+    /* ─── thumb (кружок 22 px) ─── */
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      margin-top: -9px;                 /* центр по треку ( (4-22)/2 ) */
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--thumb-bg) inset;
+      border: 1px solid var(--thumb-border);
+      transition: width .1s, height .1s;
     }
 
-    input:focus::-webkit-slider-runnable-track {
-      background: rgba(255, 255, 255, 0.1);
+
+    /* ─── hover → увеличение, позиция НЕ меняется ─── */
+    &:hover::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px var(--thumb-bg) inset;
+
+    }
+
+    /* ─── focus ring ─── */
+    &:focus-visible { outline: none; }
+    &:focus-visible::-webkit-slider-thumb {
+      border-color: var(--accent);
+
     }
   }
 }

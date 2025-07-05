@@ -22,6 +22,7 @@
     align-items: center;
     gap: 10px;
     margin: 8px 0;
+    transition: width .1s, height .1s;
 
     input[type='checkbox'] {
       /* трек -------------------------------------------------- */
@@ -51,7 +52,10 @@
       }
 
       /* шар растёт, НЕ смещается */
-      &:hover::before { width: 13px; height: 13px; }
+      &:hover::before {
+        width: 13px; height: 13px;
+        transition: width .1s, height .1s;
+      }
 
       /* ── ON ───────────────────────────────────── */
       &:checked {
@@ -81,21 +85,18 @@
  *             • dark   → светлее на 20 %
  *  Работает только в ON-состоянии (трека OFF прозрачный)
  * ───────────────────────────────────────────────*/
-.field-checkbox .checkbox-option
-input[type='checkbox']:checked:hover {
+.field-checkbox .checkbox-option input[type='checkbox']:checked:hover {
   /* светлая тема: затемняем 20 % */
   background: color-mix(in srgb, var(--accent) 90%, black);
 }
 @media (prefers-color-scheme: dark) {
-  .field-checkbox .checkbox-option
-  input[type='checkbox']:checked:hover {
+  .field-checkbox .checkbox-option input[type='checkbox']:checked:hover {
     /* тёмная тема: осветляем 20 % */
     background: color-mix(in srgb, var(--accent) 90%, white);
   }
 
   /* чёрный шар ON (тёмная тема) */
-  .field-checkbox .checkbox-option
-  input[type='checkbox']:checked::before {
+  .field-checkbox .checkbox-option input[type='checkbox']:checked::before {
     background: #000;
   }
 }

@@ -1,31 +1,34 @@
 .field-text {
 
-    input {
-        width: 100%;
-        font-size: 14px;
-        border-radius: 8px;
-        border: 1px solid #e7e7e7;
-        background-color: #ffffff;
-        padding: 8px;
-        outline: none;
-        margin: 1px;
-        transition: border-color 0.3s ease-out;
+  input {
+    width: 100%;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #e7e7e7;
+    background: #ffffff;
+    padding: 8px;
+    outline: none;
+    margin: 1px;
+    transition: border-color .2s ease-out;
 
-        &:focus {
-            border: 2px solid #0084ff;
-            margin: 0;
-        }
+    /* ── FOCUS: бордер = системный accent ── */
+    &:focus {
+      border: 2px solid var(--accent, #0084ff);  /* fallback = прежний синий */
+      margin: 0;                                 /* компенсируем толщину     */
     }
-
+  }
 }
 
+/* ── тёмная тема ───────────────────────────── */
 @media (prefers-color-scheme: dark) {
-    .field-text {
+  .field-text input {
+    color: #e4e4e4;
+    background: #191919;
+    border: 1px solid #131313;
 
-        input {
-            color: #e4e4e4;
-            background-color: #191919;
-            border: 1px solid #131313;
-        }
+    &:focus {
+      border: 2px solid var(--accent, #0084ff);
+      margin: 0;
     }
+  }
 }
