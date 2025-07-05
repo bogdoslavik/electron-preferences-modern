@@ -1,131 +1,105 @@
-'use strict';
+"use strict";
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { newGuid } from '../../../../../../../utils/newGuid';
+import React from "react";
+import PropTypes from "prop-types";
+import { newGuid } from "../../../../../../../utils/newGuid";
 
 class CheckboxField extends React.Component {
+    render() {
+        let { value } = this;
+        const { help, label } = this;
 
-	render() {
+        const fieldID = `checkbox_${newGuid()}`;
 
-		let { value } = this;
-		const { help, label } = this;
+        const options = this.options.map((option, idx) => {
+            // If only a single checkbox is being rendered, this allows you the ability to pass
+            // a boolean default value instead of ['value'], for convenience.
+            if (typeof value === "boolean" && this.options.length === 1) {
+                value = value ? [option.value] : [];
+            } else if (typeof value !== "object") {
+                value = [];
+            }
 
-		const fieldID = `checkbox_${newGuid()}`;
+            const id = `${fieldID}_${idx}`;
+            const checked = value.includes(option.value);
 
-		const options = this.options.map((option, idx) => {
+            return (
+                <label htmlFor={id} className="checkbox-option" key={idx}>
+                    {option.label}
+                    <input
+                        type="checkbox"
+                        id={id}
+                        onChange={this.onChange.bind(this)}
+                        checked={checked}
+                        aria-label={option.label}
+                    />
+                    <span className="check-square" />
+                </label>
+            );
+        });
 
-			// If only a single checkbox is being rendered, this allows you the ability to pass
-			// a boolean default value instead of ['value'], for convenience.
-			if (typeof value === 'boolean' && this.options.length === 1) {
+        return (
+            <div className={`field field-checkbox key-${this.field.key}`}>
+                <div className="field-label" aria-label={label}>
+                    {label}
+                </div>
+                {options}
+                {help && <span className="help">{help}</span>}
+            </div>
+        );
+    }
 
-				value = value ? [ option.value ] : [];
+    get field() {
+        return this.props.field;
+    }
 
-			} else if (typeof value !== 'object') {
+    get value() {
+        return this.props.value || [];
+    }
 
-				value = [];
+    get label() {
+        return this.field.label;
+    }
 
-			}
+    get options() {
+        return this.field.options || [];
+    }
 
-			const id = `${fieldID}_${idx}`;
-			const checked = value.includes(option.value);
+    get help() {
+        return this.field.help;
+    }
 
-			return (
-				<label htmlFor={ id } className='checkbox-option' key={idx}>
-					{ option.label }
-					<input type='checkbox' id={ id } onChange={ this.onChange.bind(this) } checked={ checked } aria-label={ option.label } />
-					<span className='check-square' />
-				</label>
-			);
+    onChange(e) {
+        let { value } = this;
+        const idx = e.target.id.split("_")[2];
+        const option = this.options[idx];
 
-		});
+        // Coerce values
+        if (typeof value === "boolean" && this.options.length === 1) {
+            value = value ? [option.value] : [];
+        } else if (typeof value !== "object") {
+            value = [];
+        }
 
-		return (
-			<div className={`field field-checkbox key-${this.field.key}`}>
-				<div className='field-label' aria-label={ label }>{ label }</div>
-				{ options }
-				{ help && <span className='help'>{ help }</span> }
-			</div>
-		);
+        if (e.target.checked) {
+            if (!value.includes(option.value)) {
+                value.push(option.value);
+            }
+        } else {
+            const valueIdx = value.indexOf(option.value);
+            if (valueIdx > -1) {
+                value.splice(valueIdx, 1);
+            }
+        }
 
-	}
-
-	get field() {
-
-		return this.props.field;
-
-	}
-
-	get value() {
-
-		return this.props.value || [];
-
-	}
-
-	get label() {
-
-		return this.field.label;
-
-	}
-
-	get options() {
-
-		return this.field.options || [];
-
-	}
-
-	get help() {
-
-		return this.field.help;
-
-	}
-
-	onChange(e) {
-
-		let { value } = this;
-		const idx = e.target.id.split('_')[2];
-		const option = this.options[idx];
-
-		// Coerce values
-		if (typeof value === 'boolean' && this.options.length === 1) {
-
-			value = value ? [ option.value ] : [];
-
-		} else if (typeof value !== 'object') {
-
-			value = [];
-
-		}
-
-		if (e.target.checked) {
-
-			if (!value.includes(option.value)) {
-
-				value.push(option.value);
-
-			}
-
-		} else {
-
-			const valueIdx = value.indexOf(option.value);
-			if (valueIdx > -1) {
-
-				value.splice(valueIdx, 1);
-
-			}
-
-		}
-
-		return this.props.onChange(value);
-
-	}
-
+        return this.props.onChange(value);
+    }
 }
 
 CheckboxField.propTypes = {
-	field: PropTypes.object,
-	value: PropTypes.array,
-	onChange: PropTypes.func,
+    field: PropTypes.object,
+    value: PropTypes.array,
+    onChange: PropTypes.func,
 };
 
 export default CheckboxField;

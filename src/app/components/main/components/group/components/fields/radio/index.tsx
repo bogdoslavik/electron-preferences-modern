@@ -1,85 +1,74 @@
 // Source of src/app/components/main/components/group/components/fields/radio/index.jsx
-'use strict';
+"use strict";
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { newGuid } from '../../../../../../../utils/newGuid';
+import React from "react";
+import PropTypes from "prop-types";
+import { newGuid } from "../../../../../../../utils/newGuid";
 
 class RadioField extends React.Component {
+    render() {
+        const fieldID = `radio_${newGuid()}`;
 
-	render() {
+        const options = this.options.map((option, idx) => {
+            const id = `${fieldID}_${idx}`;
 
-		const fieldID = `radio_${newGuid()}`;
+            return (
+                <label htmlFor={id} className="radio-option" key={idx}>
+                    {option.label}
+                    <input
+                        type="radio"
+                        id={id}
+                        onChange={this.onChange.bind(this)}
+                        checked={option.value === this.value}
+                        name={fieldID}
+                        aria-label={option.label}
+                    />
+                    <span className="check-circle" />
+                </label>
+            );
+        });
 
-		const options = this.options.map((option, idx) => {
+        return (
+            <div className={`field field-radio key-${this.field.key}`}>
+                <div className="field-label">{this.label}</div>
+                {options}
+                {this.help && <span className="help">{this.help}</span>}
+            </div>
+        );
+    }
 
-			const id = `${fieldID}_${idx}`;
+    get field() {
+        return this.props.field;
+    }
 
-			return (
-				<label htmlFor={ id } className='radio-option' key={ idx }>
-					{ option.label }
-					<input type='radio' id={ id } onChange={ this.onChange.bind(this) } checked={ option.value === this.value } name={ fieldID } aria-label={ option.label } />
-					<span className='check-circle' />
-				</label>
-			);
+    get value() {
+        return this.props.value || false;
+    }
 
-		});
+    get label() {
+        return this.field.label;
+    }
 
-		return (
-			<div className={`field field-radio key-${this.field.key}`}>
-				<div className='field-label'>{ this.label }</div>
-				{ options }
-				{ this.help && <span className='help'>{ this.help }</span> }
-			</div>
-		);
+    get options() {
+        return this.field.options || [];
+    }
 
-	}
+    get help() {
+        return this.field.help;
+    }
 
-	get field() {
+    onChange(e) {
+        const idx = e.target.id.split("_")[2];
+        const option = this.options[idx];
 
-		return this.props.field;
-
-	}
-
-	get value() {
-
-		return this.props.value || false;
-
-	}
-
-	get label() {
-
-		return this.field.label;
-
-	}
-
-	get options() {
-
-		return this.field.options || [];
-
-	}
-
-	get help() {
-
-		return this.field.help;
-
-	}
-
-	onChange(e) {
-
-		const idx = e.target.id.split('_')[2];
-		const option = this.options[idx];
-
-		return this.props.onChange(option.value);
-
-	}
-
+        return this.props.onChange(option.value);
+    }
 }
 
 RadioField.propTypes = {
-	field: PropTypes.object,
-	value: PropTypes.string,
-	onChange: PropTypes.func,
+    field: PropTypes.object,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
 };
 
 export default RadioField;

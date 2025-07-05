@@ -1,124 +1,68 @@
 {
-  "name": "electron-preferences-modern",
-  "version": "3.0.2",
-  "description": "A simple, consistent interface for managing user preferences within an Electron application. Based on electron-preferences by Tim Ambler.",
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bogdoslavik/electron-preferences-modern"
-  },
-  "keywords": [
-    "electron",
-    "preferences"
-  ],
-  "files": [
-    "dist",
-    "build"
-  ],
-  "scripts": {
-    "clean": "rimraf ./dist && tsc && rimraf ./build",
-    "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
-    "test": "echo \"Error: argh, you called my bluff. We don't have any tests yet :(\" && exit 1",
-    "example": "cd example && electron main.js",
-    "prepare": "npm run build",
-    "build": "rimraf ./dist && tsc && webpack",
-    "build:dev": "rimraf ./dist && tsc && webpack --mode development",
-    "build:example": "npm run build && npm run example"
-  },
-  "author": "Tim Ambler <tkambler@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.27.7",
-    "@babel/preset-env": "^7.27.2",
-    "@babel/preset-react": "^7.27.1",
-    "@babel/preset-typescript": "^7.27.1",
-    "@types/electron": "^1.4.38",
-    "@types/node": "^24.0.10",
-    "@types/react": "^19.1.8",
-    "@types/react-color": "^3.0.13",
-    "@types/react-dom": "^19.1.6",
-    "@types/react-modal": "^3.16.3",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^10.0.0",
-    "copy-webpack-plugin": "^13.0.0",
-    "css-loader": "^7.1.2",
-    "electron": "^37.1.0",
-    "eslint": "^8.57.1",
-    "eslint-plugin-react": "^7.37.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rimraf": "^6.0.1",
-    "sass": "^1.89.2",
-    "sass-loader": "^16.0.5",
-    "style-loader": "^4.0.0",
-    "typescript": "^5.8.3",
-    "webpack": "^5.99.9",
-    "webpack-cli": "^6.0.1",
-    "xo": "^0.52.4"
-  },
-  "dependencies": {
-    "@microsoft/atlas-css": "^3.67.0",
-    "eventemitter2": "^6.4.9",
-    "load-json-file": "^7.0.1",
-    "lodash": "^4.17.21",
-    "prop-types": "^15.8.1",
-    "react-color": "^2.19.3",
-    "react-modal": "^3.16.3",
-    "serialize-javascript": "^6.0.2",
-    "write-json-file": "^6.0.0"
-  },
-  "xo": {
-    "envs": [
-      "node",
-      "browser"
-    ],
-    "rules": {
-      "array-bracket-spacing": [
-        "error",
-        "always"
-      ],
-      "padded-blocks": [
-        "error",
-        {
-          "blocks": "always",
-          "switches": "always",
-          "classes": "always"
-        }
-      ],
-      "padding-line-between-statements": [
-        "error",
-        {
-          "blankLine": "always",
-          "prev": "multiline-block-like",
-          "next": "*"
-        },
-        {
-          "blankLine": "always",
-          "prev": "*",
-          "next": "return"
-        }
-      ],
-      "no-redeclare": 0,
-      "object-curly-spacing": [
-        "error",
-        "always"
-      ],
-      "semi": [
-        2,
-        "always"
-      ],
-      "space-in-parens": [
-        "error",
-        "never"
-      ],
-      "unicorn/prefer-module": 0
+    "name": "electron-preferences-modern",
+    "version": "3.0.2",
+    "description": "A simple, consistent interface for managing user preferences within an Electron application. Based on electron-preferences by Tim Ambler.",
+    "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bogdoslavik/electron-preferences-modern"
     },
-    "semicolon": true
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "semi": true,
-    "singleQuote": true
-  }
+    "keywords": [
+        "electron",
+        "preferences"
+    ],
+    "files": [
+        "dist",
+        "build"
+    ],
+    "scripts": {
+        "clean": "rimraf ./dist && tsc && rimraf ./build",
+        "test": "echo \"Error: argh, you called my bluff. We don't have any tests yet :(\" && exit 1",
+        "example": "cd example && electron main.js",
+        "prepare": "npm run build",
+        "build": "rimraf ./dist && tsc && webpack",
+        "build:dev": "rimraf ./dist && tsc && webpack --mode development",
+        "build:example": "npm run build && npm run example",
+        "lint": "biome check ."
+    },
+    "author": "Tim Ambler <tkambler@gmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.27.7",
+        "@babel/preset-env": "^7.27.2",
+        "@babel/preset-react": "^7.27.1",
+        "@babel/preset-typescript": "^7.27.1",
+        "@biomejs/biome": "^2.0.6",
+        "@types/electron": "^1.4.38",
+        "@types/node": "^24.0.10",
+        "@types/react": "^19.1.8",
+        "@types/react-color": "^3.0.13",
+        "@types/react-dom": "^19.1.6",
+        "@types/react-modal": "^3.16.3",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^10.0.0",
+        "copy-webpack-plugin": "^13.0.0",
+        "css-loader": "^7.1.2",
+        "electron": "^37.1.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "rimraf": "^6.0.1",
+        "sass": "^1.89.2",
+        "sass-loader": "^16.0.5",
+        "style-loader": "^4.0.0",
+        "typescript": "^5.8.3",
+        "webpack": "^5.99.9",
+        "webpack-cli": "^6.0.1"
+    },
+    "dependencies": {
+        "@microsoft/atlas-css": "^3.67.0",
+        "eventemitter2": "^6.4.9",
+        "load-json-file": "^7.0.1",
+        "lodash": "^4.17.21",
+        "prop-types": "^15.8.1",
+        "react-color": "^2.19.3",
+        "react-modal": "^3.16.3",
+        "serialize-javascript": "^6.0.2",
+        "write-json-file": "^6.0.0"
+    }
 }

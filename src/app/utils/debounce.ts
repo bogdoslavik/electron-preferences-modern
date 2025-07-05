@@ -15,25 +15,19 @@
 */
 
 const debounce = (func, delay) => {
+    let debounceTimer;
 
-	let debounceTimer;
+    return function (...args) {
+        clearTimeout(debounceTimer);
 
-	return function (...args) {
+        // Pass { abort: true } to cancel
+        if (args[0] && args[0].abort) {
+            return;
+        }
 
-		clearTimeout(debounceTimer);
-
-		// Pass { abort: true } to cancel
-		if (args[0] && args[0].abort) {
-
-			return;
-
-		}
-
-		const _this = this;
-		debounceTimer = setTimeout(() => func.apply(_this, args), delay);
-
-	};
-
+        const _this = this;
+        debounceTimer = setTimeout(() => func.apply(_this, args), delay);
+    };
 };
 
 export default debounce;
