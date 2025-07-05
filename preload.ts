@@ -42,6 +42,9 @@ function lightenWithWhite(hex, whitePart = 0.35) {
     return `#${lr.join("")}`; // lightened shade of the Windows accent
 }
 
+// Export for testing purposes
+module.exports.lightenWithWhite = lightenWithWhite;
+
 /* ----------------------------------------------------------
  * store the result in the --accent CSS variable
  * ---------------------------------------------------------*/
