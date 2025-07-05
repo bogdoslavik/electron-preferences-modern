@@ -1,6 +1,6 @@
-@use "@microsoft/atlas-css/src/index.scss" as *;
 .field-color {
-  .color {
+
+  .color{
     width: 36px;
     height: 14px;
     border-radius: 2px;
@@ -11,9 +11,11 @@
   }
 
   .color-swatch {
-    @extend .button;
     padding: 5px;
+    background: #fff;
+    border-radius: 1px;
     box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    display: inline-block;
     cursor: pointer;
   }
 
@@ -31,8 +33,17 @@
     bottom: 0;
     left: 0;
   }
-
+  
   .flexbox-fix {
     font-family: 'Open Sans', sans-serif;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .field-color {
+
+    .color-swatch {
+      background-color: #191919;
+    }
   }
 }
