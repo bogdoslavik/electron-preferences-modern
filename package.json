@@ -25,7 +25,7 @@
         "build:example": "npm run build && npm run example",
         "lint": "biome check ."
     },
-    "author": "Tim Ambler <tkambler@gmail.com>",
+    "author": "Slavik Bogdanov <bogdoslavik@gmail.com>",
     "license": "MIT",
     "devDependencies": {
         "@babel/core": "^7.27.7",
