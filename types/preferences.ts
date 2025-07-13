@@ -21,8 +21,8 @@ export interface Preferences {
         | number
         | boolean
         | null
-        | Preferences            // recursion → “any depth”
-        | Preferences[];         // arrays of sub-objects are OK too
+        | Preferences // recursion → “any depth”
+        | Preferences[]; // arrays of sub-objects are OK too
 }
 
 /** Options under `config` */

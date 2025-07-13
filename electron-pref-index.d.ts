@@ -5,8 +5,7 @@ import type {
 } from 'electron-preferences-modern/dist/types/preferences';
 
 /** экземпляр, который возвращает new ElectronPreferences(...) */
-export interface ElectronPreferencesInstance
-    extends EventEmitter {
+export interface ElectronPreferencesInstance extends EventEmitter {
     /** текущие prefs */
     preferences: Preferences;
 
