@@ -1,6 +1,6 @@
 {
     "name": "electron-preferences-modern",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "description": "A simple, consistent interface for managing user preferences within an Electron application. Based on electron-preferences by Tim Ambler.",
     "main": "dist/index.js",
     "repository": {
@@ -16,14 +16,15 @@
         "build"
     ],
     "scripts": {
-        "clean": "rimraf ./dist && tsc && rimraf ./build",
-        "test": "vitest run",
+        "clean": "rimraf ./dist ./build",
+        "types": "tsc --emitDeclarationOnly",
+        "build": "npm run clean && npm run types && webpack --mode production",
+        "build:dev": "npm run clean && webpack --mode development",
         "example": "cd example && electron main.js",
-        "prepare": "npm run build",
-        "build": "rimraf ./dist && tsc && webpack",
-        "build:dev": "rimraf ./dist && tsc && webpack --mode development",
         "build:example": "npm run build && npm run example",
-        "lint": "biome check ."
+        "test": "vitest run",
+        "lint": "biome check .",
+        "prepare": "npm run build"
     },
     "author": "Slavik Bogdanov <bogdoslavik@gmail.com>",
     "license": "MIT",
