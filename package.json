@@ -3,6 +3,7 @@
     "version": "3.0.5",
     "description": "A simple, consistent interface for managing user preferences within an Electron application. Based on electron-preferences by Tim Ambler.",
     "main": "dist/index.js",
+    "packageManager": "pnpm@10.11.1",
     "repository": {
         "type": "git",
         "url": "https://github.com/bogdoslavik/electron-preferences-modern"
@@ -29,13 +30,18 @@
     },
     "author": "Slavik Bogdanov <bogdoslavik@gmail.com>",
     "license": "MIT",
+    "pnpm": {
+        "overrides": {
+            "global-agent": "^4.3.0"
+        }
+    },
     "devDependencies": {
         "@babel/core": "^7.28.0",
         "@babel/preset-env": "^7.28.0",
         "@babel/preset-react": "^7.27.1",
         "@babel/preset-typescript": "^7.27.1",
         "@biomejs/biome": "^2.0.6",
-        "@types/electron": "^1.4.38",
+        "@electron/get": "^4.0.1",
         "@types/lodash": "^4.17.20",
         "@types/node": "^24.0.10",
         "@types/react": "^19.1.8",
