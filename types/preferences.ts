@@ -15,7 +15,15 @@ export type PrefValue =
     | { [key: string]: PrefValue };
 
 /** Whole preferences object */
-export type Preferences = Record<string, PrefValue>;
+export interface Preferences {
+    [key: string]:
+        | string
+        | number
+        | boolean
+        | null
+        | Preferences            // recursion → “any depth”
+        | Preferences[];         // arrays of sub-objects are OK too
+}
 
 /** Options under `config` */
 export interface PreferencesConfig {
