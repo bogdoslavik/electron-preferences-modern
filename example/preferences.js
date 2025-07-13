@@ -4,7 +4,7 @@ const electron = require('electron');
 const { Menu } = electron;
 const path = require('path');
 const os = require('os');
-const ElectronPreferences = require('../');
+const ElectronPreferences = require('../dist');
 
 const preferences = new ElectronPreferences({
     debug: false, // True will open the dev tools

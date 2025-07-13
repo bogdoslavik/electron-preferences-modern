@@ -434,4 +434,4 @@ class ElectronPreferences extends EventEmitter2 {
     }
 }
 
-module.exports = ElectronPreferences;
+export default ElectronPreferences;
