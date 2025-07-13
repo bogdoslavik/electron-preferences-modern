@@ -1,5 +1,5 @@
 export interface PreferenceField {
-    key: string;
+    key?: string;
     label?: string;
     help?: string;
     inputType?: string;

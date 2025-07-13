@@ -85,4 +85,5 @@ export interface PreferencesOptions {
 
     /** Called after the component is fully initialised */
     afterLoad?: (instance: unknown /* ElectronPreferences */) => void;
+    defaults?: Preferences;
 }
