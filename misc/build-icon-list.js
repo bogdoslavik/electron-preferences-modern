@@ -6,6 +6,7 @@ const glob = require('glob');
 
 const srcFolder = path.resolve(__dirname, '../assets/svg');
 
+// noinspection HtmlUnknownTarget
 const tpl = Handlebars.compile(`
 <table style="width: 100%;">
     <thead>
