@@ -3,6 +3,7 @@ import type {
     Menu,
     WebPreferences,
 } from 'electron';
+import {PreferenceField} from "../src/app/types";
 
 /** Primitive a single preference can hold */
 export type PrefValue =
@@ -34,12 +35,17 @@ export interface PreferencesGroup {
 }
 
 /** One UI section (simplified) */
-export interface PreferencesSection {
+export interface PreferencesSection  extends PreferenceField{
+    /** unique section id (used as tab id) */
     id: string;
+    /** visible title in the sidebar */
     label?: string;
-    form?: {
-        groups: PreferencesGroup[]; // replace with a detailed type later
-    };
+
+    icon?: string;
+    iconColor?: string;
+    enabled?: boolean;
+
+    form?: { groups: PreferencesGroup[] };
 }
 
 /** Constructor argument for `ElectronPreferences` */

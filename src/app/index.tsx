@@ -10,6 +10,7 @@ import debounce from './utils/debounce';
 import Sidebar from './components/sidebar';
 import Main from './components/main';
 import '../../scss/style.scss';
+import {Preferences, PreferencesSection} from "../../types/preferences";
 
 const allSections = api.getSections();
 const preferences = api.getPreferences();
@@ -35,7 +36,13 @@ for (const section of sections) {
     }
 }
 
-class App extends React.Component {
+interface AppState {
+    sections: PreferencesSection[];
+    activeSection: string;
+    preferences: Preferences;
+}
+
+class App extends React.Component<{}, AppState> {
     constructor(props) {
         super(props);
         this.state = {

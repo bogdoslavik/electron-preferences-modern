@@ -3,10 +3,10 @@
 import React, { CSSProperties } from 'react';
 import PropTypes from 'prop-types';
 import HideableComponent from '../generic/hideable';
-import { PreferenceField } from '../../types';
+import {PreferencesSection} from "../../../../types/preferences";
 
 interface SidebarProps {
-    sections: PreferenceField[];
+    sections: PreferencesSection[];
     activeSection: string;
     onSelectSection: (id: string) => void;
     preferences: Record<string, any>;
