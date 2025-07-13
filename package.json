@@ -1,6 +1,6 @@
 {
     "name": "electron-preferences-modern",
-    "version": "3.0.5",
+    "version": "3.0.6",
     "description": "A simple, consistent interface for managing user preferences within an Electron application. Based on electron-preferences by Tim Ambler.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
