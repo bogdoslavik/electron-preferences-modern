@@ -6,52 +6,56 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     mode: 'production',
     entry: './src/app/index.tsx',
-    watchOptions: {
-        ignored: /node_modules/,
-    },
+
+    devtool: 'source-map',
+
+    cache: { type: 'filesystem' },
+
+    watchOptions: { ignored: /node_modules/ },
+
     output: {
         path: path.resolve(__dirname, 'dist', 'build'),
         filename: 'app.js',
+        clean: true,
     },
-    performance: {
-        maxAssetSize: 512000,
-        maxEntrypointSize: 512000,
-    },
+
+    performance: { maxAssetSize: 512e3, maxEntrypointSize: 512e3 },
+
     resolve: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
-        modules: [
-            path.resolve(__dirname, 'src'),
-            path.resolve(__dirname, 'scss'),
-            path.resolve(__dirname, 'node_modules'),
-        ],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        modules: [path.resolve(__dirname, 'src'), 'node_modules'],
         alias: {},
     },
+
     plugins: [
-        new CopyWebpackPlugin({
-            patterns: [{ from: 'assets' }],
-        }),
+        new CopyWebpackPlugin({ patterns: [{ from: 'assets' }] }),
     ],
+
     module: {
         rules: [
             {
-                test: /\.(js|jsx|ts|tsx)$/,
+                test: /\.(ts|tsx|js|jsx)$/,
                 exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                '@babel/preset-env',
-                                '@babel/preset-react',
-                                '@babel/preset-typescript',
-                            ],
-                        },
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        cacheDirectory: true,
+                        presets: [
+                            '@babel/preset-env',
+                            '@babel/preset-react',
+                            '@babel/preset-typescript',
+                        ],
                     },
-                ],
+                },
             },
             {
                 test: /\.scss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.svg$/i,
+                type: 'asset/resource',
+                generator: { filename: 'svg/[name][ext]' },
             },
         ],
     },
