@@ -3,7 +3,7 @@
 import React, { CSSProperties } from 'react';
 import PropTypes from 'prop-types';
 import HideableComponent from '../generic/hideable';
-import {PreferencesSection} from "../../../../types/preferences";
+import { PreferencesSection } from '../../../../types/preferences';
 
 interface SidebarProps {
     sections: PreferencesSection[];

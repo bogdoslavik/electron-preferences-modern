@@ -17,7 +17,7 @@ import { EventEmitter2 } from 'eventemitter2';
 import { loadJsonFileSync } from 'load-json-file';
 import { writeJsonFile } from 'write-json-file';
 import jsonSerializer from 'serialize-javascript'; // also serializes functions etc.
-import {PreferencesOptions} from "./types/preferences";
+import { PreferencesOptions } from './types/preferences';
 
 /* 1) handler to fetch OS accent color */
 ipcMain.handle('get-accent-color', () => {
@@ -32,8 +32,6 @@ if (process.platform === 'win32') {
         });
     });
 }
-
-
 
 class ElectronPreferences extends EventEmitter2 {
     prefsWindow?: BrowserWindow | null;

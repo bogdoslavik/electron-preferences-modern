@@ -10,7 +10,7 @@ import debounce from './utils/debounce';
 import Sidebar from './components/sidebar';
 import Main from './components/main';
 import '../../scss/style.scss';
-import {Preferences, PreferencesSection} from "../../types/preferences";
+import { Preferences, PreferencesSection } from '../../types/preferences';
 
 const allSections = api.getSections();
 const preferences = api.getPreferences();

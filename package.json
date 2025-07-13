@@ -24,6 +24,7 @@
         "build:example": "npm run build && npm run example",
         "test": "vitest run",
         "lint": "biome check .",
+        "lint:fix": "biome format . --write",
         "prepare": "npm run build"
     },
     "author": "Slavik Bogdanov <bogdoslavik@gmail.com>",
@@ -41,7 +42,7 @@
         "@types/react-color": "^3.0.13",
         "@types/react-dom": "^19.1.6",
         "@types/react-modal": "^3.16.3",
-        "babel-core": "^6.26.3",
+        "babel-core": "^4.7.16",
         "babel-loader": "^10.0.0",
         "copy-webpack-plugin": "^13.0.0",
         "css-loader": "^7.1.2",
