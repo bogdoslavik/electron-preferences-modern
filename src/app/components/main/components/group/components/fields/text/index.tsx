@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { PreferenceField } from '../../../../../../../types';
 
 interface TextFieldProps {
     field: PreferenceField;
@@ -30,7 +30,7 @@ class TextField extends React.Component<TextFieldProps> {
     }
 
     get value() {
-        return this.props.value || "";
+        return this.props.value || '';
     }
 
     get label() {
@@ -38,7 +38,7 @@ class TextField extends React.Component<TextFieldProps> {
     }
 
     get inputType() {
-        return this.field.inputType || this.field.type || "text";
+        return this.field.inputType || this.field.type || 'text';
     }
 
     get help() {

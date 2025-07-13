@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { PreferenceField } from "../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { PreferenceField } from '../../types';
 
 interface HideableProps {
     field: PreferenceField;
@@ -28,8 +28,8 @@ class HideableComponent extends React.Component<HideableProps> {
         const { allPreferences } = this.props;
         try {
             return (
-                typeof this.field.hideFunction !== "undefined" &&
-                typeof this.field.hideFunction === "function" &&
+                typeof this.field.hideFunction !== 'undefined' &&
+                typeof this.field.hideFunction === 'function' &&
                 this.field.hideFunction(allPreferences)
             );
         } catch (e) {
@@ -39,7 +39,7 @@ class HideableComponent extends React.Component<HideableProps> {
                 e,
             );
             console.error(
-                "These were the current preferences: ",
+                'These were the current preferences: ',
                 allPreferences,
             );
         }

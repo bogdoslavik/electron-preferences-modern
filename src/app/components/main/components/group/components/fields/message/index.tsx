@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { PreferenceField } from '../../../../../../../types';
 
 interface MessageFieldProps {
     field: PreferenceField;

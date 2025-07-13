@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import ReactModal from "react-modal";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactModal from 'react-modal';
+import { PreferenceField } from '../../../../../../../types';
 
 interface ListFieldProps {
     field: PreferenceField;
@@ -15,7 +15,7 @@ class ListField extends React.Component<ListFieldProps> {
         super(props);
         this.state = {
             showInputModal: false,
-            itemToAdd: "",
+            itemToAdd: '',
             selectedIndex: 0,
         };
 
@@ -179,19 +179,19 @@ class ListField extends React.Component<ListFieldProps> {
     }
 
     cancelAdd() {
-        this.setState({ showInputModal: false, itemToAdd: "" });
+        this.setState({ showInputModal: false, itemToAdd: '' });
     }
 
     saveItem() {
         if (
             this.state.itemToAdd !== undefined &&
             this.state.itemToAdd !== null &&
-            this.state.itemToAdd !== ""
+            this.state.itemToAdd !== ''
         ) {
             this.props.onChange([...this.value, this.state.itemToAdd]);
         }
 
-        this.setState({ showInputModal: false, itemToAdd: "" });
+        this.setState({ showInputModal: false, itemToAdd: '' });
     }
 
     removeClick() {
@@ -245,7 +245,7 @@ class ListField extends React.Component<ListFieldProps> {
     }
 
     get inputType() {
-        return this.field.inputType || "list";
+        return this.field.inputType || 'list';
     }
 
     get orderable() {
@@ -281,16 +281,16 @@ class ListField extends React.Component<ListFieldProps> {
         return (
             this.field.modalStyle || {
                 overlay: {
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 },
                 content: {
-                    top: "50%",
-                    left: "50%",
-                    bottom: "auto",
-                    right: "auto",
-                    marginRight: "-50%",
-                    transform: "translate(-50%, -50%)",
-                    width: "300px",
+                    top: '50%',
+                    left: '50%',
+                    bottom: 'auto',
+                    right: 'auto',
+                    marginRight: '-50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '300px',
                 },
             }
         );
@@ -301,19 +301,17 @@ class ListField extends React.Component<ListFieldProps> {
     }
 
     get addItemLabel() {
-        return this.field.addItemLabel || "Add Item";
+        return this.field.addItemLabel || 'Add Item';
     }
 
     get addItemValidator() {
         if (this.field.addItemValidator) {
             const string_ = this.field.addItemValidator;
-            const lastSlash = string_.lastIndexOf("/");
-            const validator = new RegExp(
+            const lastSlash = string_.lastIndexOf('/');
+            return new RegExp(
                 string_.slice(1, lastSlash),
                 string_.slice(lastSlash + 1),
             );
-
-            return validator;
         }
 
         return /.+/;

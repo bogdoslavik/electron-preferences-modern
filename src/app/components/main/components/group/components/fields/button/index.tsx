@@ -1,7 +1,7 @@
 /* global api */
-import React from "react";
-import PropTypes from "prop-types";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { PreferenceField } from '../../../../../../../types';
 
 interface ButtonFieldProps {
     field: PreferenceField;
@@ -15,13 +15,13 @@ class ButtonField extends React.Component<ButtonFieldProps> {
         };
 
         const fieldLabel =
-            this.hideLabel === "true" ? (
-                ""
+            this.hideLabel === 'true' ? (
+                ''
             ) : (
                 <div className="field-label">{this.label}</div>
             );
 
-        const btLabel = this.buttonLabel ? this.buttonLabel : "Click Here";
+        const btLabel = this.buttonLabel ? this.buttonLabel : 'Click Here';
 
         return (
             <div className={`field field-button key-${this.key}`}>

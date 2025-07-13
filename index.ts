@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import {
     app,
@@ -8,36 +8,39 @@ import {
     dialog,
     safeStorage,
     systemPreferences,
-} from "electron";
-import path from "path";
-import url from "url";
-import fs from "fs";
-import _ from "lodash";
-import { EventEmitter2 } from "eventemitter2";
-import { loadJsonFileSync } from "load-json-file";
-import { writeJsonFile } from "write-json-file";
-import jsonSerializer from "serialize-javascript"; // also serializes functions etc.
+} from 'electron';
+import path from 'path';
+import url from 'url';
+import fs from 'fs';
+import _ from 'lodash';
+import { EventEmitter2 } from 'eventemitter2';
+import { loadJsonFileSync } from 'load-json-file';
+import { writeJsonFile } from 'write-json-file';
+import jsonSerializer from 'serialize-javascript'; // also serializes functions etc.
+import {PreferencesOptions} from "./types/preferences";
 
 /* 1) handler to fetch OS accent color */
-ipcMain.handle("get-accent-color", () => {
+ipcMain.handle('get-accent-color', () => {
     return systemPreferences.getAccentColor(); // "aabbccdd"
 });
 
 /* 2) forward accent color changes (Windows only) */
-if (process.platform === "win32") {
-    systemPreferences.on("accent-color-changed", (_e, newClr) => {
+if (process.platform === 'win32') {
+    systemPreferences.on('accent-color-changed', (_e, newClr) => {
         BrowserWindow.getAllWindows().forEach((win) => {
-            win.webContents.send("accent-color-changed", newClr); // "aabbccdd"
+            win.webContents.send('accent-color-changed', newClr); // "aabbccdd"
         });
     });
 }
+
+
 
 class ElectronPreferences extends EventEmitter2 {
     prefsWindow?: BrowserWindow | null;
     _preferences: any;
     options: any;
 
-    constructor(options: any = {}) {
+    constructor(options: PreferencesOptions = {}) {
         super();
 
         _.defaultsDeep(options, {
@@ -55,14 +58,14 @@ class ElectronPreferences extends EventEmitter2 {
         // Legacy: Set config values
         if (options.css && !options.config.css) {
             console.warn(
-                "DEPRECATED: css option has been deprecated and will be removed in a future version. It now lives under config.css.",
+                'DEPRECATED: css option has been deprecated and will be removed in a future version. It now lives under config.css.',
             );
             this.options.config.css = options.css;
         }
 
         if (options.dataStore && !options.config.dataStore) {
             console.warn(
-                "DEPRECATED: dataStore option has been deprecated and will be removed in a future version. It now lives under config.dataStore.",
+                'DEPRECATED: dataStore option has been deprecated and will be removed in a future version. It now lives under config.dataStore.',
             );
             this.options.config.dataStore = options.dataStore;
         }
@@ -74,7 +77,7 @@ class ElectronPreferences extends EventEmitter2 {
                 },
             });
             section.form.groups = section.form.groups.map((group, groupIdx) => {
-                group.id = "group" + sectionIdx + groupIdx;
+                group.id = 'group' + sectionIdx + groupIdx;
 
                 return group;
             });
@@ -114,91 +117,91 @@ class ElectronPreferences extends EventEmitter2 {
             this.preferences = this.defaults;
         }
 
-        if (_.isFunction(options.onLoad)) {
+        if (typeof options.onLoad === 'function') {
             this.preferences = options.onLoad(this.preferences);
         }
 
         this.save();
 
-        ipcMain.on("showPreferences", (_, section) => {
+        ipcMain.on('showPreferences', (_, section) => {
             this.show(section);
         });
 
-        ipcMain.on("closePreferences", (_) => {
+        ipcMain.on('closePreferences', (_) => {
             this.close();
         });
 
-        ipcMain.on("getConfig", (event) => {
+        ipcMain.on('getConfig', (event) => {
             event.returnValue = this.options.config;
         });
 
-        ipcMain.on("getSections", (event) => {
+        ipcMain.on('getSections', (event) => {
             event.returnValue = jsonSerializer(this.options.sections);
         });
 
-        ipcMain.on("restoreDefaults", (_) => {
+        ipcMain.on('restoreDefaults', (_) => {
             this.preferences = this.defaults;
             this.save();
             this.broadcast();
         });
 
-        ipcMain.on("getDefaults", (event) => {
+        ipcMain.on('getDefaults', (event) => {
             event.returnValue = this.defaults;
         });
 
-        ipcMain.on("getPreferences", (event) => {
+        ipcMain.on('getPreferences', (event) => {
             event.returnValue = this.preferences;
         });
 
-        ipcMain.on("setPreferences", (event, value) => {
+        ipcMain.on('setPreferences', (event, value) => {
             this.preferences = value;
             this.save();
             this.broadcast();
-            this.emit("save", Object.freeze(_.cloneDeep(this.preferences)));
+            this.emit('save', Object.freeze(_.cloneDeep(this.preferences)));
             event.returnValue = null;
         });
 
-        ipcMain.on("showOpenDialog", (event, dialogOptions) => {
+        ipcMain.on('showOpenDialog', (event, dialogOptions) => {
             event.returnValue = dialog.showOpenDialogSync(dialogOptions);
         });
 
-        ipcMain.on("sendButtonClick", (_, message) => {
+        ipcMain.on('sendButtonClick', (_, message) => {
             // Main process
-            this.emit("click", message);
+            this.emit('click', message);
         });
 
-        ipcMain.on("resetToDefaults", (_) => {
+        ipcMain.on('resetToDefaults', (_) => {
             this.resetToDefaults();
         });
 
-        ipcMain.on("encrypt", (event, secret) => {
+        ipcMain.on('encrypt', (event, secret) => {
             if (!safeStorage.isEncryptionAvailable()) {
                 console.warn(
                     "Cannot encrypt secret as electron's safeStorage isn't available",
                 );
-                event.returnValue = "";
+                event.returnValue = '';
                 return;
             }
 
             event.returnValue = safeStorage
                 .encryptString(secret)
-                .toString("base64");
+                .toString('base64');
         });
 
-        ipcMain.on("decrypt", (event, encryptedSecret) => {
+        ipcMain.on('decrypt', (event, encryptedSecret) => {
             if (!safeStorage.isEncryptionAvailable()) {
                 console.warn(
                     "Cannot decrypt encrypted secret as electron's safeStorage isn't available",
                 );
-                event.returnValue = "";
+                event.returnValue = '';
                 return;
             }
 
-            const encryptedBuffer = Buffer.from(encryptedSecret, "base64");
+            const encryptedBuffer = Buffer.from(encryptedSecret, 'base64');
             event.returnValue = safeStorage.decryptString(encryptedBuffer);
         });
 
-        if (_.isFunction(options.afterLoad)) {
+        if (typeof options.onLoad === 'function') {
             options.afterLoad(this);
         }
     }
@@ -256,13 +259,13 @@ class ElectronPreferences extends EventEmitter2 {
 
     broadcast() {
         for (const wc of webContents.getAllWebContents()) {
-            wc.send("preferencesUpdated", this.preferences);
+            wc.send('preferencesUpdated', this.preferences);
         }
     }
 
     getBrowserWindowOptions() {
         let browserWindowOptions = {
-            title: "Preferences",
+            title: 'Preferences',
             width: 800,
             maxWidth: 800,
             height: 600,
@@ -270,7 +273,7 @@ class ElectronPreferences extends EventEmitter2 {
             resizable: false,
             acceptFirstMouse: true,
             maximizable: false,
-            backgroundColor: "#E7E7E7",
+            backgroundColor: '#E7E7E7',
             show: false,
             webPreferences: this.options.webPreferences,
         };
@@ -278,7 +281,7 @@ class ElectronPreferences extends EventEmitter2 {
         const defaultWebPreferences = {
             nodeIntegration: false,
             enableRemoteModule: false,
-            preload: path.join(__dirname, "./preload.js"),
+            preload: path.join(__dirname, './preload.js'),
             devTools: this.options.debug,
         };
 
@@ -306,7 +309,7 @@ class ElectronPreferences extends EventEmitter2 {
     }
 
     show(section) {
-        if (typeof section !== "undefined") {
+        if (typeof section !== 'undefined') {
             const sectionIds = this.options.sections.map(
                 (section) => section.id,
             );
@@ -345,24 +348,24 @@ class ElectronPreferences extends EventEmitter2 {
 
         this.prefsWindow.loadURL(
             url.format({
-                pathname: path.join(__dirname, "build/index.html"),
-                protocol: "file:",
+                pathname: path.join(__dirname, 'build/index.html'),
+                protocol: 'file:',
                 slashes: true,
             }),
         );
 
-        this.prefsWindow.once("ready-to-show", () => {
+        this.prefsWindow.once('ready-to-show', () => {
             // Show: false by default, then show when ready to prevent page "flicker"
             this.prefsWindow.show();
         });
 
-        this.prefsWindow.webContents.on("dom-ready", async () => {
+        this.prefsWindow.webContents.on('dom-ready', async () => {
             // Load custom css file
             const cssFile = this.config.css;
             if (cssFile) {
                 const file = path
                     .join(app.getAppPath(), cssFile)
-                    .replace(/\\/g, "/"); // Make sure it also works in Windows
+                    .replace(/\\/g, '/'); // Make sure it also works in Windows
 
                 try {
                     if (await fs.promises.stat(file)) {
@@ -394,7 +397,7 @@ class ElectronPreferences extends EventEmitter2 {
             }
         });
 
-        this.prefsWindow.on("closed", () => {
+        this.prefsWindow.on('closed', () => {
             this.prefsWindow = null;
         });
 
@@ -427,7 +430,7 @@ class ElectronPreferences extends EventEmitter2 {
             );
         }
 
-        const encryptedSecret = Buffer.from(encryptedSecretString, "base64");
+        const encryptedSecret = Buffer.from(encryptedSecretString, 'base64');
 
         return safeStorage.decryptString(encryptedSecret);
     }

@@ -1,10 +1,10 @@
 // Source of src/app/components/main/components/group/components/fields/radio/index.jsx
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { newGuid } from "../../../../../../../utils/newGuid";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { newGuid } from '../../../../../../../utils/newGuid';
+import { PreferenceField } from '../../../../../../../types';
 
 interface RadioFieldProps {
     field: PreferenceField;
@@ -64,7 +64,7 @@ class RadioField extends React.Component<RadioFieldProps> {
     }
 
     onChange(e) {
-        const idx = e.target.id.split("_")[2];
+        const idx = e.target.id.split('_')[2];
         const option = this.options[idx];
 
         return this.props.onChange(option.value);

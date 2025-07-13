@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-import React, {CSSProperties} from "react";
-import PropTypes from "prop-types";
-import HideableComponent from "../generic/hideable";
-import {PreferenceField} from "../../types";
+import React, { CSSProperties } from 'react';
+import PropTypes from 'prop-types';
+import HideableComponent from '../generic/hideable';
+import { PreferenceField } from '../../types';
 
 interface SidebarProps {
     sections: PreferenceField[];
@@ -17,14 +17,16 @@ class Sidebar extends React.Component<SidebarProps> {
 
         const sections = this.sections.map((section) => {
             const isActive = this.activeSection === section.id;
-            let className = "sidebar-section" + (isActive ? " active" : "");
+            let className = 'sidebar-section' + (isActive ? ' active' : '');
 
             const iconStyle = {
                 mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
                 WebkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
             };
 
-            const liStyle: CSSProperties = section.iconColor ? {"--icon-clr": section.iconColor} as CSSProperties : {};
+            const liStyle: CSSProperties = section.iconColor
+                ? ({ '--icon-clr': section.iconColor } as CSSProperties)
+                : {};
 
             return (
                 <HideableComponent

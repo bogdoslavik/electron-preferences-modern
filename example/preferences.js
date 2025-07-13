@@ -1,25 +1,25 @@
-"use strict";
+'use strict';
 
-const electron = require("electron");
+const electron = require('electron');
 const { Menu } = electron;
-const path = require("path");
-const os = require("os");
-const ElectronPreferences = require("../");
+const path = require('path');
+const os = require('os');
+const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
     debug: true, // True will open the dev tools
     config: {
         debounce: 10,
-        css: "custom-style.css",
-        dataStore: path.resolve(__dirname, "preferences.json"),
+        css: 'custom-style.css',
+        dataStore: path.resolve(__dirname, 'preferences.json'),
     },
     defaults: {
         notes: {
-            folder: path.resolve(os.homedir(), "Notes"),
+            folder: path.resolve(os.homedir(), 'Notes'),
         },
         about: {
-            firstName: "Pieter-Jan",
-            lastName: "Van Robays",
+            firstName: 'Pieter-Jan',
+            lastName: 'Van Robays',
         },
         sectionsEnabler: {
             lists: true,
@@ -33,119 +33,119 @@ const preferences = new ElectronPreferences({
     },
     menuBar: Menu.buildFromTemplate([
         {
-            label: "Window",
-            role: "window",
+            label: 'Window',
+            role: 'window',
             submenu: [
                 {
-                    label: "Close",
-                    accelerator: "CmdOrCtrl+W",
-                    role: "close",
+                    label: 'Close',
+                    accelerator: 'CmdOrCtrl+W',
+                    role: 'close',
                 },
             ],
         },
     ]),
     browserWindowOverrides: {
-        title: "My Electron Preferences",
+        title: 'My Electron Preferences',
     },
     sections: [
         {
-            id: "about",
-            label: "About You",
-            icon: "single-01",
-            iconColor: "#f7630c",
+            id: 'about',
+            label: 'About You',
+            icon: 'single-01',
+            iconColor: '#f7630c',
             form: {
                 groups: [
                     {
-                        label: "About You",
+                        label: 'About You',
                         fields: [
                             {
-                                label: "First Name",
-                                key: "firstName",
-                                type: "text",
-                                help: "What is your first name?",
+                                label: 'First Name',
+                                key: 'firstName',
+                                type: 'text',
+                                help: 'What is your first name?',
                             },
                             {
-                                label: "Last Name",
-                                key: "lastName",
-                                type: "text",
-                                help: "What is your last name?",
+                                label: 'Last Name',
+                                key: 'lastName',
+                                type: 'text',
+                                help: 'What is your last name?',
                             },
                             {
-                                label: "Enable Gender",
-                                key: "enableGender",
-                                type: "radio",
+                                label: 'Enable Gender',
+                                key: 'enableGender',
+                                type: 'radio',
                                 options: [
-                                    { label: "No", value: false },
-                                    { label: "Yes", value: true },
+                                    { label: 'No', value: false },
+                                    { label: 'Yes', value: true },
                                 ],
-                                help: "So woke!",
+                                help: 'So woke!',
                             },
                             {
-                                label: "Gender",
-                                key: "gender",
-                                type: "dropdown",
+                                label: 'Gender',
+                                key: 'gender',
+                                type: 'dropdown',
                                 options: [
-                                    { label: "Male", value: "male" },
-                                    { label: "Female", value: "female" },
+                                    { label: 'Male', value: 'male' },
+                                    { label: 'Female', value: 'female' },
                                     {
-                                        label: "Unspecified",
-                                        value: "unspecified",
+                                        label: 'Unspecified',
+                                        value: 'unspecified',
                                     },
                                 ],
-                                help: "What is your gender?",
+                                help: 'What is your gender?',
                                 hideFunction: (preferences) => {
                                     return !preferences.about?.enableGender;
                                 },
                             },
                             {
-                                label: "Age",
-                                key: "age",
-                                type: "text",
-                                inputType: "number",
+                                label: 'Age',
+                                key: 'age',
+                                type: 'text',
+                                inputType: 'number',
                             },
                             {
-                                label: "Age2",
-                                key: "age2",
-                                type: "number",
+                                label: 'Age2',
+                                key: 'age2',
+                                type: 'number',
                             },
                             {
-                                label: "Which of the following foods do you like?",
-                                key: "foods",
-                                type: "checkbox",
+                                label: 'Which of the following foods do you like?',
+                                key: 'foods',
+                                type: 'checkbox',
                                 options: [
-                                    { label: "Ice Cream", value: "iceCream" },
-                                    { label: "Carrots", value: "carrots" },
-                                    { label: "Cake", value: "cake" },
-                                    { label: "Spinach", value: "spinach" },
+                                    { label: 'Ice Cream', value: 'iceCream' },
+                                    { label: 'Carrots', value: 'carrots' },
+                                    { label: 'Cake', value: 'cake' },
+                                    { label: 'Spinach', value: 'spinach' },
                                 ],
-                                help: "Select one or more foods that you like.",
+                                help: 'Select one or more foods that you like.',
                             },
                             {
-                                label: "Are you tired?",
-                                key: "tired",
-                                type: "checkbox",
-                                options: [{ label: "Yes", value: "yes" }],
+                                label: 'Are you tired?',
+                                key: 'tired',
+                                type: 'checkbox',
+                                options: [{ label: 'Yes', value: 'yes' }],
                             },
                             {
-                                label: "Coolness",
-                                key: "coolness",
-                                type: "slider",
+                                label: 'Coolness',
+                                key: 'coolness',
+                                type: 'slider',
                                 min: 0,
                                 max: 9001,
                             },
                             {
-                                label: "Eye Color",
-                                key: "eyeColor",
-                                type: "color",
-                                format: "hex",
-                                help: "Your eye color",
+                                label: 'Eye Color',
+                                key: 'eyeColor',
+                                type: 'color',
+                                format: 'hex',
+                                help: 'Your eye color',
                             },
                             {
-                                label: "Hair Color",
-                                key: "hairColor",
-                                type: "color",
-                                format: "rgb",
-                                help: "Your hair color",
+                                label: 'Hair Color',
+                                key: 'hairColor',
+                                type: 'color',
+                                format: 'rgb',
+                                help: 'Your hair color',
                             },
                         ],
                     },
@@ -153,61 +153,61 @@ const preferences = new ElectronPreferences({
             },
         },
         {
-            id: "notes",
-            label: "Notes",
-            icon: "folder-15",
-            iconColor: "rgb(74,182,239)",
+            id: 'notes',
+            label: 'Notes',
+            icon: 'folder-15',
+            iconColor: 'rgb(74,182,239)',
             form: {
                 groups: [
                     {
-                        label: "Stuff",
+                        label: 'Stuff',
                         fields: [
                             {
-                                label: "Read notes from folder",
-                                key: "folder",
-                                type: "directory",
-                                help: "The location where your notes will be stored.",
+                                label: 'Read notes from folder',
+                                key: 'folder',
+                                type: 'directory',
+                                help: 'The location where your notes will be stored.',
                                 multiSelections: false,
                                 noResolveAliases: false,
                                 treatPackageAsDirectory: false,
                                 dontAddToRecent: true,
                             },
                             {
-                                label: "Select some images",
-                                key: "images",
-                                type: "file",
-                                help: "List of selected images",
+                                label: 'Select some images',
+                                key: 'images',
+                                type: 'file',
+                                help: 'List of selected images',
                                 filters: [
                                     {
-                                        name: "Joint Photographic Experts Group (JPG)",
+                                        name: 'Joint Photographic Experts Group (JPG)',
                                         extensions: [
-                                            "jpg",
-                                            "jpeg",
-                                            "jpe",
-                                            "jfif",
-                                            "jfi",
-                                            "jif",
+                                            'jpg',
+                                            'jpeg',
+                                            'jpe',
+                                            'jfif',
+                                            'jfi',
+                                            'jif',
                                         ],
                                     },
                                     {
-                                        name: "Portable Network Graphics (PNG)",
-                                        extensions: ["png"],
+                                        name: 'Portable Network Graphics (PNG)',
+                                        extensions: ['png'],
                                     },
                                     {
-                                        name: "Graphics Interchange Format (GIF)",
-                                        extensions: ["gif"],
+                                        name: 'Graphics Interchange Format (GIF)',
+                                        extensions: ['gif'],
                                     },
                                     {
-                                        name: "All Images",
+                                        name: 'All Images',
                                         extensions: [
-                                            "jpg",
-                                            "jpeg",
-                                            "jpe",
-                                            "jfif",
-                                            "jfi",
-                                            "jif",
-                                            "png",
-                                            "gif",
+                                            'jpg',
+                                            'jpeg',
+                                            'jpe',
+                                            'jfif',
+                                            'jfi',
+                                            'jif',
+                                            'png',
+                                            'gif',
                                         ],
                                     },
                                     // { name: 'All Files', extensions: ['*'] }
@@ -219,17 +219,17 @@ const preferences = new ElectronPreferences({
                                 dontAddToRecent: true,
                             },
                             {
-                                heading: "Important Message",
+                                heading: 'Important Message',
                                 content:
-                                    "<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>",
-                                type: "message",
+                                    '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
+                                type: 'message',
                             },
                             {
-                                label: "Do some action on the main process",
-                                key: "do-action-on-main",
-                                type: "button",
-                                buttonLabel: "Just do it!",
-                                help: "Can be used to trigger an action on the main process. For example, reset some preferences",
+                                label: 'Do some action on the main process',
+                                key: 'do-action-on-main',
+                                type: 'button',
+                                buttonLabel: 'Just do it!',
+                                help: 'Can be used to trigger an action on the main process. For example, reset some preferences',
                             },
                         ],
                     },
@@ -237,46 +237,46 @@ const preferences = new ElectronPreferences({
             },
         },
         {
-            id: "space",
-            label: "Other Settings",
-            icon: "spaceship",
+            id: 'space',
+            label: 'Other Settings',
+            icon: 'spaceship',
             form: {
                 groups: [
                     {
                         fields: [
                             {
-                                label: "Phone Number",
-                                key: "phoneNumber",
-                                type: "text",
-                                help: "What is your phone number?",
+                                label: 'Phone Number',
+                                key: 'phoneNumber',
+                                type: 'text',
+                                help: 'What is your phone number?',
                             },
                             {
-                                label: "Foo or Bar?",
-                                key: "foobar",
-                                type: "radio",
+                                label: 'Foo or Bar?',
+                                key: 'foobar',
+                                type: 'radio',
                                 options: [
-                                    { label: "Foo", value: "foo" },
-                                    { label: "Bar", value: "bar" },
-                                    { label: "FooBar", value: "foobar" },
+                                    { label: 'Foo', value: 'foo' },
+                                    { label: 'Bar', value: 'bar' },
+                                    { label: 'FooBar', value: 'foobar' },
                                 ],
-                                help: "Foo? Bar?",
+                                help: 'Foo? Bar?',
                             },
                             {
-                                label: "Bar or Foo?",
-                                key: "barfoo",
-                                type: "radio",
+                                label: 'Bar or Foo?',
+                                key: 'barfoo',
+                                type: 'radio',
                                 options: [
-                                    { label: "Bar", value: "bar" },
-                                    { label: "Foo", value: "foo" },
-                                    { label: "BarFoo", value: "barfoo" },
+                                    { label: 'Bar', value: 'bar' },
+                                    { label: 'Foo', value: 'foo' },
+                                    { label: 'BarFoo', value: 'barfoo' },
                                 ],
-                                help: "Bar? Foo?",
+                                help: 'Bar? Foo?',
                             },
                             {
-                                label: "Shortcut",
-                                key: "shortcut",
-                                type: "accelerator",
-                                help: "A keyboard shortcut",
+                                label: 'Shortcut',
+                                key: 'shortcut',
+                                type: 'accelerator',
+                                help: 'A keyboard shortcut',
                                 modifierRequired: true,
                             },
                         ],
@@ -285,23 +285,23 @@ const preferences = new ElectronPreferences({
             },
         },
         {
-            id: "account",
-            label: "Account",
-            icon: "lock",
+            id: 'account',
+            label: 'Account',
+            icon: 'lock',
             form: {
                 groups: [
                     {
-                        label: "Account",
+                        label: 'Account',
                         fields: [
                             {
-                                label: "Username",
-                                key: "username",
-                                type: "text",
+                                label: 'Username',
+                                key: 'username',
+                                type: 'text',
                             },
                             {
-                                label: "Password",
-                                key: "password",
-                                type: "secret",
+                                label: 'Password',
+                                key: 'password',
+                                type: 'secret',
                             },
                         ],
                     },
@@ -309,86 +309,86 @@ const preferences = new ElectronPreferences({
             },
         },
         {
-            id: "sectionsEnabler",
-            label: "Enable Sections",
-            icon: "preferences",
+            id: 'sectionsEnabler',
+            label: 'Enable Sections',
+            icon: 'preferences',
             form: {
                 groups: [
                     {
-                        label: "Enable Sections",
+                        label: 'Enable Sections',
                         fields: [
                             {
-                                label: "Lists",
-                                key: "lists",
-                                type: "radio",
+                                label: 'Lists',
+                                key: 'lists',
+                                type: 'radio',
                                 options: [
-                                    { label: "No", value: false },
-                                    { label: "Yes", value: true },
+                                    { label: 'No', value: false },
+                                    { label: 'Yes', value: true },
                                 ],
-                                help: "Show Lists sections?",
+                                help: 'Show Lists sections?',
                             },
                             {
-                                label: "Theme",
-                                key: "theme",
-                                type: "radio",
+                                label: 'Theme',
+                                key: 'theme',
+                                type: 'radio',
                                 options: [
-                                    { label: "No", value: false },
-                                    { label: "Yes", value: true },
+                                    { label: 'No', value: false },
+                                    { label: 'Yes', value: true },
                                 ],
-                                help: "Show Themes sections?",
+                                help: 'Show Themes sections?',
                             },
                         ],
                     },
                     {
-                        label: "Enable Groups",
+                        label: 'Enable Groups',
                         fields: [
                             {
-                                label: "Enable Group 1",
-                                key: "group1",
-                                type: "dropdown",
+                                label: 'Enable Group 1',
+                                key: 'group1',
+                                type: 'dropdown',
                                 options: [
-                                    { label: "No", value: false },
-                                    { label: "Yes", value: true },
+                                    { label: 'No', value: false },
+                                    { label: 'Yes', value: true },
                                 ],
-                                help: "Show group 1?",
+                                help: 'Show group 1?',
                             },
                             {
-                                label: "Enable Group 2",
-                                key: "group2",
-                                type: "radio",
+                                label: 'Enable Group 2',
+                                key: 'group2',
+                                type: 'radio',
                                 options: [
-                                    { label: "No", value: false },
-                                    { label: "Yes", value: true },
+                                    { label: 'No', value: false },
+                                    { label: 'Yes', value: true },
                                 ],
-                                help: "Show Group2?",
+                                help: 'Show Group2?',
                             },
                         ],
                     },
                     {
-                        label: "Group 1",
+                        label: 'Group 1',
                         hideFunction: (preferences) => {
                             return (
-                                preferences.sectionsEnabler?.group1 === "false"
+                                preferences.sectionsEnabler?.group1 === 'false'
                             );
                         },
                         fields: [
                             {
-                                heading: "Group 1",
-                                content: "<p>Placeholder for group 1</p>",
-                                type: "message",
+                                heading: 'Group 1',
+                                content: '<p>Placeholder for group 1</p>',
+                                type: 'message',
                             },
                         ],
                     },
                     {
-                        label: "Group 2",
+                        label: 'Group 2',
                         hideFunction: (preferences) => {
                             return !preferences.sectionsEnabler?.group2;
                         },
                         fields: [
                             {
-                                heading: "Group 1",
-                                content: "<p>Placeholder for group 1</p>",
-                                type: "message",
+                                heading: 'Group 1',
+                                content: '<p>Placeholder for group 1</p>',
+                                type: 'message',
                             },
                         ],
                     },
@@ -396,37 +396,37 @@ const preferences = new ElectronPreferences({
             },
         },
         {
-            id: "lists",
-            label: "Lists",
-            icon: "notes",
+            id: 'lists',
+            label: 'Lists',
+            icon: 'notes',
             hideFunction: (preferences) => {
                 return !preferences.sectionsEnabler?.lists;
             },
             form: {
                 groups: [
                     {
-                        label: "Lists",
+                        label: 'Lists',
                         fields: [
                             {
-                                label: "Favorite foods",
-                                key: "foods",
-                                type: "list",
+                                label: 'Favorite foods',
+                                key: 'foods',
+                                type: 'list',
                                 size: 15,
-                                help: "A list of your favorite foods",
+                                help: 'A list of your favorite foods',
                                 addItemValidator: /^[A-Za-z ]+$/.toString(),
-                                addItemLabel: "Add favorite food",
+                                addItemLabel: 'Add favorite food',
                                 min: 1,
                                 max: 4,
                             },
                             {
-                                label: "Best places to visit",
-                                key: "places",
-                                type: "list",
+                                label: 'Best places to visit',
+                                key: 'places',
+                                type: 'list',
                                 size: 10,
                                 style: {
-                                    width: "75%",
+                                    width: '75%',
                                 },
-                                help: "An ordered list of nice places to visit",
+                                help: 'An ordered list of nice places to visit',
                                 orderable: true,
                             },
                         ],
@@ -435,9 +435,9 @@ const preferences = new ElectronPreferences({
             },
         },
         {
-            id: "theme",
-            label: "Theme",
-            icon: "brightness-6",
+            id: 'theme',
+            label: 'Theme',
+            icon: 'brightness-6',
             hideFunction: (preferences) => {
                 return !preferences.sectionsEnabler?.theme;
             },
@@ -446,18 +446,18 @@ const preferences = new ElectronPreferences({
                     {
                         fields: [
                             {
-                                label: "Theme",
-                                key: "theme",
-                                type: "radio",
+                                label: 'Theme',
+                                key: 'theme',
+                                type: 'radio',
                                 options: [
                                     {
-                                        label: "System (default)",
-                                        value: "system",
+                                        label: 'System (default)',
+                                        value: 'system',
                                     },
-                                    { label: "Light", value: "light" },
-                                    { label: "Dark", value: "dark" },
+                                    { label: 'Light', value: 'light' },
+                                    { label: 'Dark', value: 'dark' },
                                 ],
-                                help: "Light or dark theme?",
+                                help: 'Light or dark theme?',
                             },
                         ],
                     },

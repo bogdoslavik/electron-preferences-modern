@@ -1,8 +1,8 @@
 /* global api */
-import React from "react";
-import PropTypes from "prop-types";
-import { isArray } from "../../../../../../../utils/isArray";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { isArray } from '../../../../../../../utils/isArray';
+import { PreferenceField } from '../../../../../../../types';
 
 interface DirectoryFieldProps {
     field: PreferenceField;
@@ -22,11 +22,11 @@ class DirectoryField extends React.Component<DirectoryFieldProps> {
         const btLabel =
             value && value.length > 0
                 ? multiSelections
-                    ? "Choose other Folders"
-                    : "Choose Another Folder"
+                    ? 'Choose other Folders'
+                    : 'Choose Another Folder'
                 : multiSelections
-                  ? "Choose Folders"
-                  : "Choose a Folder";
+                  ? 'Choose Folders'
+                  : 'Choose a Folder';
 
         return (
             <div className={`field field-directory key-${this.field.key}`}>
@@ -34,7 +34,7 @@ class DirectoryField extends React.Component<DirectoryFieldProps> {
                     {label}
                 </div>
                 <div className="value" onClick={this.choose}>
-                    {multiSelections ? "Folders" : "Folder"}:&nbsp;
+                    {multiSelections ? 'Folders' : 'Folder'}:&nbsp;
                     {value ? (
                         multiSelections || value.length > 1 ? (
                             <ul>
@@ -46,7 +46,7 @@ class DirectoryField extends React.Component<DirectoryFieldProps> {
                             value[0]
                         )
                     ) : (
-                        "None"
+                        'None'
                     )}
                 </div>
                 <button
@@ -69,7 +69,7 @@ class DirectoryField extends React.Component<DirectoryFieldProps> {
         // Always return an array
 
         const { value } = this.props;
-        if (typeof value === "undefined") {
+        if (typeof value === 'undefined') {
             return undefined;
         }
 
@@ -115,21 +115,21 @@ class DirectoryField extends React.Component<DirectoryFieldProps> {
             treatPackageAsDirectory,
             dontAddToRecent,
         } = this;
-        const properties = ["openDirectory", "createDirectory"];
+        const properties = ['openDirectory', 'createDirectory'];
         if (multiSelections) {
-            properties.push("multiSelections");
+            properties.push('multiSelections');
         }
 
         if (noResolveAliases) {
-            properties.push("noResolveAliases");
+            properties.push('noResolveAliases');
         }
 
         if (treatPackageAsDirectory) {
-            properties.push("treatPackageAsDirectory");
+            properties.push('treatPackageAsDirectory');
         }
 
         if (dontAddToRecent) {
-            properties.push("dontAddToRecent");
+            properties.push('dontAddToRecent');
         }
 
         const result = api?.showOpenDialog({

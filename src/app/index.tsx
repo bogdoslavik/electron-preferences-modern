@@ -1,15 +1,15 @@
 /* global api, document */
 
 /* Electron Renderer Process */
-"use strict";
+'use strict';
 
-import React from "react";
-import { createRoot } from "react-dom/client";
-import _ from "lodash";
-import debounce from "./utils/debounce";
-import Sidebar from "./components/sidebar";
-import Main from "./components/main";
-import "../../scss/style.scss";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import _ from 'lodash';
+import debounce from './utils/debounce';
+import Sidebar from './components/sidebar';
+import Main from './components/main';
+import '../../scss/style.scss';
 
 const allSections = api.getSections();
 const preferences = api.getPreferences();
@@ -77,5 +77,5 @@ class App extends React.Component {
     }
 }
 
-const root = createRoot(document.querySelector("#window"));
+const root = createRoot(document.querySelector('#window'));
 root.render(<App />);

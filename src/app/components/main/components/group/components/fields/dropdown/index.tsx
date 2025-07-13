@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { PreferenceField } from '../../../../../../../types';
 
 interface DropdownFieldProps {
     field: PreferenceField;
@@ -38,7 +38,7 @@ class DropdownField extends React.Component<DropdownFieldProps> {
     }
 
     get value() {
-        return this.props.value || "";
+        return this.props.value || '';
     }
 
     get label() {

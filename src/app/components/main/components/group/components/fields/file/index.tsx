@@ -1,10 +1,10 @@
 /*global api*/
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { isArray } from "../../../../../../../utils/isArray";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { isArray } from '../../../../../../../utils/isArray';
+import { PreferenceField } from '../../../../../../../types';
 
 interface FileFieldProps {
     field: PreferenceField;
@@ -25,11 +25,11 @@ class FileField extends React.Component<FileFieldProps> {
             buttonLabel ||
             (value && value.length > 0
                 ? multiSelections
-                    ? "Choose other Files"
-                    : "Choose another File"
+                    ? 'Choose other Files'
+                    : 'Choose another File'
                 : multiSelections
-                  ? "Choose Files"
-                  : "Choose a File");
+                  ? 'Choose Files'
+                  : 'Choose a File');
 
         return (
             <div className={`field field-file key-${this.field.key}`}>
@@ -37,7 +37,7 @@ class FileField extends React.Component<FileFieldProps> {
                     {label}
                 </div>
                 <div className="value" onClick={this.choose}>
-                    {multiSelections ? "Files" : "File"}:&nbsp;
+                    {multiSelections ? 'Files' : 'File'}:&nbsp;
                     {value ? (
                         multiSelections || value.length > 1 ? (
                             <ul>
@@ -49,7 +49,7 @@ class FileField extends React.Component<FileFieldProps> {
                             value[0]
                         )
                     ) : (
-                        "None"
+                        'None'
                     )}
                 </div>
                 <button
@@ -72,7 +72,7 @@ class FileField extends React.Component<FileFieldProps> {
         // Always return an array
 
         const { value } = this.props;
-        if (typeof value === "undefined") {
+        if (typeof value === 'undefined') {
             return undefined;
         }
 
@@ -132,25 +132,25 @@ class FileField extends React.Component<FileFieldProps> {
             dontAddToRecent,
             filters,
         } = this;
-        const properties = ["openFile"];
+        const properties = ['openFile'];
         if (multiSelections) {
-            properties.push("multiSelections");
+            properties.push('multiSelections');
         }
 
         if (showHiddenFiles) {
-            properties.push("showHiddenFiles");
+            properties.push('showHiddenFiles');
         }
 
         if (noResolveAliases) {
-            properties.push("noResolveAliases");
+            properties.push('noResolveAliases');
         }
 
         if (treatPackageAsDirectory) {
-            properties.push("treatPackageAsDirectory");
+            properties.push('treatPackageAsDirectory');
         }
 
         if (dontAddToRecent) {
-            properties.push("dontAddToRecent");
+            properties.push('dontAddToRecent');
         }
 
         const result = api?.showOpenDialog({

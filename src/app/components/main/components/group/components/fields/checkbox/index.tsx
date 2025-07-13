@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { newGuid } from "../../../../../../../utils/newGuid";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { newGuid } from '../../../../../../../utils/newGuid';
+import { PreferenceField } from '../../../../../../../types';
 
 interface CheckboxFieldProps {
     field: PreferenceField;
@@ -20,9 +20,9 @@ class CheckboxField extends React.Component<CheckboxFieldProps> {
         const options = this.options.map((option, idx) => {
             // If only a single checkbox is being rendered, this allows you the ability to pass
             // a boolean default value instead of ['value'], for convenience.
-            if (typeof value === "boolean" && this.options.length === 1) {
+            if (typeof value === 'boolean' && this.options.length === 1) {
                 value = value ? [option.value] : [];
-            } else if (typeof value !== "object") {
+            } else if (typeof value !== 'object') {
                 value = [];
             }
 
@@ -77,13 +77,13 @@ class CheckboxField extends React.Component<CheckboxFieldProps> {
 
     onChange(e) {
         let { value } = this;
-        const idx = e.target.id.split("_")[2];
+        const idx = e.target.id.split('_')[2];
         const option = this.options[idx];
 
         // Coerce values
-        if (typeof value === "boolean" && this.options.length === 1) {
+        if (typeof value === 'boolean' && this.options.length === 1) {
             value = value ? [option.value] : [];
-        } else if (typeof value !== "object") {
+        } else if (typeof value !== 'object') {
             value = [];
         }
 

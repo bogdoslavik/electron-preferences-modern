@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { PreferenceField } from "../../../types";
-import DirectoryField from "./components/fields/directory";
-import TextField from "./components/fields/text";
-import MessageField from "./components/fields/message";
-import DropdownField from "./components/fields/dropdown";
-import CheckboxField from "./components/fields/checkbox";
-import RadioField from "./components/fields/radio";
-import SliderField from "./components/fields/slider";
-import AcceleratorField from "./components/fields/accelerator";
-import ColorField from "./components/fields/color";
-import ListField from "./components/fields/list";
-import FileField from "./components/fields/file";
-import ButtonField from "./components/fields/button";
-import SecretField from "./components/fields/secret";
-import HideableComponent from "../../../generic/hideable";
+import React from 'react';
+import PropTypes from 'prop-types';
+import DirectoryField from './components/fields/directory';
+import TextField from './components/fields/text';
+import MessageField from './components/fields/message';
+import DropdownField from './components/fields/dropdown';
+import CheckboxField from './components/fields/checkbox';
+import RadioField from './components/fields/radio';
+import SliderField from './components/fields/slider';
+import AcceleratorField from './components/fields/accelerator';
+import ColorField from './components/fields/color';
+import ListField from './components/fields/list';
+import FileField from './components/fields/file';
+import ButtonField from './components/fields/button';
+import SecretField from './components/fields/secret';
+import HideableComponent from '../../../generic/hideable';
+// import { PreferenceField } from '../../../types';
 
 const fieldMap = {
     directory: DirectoryField,

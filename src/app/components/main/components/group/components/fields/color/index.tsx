@@ -1,10 +1,10 @@
 /* global document */
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { ChromePicker } from "react-color";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ChromePicker } from 'react-color';
+import { PreferenceField } from '../../../../../../../types';
 
 interface ColorFieldProps {
     field: PreferenceField;
@@ -38,7 +38,7 @@ class ColorField extends React.Component<ColorFieldProps> {
                             <ChromePicker
                                 color={this.value}
                                 onChange={this.onChange}
-                                disableAlpha={this.format === "hex"}
+                                disableAlpha={this.format === 'hex'}
                             />
                         </div>
                     ) : null}
@@ -57,11 +57,11 @@ class ColorField extends React.Component<ColorFieldProps> {
     }
 
     componentDidMount() {
-        document.addEventListener("click", this.handleClickOutside, true);
+        document.addEventListener('click', this.handleClickOutside, true);
     }
 
     componentWillUnmount() {
-        document.removeEventListener("click", this.handleClickOutside, true);
+        document.removeEventListener('click', this.handleClickOutside, true);
     }
 
     handleClickOutside(event) {
@@ -79,7 +79,7 @@ class ColorField extends React.Component<ColorFieldProps> {
     }
 
     get value() {
-        return this.props.value || "#fff";
+        return this.props.value || '#fff';
     }
 
     get label() {
@@ -95,21 +95,21 @@ class ColorField extends React.Component<ColorFieldProps> {
     }
 
     get style() {
-        let style = "";
+        let style = '';
         switch (this.format) {
-            case "rgb": {
+            case 'rgb': {
                 style = `rgba(${this.value.r}, ${this.value.g}, ${this.value.b}, ${this.value.a})`;
 
                 break;
             }
 
-            case "hex": {
+            case 'hex': {
                 style = this.value;
 
                 break;
             }
 
-            case "hsl": {
+            case 'hsl': {
                 style = `hsla(${this.value.h}, ${this.value.s * 100}%, ${this.value.l * 100}%, ${this.value.a})`;
 
                 break;
@@ -126,19 +126,19 @@ class ColorField extends React.Component<ColorFieldProps> {
 
     onChange(color) {
         switch (this.format) {
-            case "rgb": {
+            case 'rgb': {
                 color = color.rgb;
 
                 break;
             }
 
-            case "hex": {
+            case 'hex': {
                 color = color.hex;
 
                 break;
             }
 
-            case "hsl": {
+            case 'hsl': {
                 color = color.hsl;
 
                 break;

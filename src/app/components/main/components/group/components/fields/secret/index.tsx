@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 /* global api */
 
-import React from "react";
-import PropTypes from "prop-types";
-import ReactModal from "react-modal";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactModal from 'react-modal';
+import { PreferenceField } from '../../../../../../../types';
 
 interface SecretFieldProps {
     field: PreferenceField;
@@ -16,7 +16,7 @@ class SecretField extends React.Component<SecretFieldProps> {
         super(props);
         this.state = {
             showInputModal: false,
-            updatedSecret: "",
+            updatedSecret: '',
         };
     }
 
@@ -27,7 +27,7 @@ class SecretField extends React.Component<SecretFieldProps> {
                 <div className="input-button-container">
                     <input
                         type="password"
-                        value={this.hasValue ? "superSecret" : ""}
+                        value={this.hasValue ? 'superSecret' : ''}
                         aria-label="secret"
                         disabled="disabled"
                     />
@@ -110,20 +110,20 @@ class SecretField extends React.Component<SecretFieldProps> {
         const secret = this.state.updatedSecret;
         const encrypted = api.encrypt(secret);
         this.props.onChange(encrypted);
-        this.setState({ showInputModal: false, updatedSecret: "" });
+        this.setState({ showInputModal: false, updatedSecret: '' });
     }
 
     changeSecret() {
         this.setState({
             showInputModal: true,
-            updatedSecret: "",
+            updatedSecret: '',
         });
     }
 
     cancelSecret() {
         this.setState({
             showInputModal: false,
-            updatedSecret: "",
+            updatedSecret: '',
         });
     }
 
@@ -131,7 +131,7 @@ class SecretField extends React.Component<SecretFieldProps> {
         this.props.onChange(null);
         this.setState({
             showInputModal: false,
-            updatedSecret: "",
+            updatedSecret: '',
         });
     }
 
@@ -139,16 +139,16 @@ class SecretField extends React.Component<SecretFieldProps> {
         return (
             this.field.modalStyle || {
                 overlay: {
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 },
                 content: {
-                    top: "50%",
-                    left: "50%",
-                    bottom: "auto",
-                    right: "auto",
-                    marginRight: "-50%",
-                    transform: "translate(-50%, -50%)",
-                    width: "300px",
+                    top: '50%',
+                    left: '50%',
+                    bottom: 'auto',
+                    right: 'auto',
+                    marginRight: '-50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '300px',
                 },
             }
         );

@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
-import Group from "./components/group";
-import HideableComponent from "../generic/hideable";
-import { PreferenceField } from "../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import Group from './components/group';
+import HideableComponent from '../generic/hideable';
+import { PreferenceField } from '../types';
 
 interface MainProps {
     sections: PreferenceField[];

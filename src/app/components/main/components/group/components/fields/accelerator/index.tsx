@@ -1,10 +1,10 @@
 /* global navigator */
-"use strict";
+'use strict';
 
-import React from "react";
-import PropTypes from "prop-types";
-import keycodeToChar from "../../../../../../../utils/keycodeToChar";
-import { PreferenceField } from "../../../../../../../types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import keycodeToChar from '../../../../../../../utils/keycodeToChar';
+import { PreferenceField } from '../../../../../../../types';
 
 interface AcceleratorFieldProps {
     field: PreferenceField;
@@ -26,7 +26,7 @@ const AcceleratorField: React.FC<AcceleratorFieldProps> = ({
 
     // Display the keys being pushed while trying to set accelerator
     const [pressing, setPressing] = React.useState(false);
-    const [accelerator, setAccelerator] = React.useState("");
+    const [accelerator, setAccelerator] = React.useState('');
 
     /*
 		Using this info: https://keycode.info/ we exclude some keys that we need for modifiers
@@ -40,13 +40,13 @@ const AcceleratorField: React.FC<AcceleratorFieldProps> = ({
     ]);
 
     // Assign modifier key names, different OS' use different key names
-    let altKeyName = "Alt";
-    let metaKeyName = "Meta";
-    if (navigator.userAgent.indexOf("Mac") !== -1) {
-        altKeyName = "Option";
-        metaKeyName = "Command";
-    } else if (navigator.userAgent.indexOf("Win") !== -1) {
-        metaKeyName = "Windows";
+    let altKeyName = 'Alt';
+    let metaKeyName = 'Meta';
+    if (navigator.userAgent.indexOf('Mac') !== -1) {
+        altKeyName = 'Option';
+        metaKeyName = 'Command';
+    } else if (navigator.userAgent.indexOf('Win') !== -1) {
+        metaKeyName = 'Windows';
     }
 
     const handleKeyDown = (event) => {
@@ -54,10 +54,10 @@ const AcceleratorField: React.FC<AcceleratorFieldProps> = ({
 
         // Start key array with any modifiers
         const keys = [
-            event.ctrlKey && "Control",
+            event.ctrlKey && 'Control',
             event.metaKey && metaKeyName,
             event.altKey && altKeyName,
-            event.shiftKey && "Shift",
+            event.shiftKey && 'Shift',
         ].filter(Boolean); // Remove false values
 
         // I've not tested every combo to verify it will work in electron, all the documentation they provide:
@@ -69,7 +69,7 @@ const AcceleratorField: React.FC<AcceleratorFieldProps> = ({
                 (event.which === 8 || event.which === 46)
             ) {
                 setPressing(false);
-                onChange("");
+                onChange('');
 
                 return;
             }
@@ -81,7 +81,7 @@ const AcceleratorField: React.FC<AcceleratorFieldProps> = ({
 
             // Save values
             keys.push(keycodeToChar[event.which]);
-            onChange(keys.join("+"));
+            onChange(keys.join('+'));
         } else if (
             field.allowOnlyModifier &&
             modifierKeyCodes.has(event.which) &&
@@ -95,7 +95,7 @@ const AcceleratorField: React.FC<AcceleratorFieldProps> = ({
 
         // Display current keys pressed
         setPressing(true);
-        setAccelerator(keys.join("+"));
+        setAccelerator(keys.join('+'));
     };
 
     const handleKeyUp = (_) => {
