@@ -30,5 +30,10 @@
             "!**/build/**", // …except compiled output
             "!**/dist/**" // …and release bundles
         ]
+    },
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
     }
 }
