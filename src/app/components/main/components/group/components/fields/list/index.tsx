@@ -10,7 +10,14 @@ interface ListFieldProps {
     value?: string[];
     onChange: (value: string[]) => void;
 }
-class ListField extends React.Component<ListFieldProps> {
+
+interface ListFieldState {
+    showInputModal: boolean;
+    itemToAdd: string;
+    selectedIndex: number;
+}
+
+class ListField extends React.Component<ListFieldProps, ListFieldState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -151,7 +158,7 @@ class ListField extends React.Component<ListFieldProps> {
                                 )) || (
                                     <button
                                         className="ep-list-modal-button"
-                                        disabled="disabled"
+                                        disabled
                                         aria-label="Save"
                                     >
                                         Save
