@@ -27,9 +27,7 @@ module.exports = {
         alias: {},
     },
 
-    plugins: [
-        new CopyWebpackPlugin({ patterns: [{ from: 'assets' }] }),
-    ],
+    plugins: [new CopyWebpackPlugin({ patterns: [{ from: 'assets' }] })],
 
     module: {
         rules: [
