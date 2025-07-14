@@ -3,6 +3,7 @@ export interface PreferenceField {
     label?: string;
     help?: string;
     inputType?: string;
+    placeholder?: string;
     options?: Array<{ label: string; value: any }>;
     [key: string]: any;
 }

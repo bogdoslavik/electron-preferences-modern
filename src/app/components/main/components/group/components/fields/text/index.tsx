@@ -16,8 +16,9 @@ class TextField extends React.Component<TextFieldProps> {
                 <div className="field-label">{this.label}</div>
                 <input
                     type={this.inputType}
-                    onChange={this.onChange.bind(this)}
+                    onChange={this.handleChange}
                     value={this.value}
+                    placeholder={this.placeholder}
                     aria-label={this.label}
                 />
                 {this.help && <span className="help">{this.help}</span>}
@@ -25,29 +26,14 @@ class TextField extends React.Component<TextFieldProps> {
         );
     }
 
-    get field() {
-        return this.props.field;
-    }
-
-    get value() {
-        return this.props.value || '';
-    }
-
-    get label() {
-        return this.field.label;
-    }
-
-    get inputType() {
-        return this.field.inputType || this.field.type || 'text';
-    }
-
-    get help() {
-        return this.field.help;
-    }
-
-    onChange(e) {
-        return this.props.onChange(e.target.value);
-    }
+    get field()        { return this.props.field; }
+    get value()        { return this.props.value ?? ''; }
+    get label()        { return this.field.label; }
+    get inputType()    { return this.field.inputType ?? this.field.type ?? 'text'; }
+    get help()         { return this.field.help; }
+    get placeholder()  { return this.field.placeholder ?? ''; }
+    handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+        this.props.onChange(e.target.value);
 }
 
 TextField.propTypes = {

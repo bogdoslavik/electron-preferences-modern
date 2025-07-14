@@ -50,6 +50,7 @@ export interface PreferencesSection extends PreferenceField {
     label?: string;
 
     icon?: string;
+    customIcon?: string;
     iconColor?: string;
     enabled?: boolean;
 

@@ -63,6 +63,7 @@ const preferences = new ElectronPreferences({
                                 label: 'First Name',
                                 key: 'firstName',
                                 type: 'text',
+                                placeholder: 'Enter your first name here',
                                 help: 'What is your first name?',
                             },
                             {
