@@ -19,11 +19,11 @@ class Sidebar extends React.Component<SidebarProps> {
             const isActive = this.activeSection === section.id;
             let className = 'sidebar-section' + (isActive ? ' active' : '');
 
-            const rawPath   = section.customIcon
+            const rawPath = section.customIcon
                 ? section.customIcon
                 : `svg/${section.icon}.svg`;
-            const iconUrl   = rawPath.replace(/\\/g, '/');
-            const safeUrl   = encodeURI(iconUrl);
+            const iconUrl = rawPath.replace(/\\/g, '/');
+            const safeUrl = encodeURI(iconUrl);
 
             const iconStyle = {
                 mask: `url("${safeUrl}") no-repeat center / contain`,

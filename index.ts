@@ -234,7 +234,7 @@ class ElectronPreferences extends EventEmitter2 {
         });
     }
 
-    value(key?:string, value?: any) {
+    value(key?: string, value?: any) {
         // Place the key/value pair(s) into this.preferences var
         if (_.isArray(key)) {
             key.forEach(({ key, value }) => {

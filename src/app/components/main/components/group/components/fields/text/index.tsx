@@ -26,12 +26,24 @@ class TextField extends React.Component<TextFieldProps> {
         );
     }
 
-    get field()        { return this.props.field; }
-    get value()        { return this.props.value ?? ''; }
-    get label()        { return this.field.label; }
-    get inputType()    { return this.field.inputType ?? this.field.type ?? 'text'; }
-    get help()         { return this.field.help; }
-    get placeholder()  { return this.field.placeholder ?? ''; }
+    get field() {
+        return this.props.field;
+    }
+    get value() {
+        return this.props.value ?? '';
+    }
+    get label() {
+        return this.field.label;
+    }
+    get inputType() {
+        return this.field.inputType ?? this.field.type ?? 'text';
+    }
+    get help() {
+        return this.field.help;
+    }
+    get placeholder() {
+        return this.field.placeholder ?? '';
+    }
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
         this.props.onChange(e.target.value);
 }
