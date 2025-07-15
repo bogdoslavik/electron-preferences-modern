@@ -306,7 +306,7 @@ class ElectronPreferences extends EventEmitter2 {
         return browserWindowOptions;
     }
 
-    show(section) {
+    show(section?) {
         if (typeof section !== 'undefined') {
             const sectionIds = this.options.sections.map(
                 (section) => section.id,
