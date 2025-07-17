@@ -25,7 +25,6 @@ class DropdownField extends React.Component<DropdownFieldProps> {
                     value={this.value}
                     aria-label={this.label}
                 >
-                    <option value="">-- Select One --</option>
                     {options}
                 </select>
                 {this.help && <span className="help">{this.help}</span>}
