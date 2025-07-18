@@ -8,7 +8,8 @@ const os = require('os');
 const { default: ElectronPreferences } = require('../dist');
 
 const preferences = new ElectronPreferences({
-    debug: false, // True will open the dev tools
+    debug: true, // True will open the dev tools
+    // debug: false,
     config: {
         debounce: 10,
         css: 'custom-style.css',

@@ -4,11 +4,10 @@
     width: 100%;
     font-size: 14px;
     border-radius: 8px;
-    border: 1px solid #e7e7e7;
+    border: 2px solid #e7e7e7;
     background: #ffffff;
     padding: 8px;
     outline: none;
-    margin: 1px;
     transition: border-color .2s ease-out;
 
     /* ── FOCUS: border uses system accent ── */
@@ -24,7 +23,7 @@
   .field-dropdown select {
     color: #e4e4e4;
     background: #191919;
-    border: 1px solid #131313;
+    border: 2px solid #5d5d5d;
 
     &:focus {
       border: 2px solid var(--accent, #0084ff);
