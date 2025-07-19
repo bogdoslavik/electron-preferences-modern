@@ -4,6 +4,7 @@ export interface PreferenceField {
     help?: string;
     inputType?: string;
     placeholder?: string;
+    lines?: number; // for text field
     options?: Array<{ label: string; value: any }>;
     [key: string]: any;
 }

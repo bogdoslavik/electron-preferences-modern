@@ -33,6 +33,24 @@ if (process.platform === 'win32') {
     });
 }
 
+// Helper: collect "section.key" paths that changed
+function diffPrefs(oldPrefs: any, newPrefs: any): string[] {
+    const changed: string[] = [];
+
+    const walk = (o: any, n: any, path: string[] = []) => {
+        // Both values are objects → dive deeper
+        if (_.isPlainObject(o) && _.isPlainObject(n)) {
+            const keys = _.union(_.keys(o), _.keys(n));
+            keys.forEach(k => walk(o?.[k], n?.[k], [...path, k]));
+        } else if (!_.isEqual(o, n)) {
+            changed.push(path.join('.'));
+        }
+    };
+
+    walk(oldPrefs, newPrefs);
+    return changed;
+}
+
 class ElectronPreferences extends EventEmitter2 {
     prefsWindow?: BrowserWindow | null;
     _preferences: any;
@@ -152,10 +170,12 @@ class ElectronPreferences extends EventEmitter2 {
         });
 
         ipcMain.on('setPreferences', (event, value) => {
+            const prevPrefs = _.cloneDeep(this.preferences);
             this.preferences = value;
             this.save();
             this.broadcast();
-            this.emit('save', Object.freeze(_.cloneDeep(this.preferences)));
+            const changed = diffPrefs(prevPrefs, this.preferences);
+            this.emit('save', Object.freeze(_.cloneDeep(this.preferences)), changed);
             event.returnValue = null;
         });
 

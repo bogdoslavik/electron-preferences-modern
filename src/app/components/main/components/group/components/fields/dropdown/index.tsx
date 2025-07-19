@@ -9,6 +9,7 @@ interface DropdownFieldProps {
     value?: string;
     onChange: (value: string) => void;
 }
+
 class DropdownField extends React.Component<DropdownFieldProps> {
     render() {
         const options = this.options.map((option, idx) => (
@@ -45,7 +46,14 @@ class DropdownField extends React.Component<DropdownFieldProps> {
     }
 
     get options() {
-        return this.field.options || [];
+        const opts = this.field.options;
+
+        if (typeof opts === 'function') {
+            const result = (opts as () => any[])();
+            return Array.isArray(result) ? result : [];
+        }
+
+        return Array.isArray(opts) ? opts : [];
     }
 
     get help() {

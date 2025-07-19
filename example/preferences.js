@@ -71,6 +71,7 @@ const preferences = new ElectronPreferences({
                                 label: 'Last Name',
                                 key: 'lastName',
                                 type: 'text',
+                                lines: 2,
                                 help: 'What is your last name?',
                             },
                             {
@@ -87,7 +88,7 @@ const preferences = new ElectronPreferences({
                                 label: 'Gender',
                                 key: 'gender',
                                 type: 'dropdown',
-                                options: [
+                                options: () => [
                                     { label: 'Male', value: 'male' },
                                     { label: 'Female', value: 'female' },
                                     {

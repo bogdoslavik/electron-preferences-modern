@@ -12,11 +12,12 @@ const preferences = require('./preferences');
 app.commandLine.appendSwitch('enable-smooth-scrolling');
 nativeTheme.themeSource = preferences.preferences?.theme?.theme ?? 'system';
 
-preferences.on('save', (preferences) => {
+preferences.on('save', (preferences, changed) => {
     console.log(
         'Preferences were saved.',
         JSON.stringify(preferences, null, 4),
     );
+    console.log('Changed:', changed);
 
     nativeTheme.themeSource = preferences?.theme?.theme ?? 'system';
 });
