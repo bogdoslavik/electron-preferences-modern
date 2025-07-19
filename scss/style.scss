@@ -60,7 +60,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 2px;
-    background-color: #8a8a8a;
+    background-color: #808080;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -69,7 +69,7 @@ body {
         color: #e4e4e4;
     }
     ::-webkit-scrollbar-thumb {
-        background-color: #151515;
+        background-color: #808080;
     }
 }
 
