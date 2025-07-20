@@ -41,7 +41,7 @@ function diffPrefs(oldPrefs: any, newPrefs: any): string[] {
         // Both values are objects → dive deeper
         if (_.isPlainObject(o) && _.isPlainObject(n)) {
             const keys = _.union(_.keys(o), _.keys(n));
-            keys.forEach(k => walk(o?.[k], n?.[k], [...path, k]));
+            keys.forEach((k) => walk(o?.[k], n?.[k], [...path, k]));
         } else if (!_.isEqual(o, n)) {
             changed.push(path.join('.'));
         }
@@ -175,7 +175,11 @@ class ElectronPreferences extends EventEmitter2 {
             this.save();
             this.broadcast();
             const changed = diffPrefs(prevPrefs, this.preferences);
-            this.emit('save', Object.freeze(_.cloneDeep(this.preferences)), changed);
+            this.emit(
+                'save',
+                Object.freeze(_.cloneDeep(this.preferences)),
+                changed,
+            );
             event.returnValue = null;
         });
 
