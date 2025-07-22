@@ -52,12 +52,23 @@ function diffPrefs(oldPrefs: any, newPrefs: any): string[] {
 }
 
 class ElectronPreferences extends EventEmitter2 {
+    /** map of instances by id */
+    static instances: Map<string, ElectronPreferences> = new Map();
+
     prefsWindow?: BrowserWindow | null;
     _preferences: any;
     options: any;
+    id?: string;
+
+    private ipcChannel(name: string) {
+        return this.id ? `${name}:${this.id}` : name;
+    }
 
     constructor(options: PreferencesOptions = {}) {
         super();
+
+        this.id = options.id;
+        ElectronPreferences.instances.set(this.id ?? 'default', this);
 
         _.defaultsDeep(options, {
             config: {
@@ -139,37 +150,37 @@ class ElectronPreferences extends EventEmitter2 {
 
         this.save();
 
-        ipcMain.on('showPreferences', (_, section) => {
+        ipcMain.on(this.ipcChannel('showPreferences'), (_, section) => {
             this.show(section);
         });
 
-        ipcMain.on('closePreferences', (_) => {
+        ipcMain.on(this.ipcChannel('closePreferences'), (_) => {
             this.close();
         });
 
-        ipcMain.on('getConfig', (event) => {
+        ipcMain.on(this.ipcChannel('getConfig'), (event) => {
             event.returnValue = this.options.config;
         });
 
-        ipcMain.on('getSections', (event) => {
+        ipcMain.on(this.ipcChannel('getSections'), (event) => {
             event.returnValue = jsonSerializer(this.options.sections);
         });
 
-        ipcMain.on('restoreDefaults', (_) => {
+        ipcMain.on(this.ipcChannel('restoreDefaults'), (_) => {
             this.preferences = this.defaults;
             this.save();
             this.broadcast();
         });
 
-        ipcMain.on('getDefaults', (event) => {
+        ipcMain.on(this.ipcChannel('getDefaults'), (event) => {
             event.returnValue = this.defaults;
         });
 
-        ipcMain.on('getPreferences', (event) => {
+        ipcMain.on(this.ipcChannel('getPreferences'), (event) => {
             event.returnValue = this.preferences;
         });
 
-        ipcMain.on('setPreferences', (event, value) => {
+        ipcMain.on(this.ipcChannel('setPreferences'), (event, value) => {
             const prevPrefs = _.cloneDeep(this.preferences);
             this.preferences = value;
             this.save();
@@ -183,20 +194,23 @@ class ElectronPreferences extends EventEmitter2 {
             event.returnValue = null;
         });
 
-        ipcMain.on('showOpenDialog', (event, dialogOptions) => {
-            event.returnValue = dialog.showOpenDialogSync(dialogOptions);
-        });
+        ipcMain.on(
+            this.ipcChannel('showOpenDialog'),
+            (event, dialogOptions) => {
+                event.returnValue = dialog.showOpenDialogSync(dialogOptions);
+            },
+        );
 
-        ipcMain.on('sendButtonClick', (_, message) => {
+        ipcMain.on(this.ipcChannel('sendButtonClick'), (_, message) => {
             // Main process
             this.emit('click', message);
         });
 
-        ipcMain.on('resetToDefaults', (_) => {
+        ipcMain.on(this.ipcChannel('resetToDefaults'), (_) => {
             this.resetToDefaults();
         });
 
-        ipcMain.on('encrypt', (event, secret) => {
+        ipcMain.on(this.ipcChannel('encrypt'), (event, secret) => {
             if (!safeStorage.isEncryptionAvailable()) {
                 console.warn(
                     "Cannot encrypt secret as electron's safeStorage isn't available",
@@ -210,7 +224,7 @@ class ElectronPreferences extends EventEmitter2 {
                 .toString('base64');
         });
 
-        ipcMain.on('decrypt', (event, encryptedSecret) => {
+        ipcMain.on(this.ipcChannel('decrypt'), (event, encryptedSecret) => {
             if (!safeStorage.isEncryptionAvailable()) {
                 console.warn(
                     "Cannot decrypt encrypted secret as electron's safeStorage isn't available",
@@ -281,7 +295,7 @@ class ElectronPreferences extends EventEmitter2 {
 
     broadcast() {
         for (const wc of webContents.getAllWebContents()) {
-            wc.send('preferencesUpdated', this.preferences);
+            wc.send(this.ipcChannel('preferencesUpdated'), this.preferences);
         }
     }
 

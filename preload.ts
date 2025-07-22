@@ -3,6 +3,7 @@
 const electron = require('electron');
 const { contextBridge } = electron;
 const { ipcRenderer } = electron;
+const ch = (name, id) => (id ? `${name}:${id}` : name);
 
 // eslint-disable-next-line no-eval -- deserialize function for 'serialize-javascript' library
 const deserializeJson = (serializedJavascript) =>
@@ -10,21 +11,23 @@ const deserializeJson = (serializedJavascript) =>
 let onPreferencesUpdatedHandler;
 
 contextBridge.exposeInMainWorld('api', {
-    getSections: () => deserializeJson(ipcRenderer.sendSync('getSections')),
-    getPreferences: () => ipcRenderer.sendSync('getPreferences'),
-    getDefaults: () => ipcRenderer.sendSync('getDefaults'),
-    getConfig: () => ipcRenderer.sendSync('getConfig'),
-    setPreferences: (preferences) =>
-        ipcRenderer.send('setPreferences', preferences),
-    showOpenDialog: (dialogOptions) =>
-        ipcRenderer.sendSync('showOpenDialog', dialogOptions),
-    sendButtonClick: (channel) => ipcRenderer.send('sendButtonClick', channel),
-    encrypt: (secret) => ipcRenderer.sendSync('encrypt', secret),
+    getSections: (id) =>
+        deserializeJson(ipcRenderer.sendSync(ch('getSections', id))),
+    getPreferences: (id) => ipcRenderer.sendSync(ch('getPreferences', id)),
+    getDefaults: (id) => ipcRenderer.sendSync(ch('getDefaults', id)),
+    getConfig: (id) => ipcRenderer.sendSync(ch('getConfig', id)),
+    setPreferences: (preferences, id) =>
+        ipcRenderer.send(ch('setPreferences', id), preferences),
+    showOpenDialog: (dialogOptions, id) =>
+        ipcRenderer.sendSync(ch('showOpenDialog', id), dialogOptions),
+    sendButtonClick: (channel, id) =>
+        ipcRenderer.send(ch('sendButtonClick', id), channel),
+    encrypt: (secret, id) => ipcRenderer.sendSync(ch('encrypt', id), secret),
     onPreferencesUpdated(handler) {
         onPreferencesUpdatedHandler = handler;
     },
 });
-ipcRenderer.on('preferencesUpdated', (e, preferences) => {
+ipcRenderer.on(ch('preferencesUpdated'), (e, preferences) => {
     if (typeof onPreferencesUpdatedHandler === 'function') {
         onPreferencesUpdatedHandler(preferences);
     }

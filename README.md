@@ -106,7 +106,9 @@ const { app } = require('electron');
 const path = require('path');
 
 const preferences = new ElectronPreferences({
-	config: {
+        // optional identifier to create multiple preference windows
+        id: 'main',
+        config: {
 		debounce: 150, // debounce preference save settings event; 0 to disable
 	},
 
@@ -196,10 +198,16 @@ const preferences = ipcRenderer.sendSync('getPreferences');
 ipcRenderer.send('showPreferences');
 // Or show a specific section:
 ipcRenderer.send('showPreferences', 'about');
+// When using multiple preference instances, append the id to the channel:
+ipcRenderer.send('showPreferences:plugins');
 
 // Listen to the `preferencesUpdated` event to be notified when preferences are changed.
 ipcRenderer.on('preferencesUpdated', (e, preferences) => {
-	console.log('Preferences were updated', preferences);
+        console.log('Preferences were updated', preferences);
+});
+// For instance specific events use the same id suffix:
+ipcRenderer.on('preferencesUpdated:plugins', (e, preferences) => {
+        console.log('Plugin preferences updated', preferences);
 });
 
 // Instruct the preferences service to update the preferences object from within the renderer.

@@ -59,6 +59,8 @@ export interface PreferencesSection extends PreferenceField {
 
 /** Constructor argument for `ElectronPreferences` */
 export interface PreferencesOptions {
+    /** instance id for multiple preference windows */
+    id?: string;
     /** Core storage configuration */
     config?: PreferencesConfig;
 

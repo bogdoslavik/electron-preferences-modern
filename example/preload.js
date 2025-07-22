@@ -4,23 +4,25 @@ const electron = require('electron');
 
 const { contextBridge } = electron;
 const { ipcRenderer } = electron;
+const ch = (name, id) => (id ? `${name}:${id}` : name);
 
 let onPreferencesChangedHandler = () => {};
 
 contextBridge.exposeInMainWorld('api', {
-    showPreferences: (section) => ipcRenderer.send('showPreferences', section),
-    closePreferences: () => ipcRenderer.send('closePreferences'),
-    getPreferences: () => ipcRenderer.sendSync('getPreferences'),
+    showPreferences: (section, id) =>
+        ipcRenderer.send(ch('showPreferences', id), section),
+    closePreferences: (id) => ipcRenderer.send(ch('closePreferences', id)),
+    getPreferences: (id) => ipcRenderer.sendSync(ch('getPreferences', id)),
     onPreferencesChanged(handler) {
         onPreferencesChangedHandler = handler;
     },
-    getDefaults: () => ipcRenderer.sendSync('getDefaults'),
-    resetToDefaults: () => ipcRenderer.send('resetToDefaults'),
-    decrypt: (encryptedSecret) =>
-        ipcRenderer.sendSync('decrypt', encryptedSecret),
+    getDefaults: (id) => ipcRenderer.sendSync(ch('getDefaults', id)),
+    resetToDefaults: (id) => ipcRenderer.send(ch('resetToDefaults', id)),
+    decrypt: (encryptedSecret, id) =>
+        ipcRenderer.sendSync(ch('decrypt', id), encryptedSecret),
 });
 
-ipcRenderer.on('preferencesUpdated', (e, preferences) => {
+ipcRenderer.on(ch('preferencesUpdated'), (e, preferences) => {
     onPreferencesChangedHandler(preferences);
 });
 
