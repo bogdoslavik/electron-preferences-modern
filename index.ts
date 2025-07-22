@@ -55,6 +55,7 @@ class ElectronPreferences extends EventEmitter2 {
     prefsWindow?: BrowserWindow | null;
     _preferences: any;
     options: any;
+    prefix: string;
 
     constructor(options: PreferencesOptions = {}) {
         super();
@@ -70,6 +71,7 @@ class ElectronPreferences extends EventEmitter2 {
         });
 
         this.options = options;
+        this.prefix = options.ipcPrefix ?? '';
 
         // Legacy: Set config values
         if (options.css && !options.config.css) {
@@ -139,37 +141,37 @@ class ElectronPreferences extends EventEmitter2 {
 
         this.save();
 
-        ipcMain.on('showPreferences', (_, section) => {
+        ipcMain.on(this.ch('showPreferences'), (_, section) => {
             this.show(section);
         });
 
-        ipcMain.on('closePreferences', (_) => {
+        ipcMain.on(this.ch('closePreferences'), (_) => {
             this.close();
         });
 
-        ipcMain.on('getConfig', (event) => {
+        ipcMain.on(this.ch('getConfig'), (event) => {
             event.returnValue = this.options.config;
         });
 
-        ipcMain.on('getSections', (event) => {
+        ipcMain.on(this.ch('getSections'), (event) => {
             event.returnValue = jsonSerializer(this.options.sections);
         });
 
-        ipcMain.on('restoreDefaults', (_) => {
+        ipcMain.on(this.ch('restoreDefaults'), (_) => {
             this.preferences = this.defaults;
             this.save();
             this.broadcast();
         });
 
-        ipcMain.on('getDefaults', (event) => {
+        ipcMain.on(this.ch('getDefaults'), (event) => {
             event.returnValue = this.defaults;
         });
 
-        ipcMain.on('getPreferences', (event) => {
+        ipcMain.on(this.ch('getPreferences'), (event) => {
             event.returnValue = this.preferences;
         });
 
-        ipcMain.on('setPreferences', (event, value) => {
+        ipcMain.on(this.ch('setPreferences'), (event, value) => {
             const prevPrefs = _.cloneDeep(this.preferences);
             this.preferences = value;
             this.save();
@@ -183,20 +185,20 @@ class ElectronPreferences extends EventEmitter2 {
             event.returnValue = null;
         });
 
-        ipcMain.on('showOpenDialog', (event, dialogOptions) => {
+        ipcMain.on(this.ch('showOpenDialog'), (event, dialogOptions) => {
             event.returnValue = dialog.showOpenDialogSync(dialogOptions);
         });
 
-        ipcMain.on('sendButtonClick', (_, message) => {
+        ipcMain.on(this.ch('sendButtonClick'), (_, message) => {
             // Main process
             this.emit('click', message);
         });
 
-        ipcMain.on('resetToDefaults', (_) => {
+        ipcMain.on(this.ch('resetToDefaults'), (_) => {
             this.resetToDefaults();
         });
 
-        ipcMain.on('encrypt', (event, secret) => {
+        ipcMain.on(this.ch('encrypt'), (event, secret) => {
             if (!safeStorage.isEncryptionAvailable()) {
                 console.warn(
                     "Cannot encrypt secret as electron's safeStorage isn't available",
@@ -210,7 +212,7 @@ class ElectronPreferences extends EventEmitter2 {
                 .toString('base64');
         });
 
-        ipcMain.on('decrypt', (event, encryptedSecret) => {
+        ipcMain.on(this.ch('decrypt'), (event, encryptedSecret) => {
             if (!safeStorage.isEncryptionAvailable()) {
                 console.warn(
                     "Cannot decrypt encrypted secret as electron's safeStorage isn't available",
@@ -226,6 +228,10 @@ class ElectronPreferences extends EventEmitter2 {
         if (typeof options.onLoad === 'function') {
             options.afterLoad(this);
         }
+    }
+
+    private ch(name: string): string {
+        return this.prefix ? `${this.prefix}:${name}` : name;
     }
 
     get dataStore() {
@@ -281,7 +287,7 @@ class ElectronPreferences extends EventEmitter2 {
 
     broadcast() {
         for (const wc of webContents.getAllWebContents()) {
-            wc.send('preferencesUpdated', this.preferences);
+            wc.send(this.ch('preferencesUpdated'), this.preferences);
         }
     }
 
