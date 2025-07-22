@@ -3,7 +3,7 @@
 const electron = require('electron');
 const { contextBridge } = electron;
 const { ipcRenderer } = electron;
-const ch = (name, id) => (id ? `${name}:${id}` : name);
+const ch = (name:string, id?:string) => (id ? `${name}:${id}` : name);
 
 // eslint-disable-next-line no-eval -- deserialize function for 'serialize-javascript' library
 const deserializeJson = (serializedJavascript) =>
