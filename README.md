@@ -165,6 +165,19 @@ preferences.show();
 //or show a specific section by its ID
 preferences.show("about");
 
+// Namespaced instances
+const corePrefs = new ElectronPreferences({
+  config: { dataStore: path.join(app.getPath('userData'), 'core.json') },
+  ipcPrefix: 'core',
+});
+corePrefs.show();
+
+const pluginPrefs = new ElectronPreferences({
+  config: { dataStore: path.join(app.getPath('userData'), 'plugin.json') },
+  ipcPrefix: 'plugin',
+});
+pluginPrefs.show('plugin-section');
+
 // Get a value from the preferences data store
 const name = preferences.value('about.name');
 
@@ -187,23 +200,20 @@ preferences.on('click', (key) => {
 ### From the Renderer process
 
 ```js
-const { ipcRenderer, remote } = require('electron');
-
-// Fetch the preferences object
-const preferences = ipcRenderer.sendSync('getPreferences');
-
-// Display the preferences window
-ipcRenderer.send('showPreferences');
-// Or show a specific section:
-ipcRenderer.send('showPreferences', 'about');
-
-// Listen to the `preferencesUpdated` event to be notified when preferences are changed.
-ipcRenderer.on('preferencesUpdated', (e, preferences) => {
-	console.log('Preferences were updated', preferences);
+// Access the default preferences instance
+const prefs = window.prefAPI();
+prefs.get().then((all) => {
+  console.log('Current prefs', all);
 });
 
-// Instruct the preferences service to update the preferences object from within the renderer.
-ipcRenderer.sendSync('setPreferences', { ... });
+// Display the preferences window
+prefs.save({ theme: 'dark' });
+
+// Plugin renderer can use its own namespace
+const pluginPrefs = window.prefAPI('plugin');
+pluginPrefs.onUpdated((_e, updated) => {
+  console.log('Plugin prefs changed', updated);
+});
 ```
 
 

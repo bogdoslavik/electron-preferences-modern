@@ -77,6 +77,13 @@ export interface PreferencesOptions {
     /** Show DevTools for the preferences window */
     debug?: boolean;
 
+    /**
+     * Optional IPC namespace. When set, the instance registers its listeners
+     * under `${ipcPrefix}:<event>`, isolating it from other instances.
+     * If omitted, the legacy channel names are used for full backward compatibility.
+     */
+    ipcPrefix?: string;
+
     /** Deprecated fields kept for backward compatibility */
     css?: string;
     dataStore?: string;
