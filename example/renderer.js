@@ -6,6 +6,8 @@ const bt2 = document.querySelectorAll('.bt')[1];
 const bt3 = document.querySelectorAll('.bt')[2];
 const bt4 = document.querySelectorAll('.bt')[3];
 const bt5 = document.querySelectorAll('.bt')[4];
+const bt6 = document.querySelectorAll('.bt')[5];
+const bt7 = document.querySelectorAll('.bt')[6];
 const prefsElement = document.querySelectorAll('.preferences')[0];
 prefsElement.innerHTML = JSON.stringify(api.getPreferences(), null, 4);
 
@@ -35,6 +37,14 @@ bt5.addEventListener('click', () => {
 
     // eslint-disable-next-line no-alert
     alert(`Encrypted password: ${encrypted}\nDecrypted password: ${decrypted}`);
+});
+
+bt6.addEventListener('click', () => {
+    api.showPreferences(undefined, 'preferences2');
+});
+
+bt7.addEventListener('click', () => {
+    api.closePreferences('preferences2');
 });
 
 api.onPreferencesChanged((preferences) => {
