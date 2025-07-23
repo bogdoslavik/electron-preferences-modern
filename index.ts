@@ -342,6 +342,13 @@ class ElectronPreferences extends EventEmitter2 {
             unOverridableWebPreferences,
         );
 
+        if (this.id) {
+            browserWindowOptions.webPreferences.additionalArguments = [
+                ...(browserWindowOptions.webPreferences.additionalArguments || []),
+                `--preferences-id=${this.id}`,
+            ];
+        }
+
         return browserWindowOptions;
     }
 

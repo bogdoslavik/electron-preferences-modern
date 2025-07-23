@@ -3,7 +3,11 @@
 const electron = require('electron');
 const { contextBridge } = electron;
 const { ipcRenderer } = electron;
-const ch = (name:string, id?:string) => (id ? `${name}:${id}` : name);
+const ch = (name: string, id?: string) => (id ? `${name}:${id}` : name);
+
+const prefIdArg = process.argv.find((a) => a.startsWith('--preferences-id='));
+const defaultId = prefIdArg ? prefIdArg.split('=')[1] : undefined;
+const withId = (id?: string) => id ?? defaultId;
 
 // eslint-disable-next-line no-eval -- deserialize function for 'serialize-javascript' library
 const deserializeJson = (serializedJavascript) =>
@@ -12,22 +16,24 @@ let onPreferencesUpdatedHandler;
 
 contextBridge.exposeInMainWorld('api', {
     getSections: (id) =>
-        deserializeJson(ipcRenderer.sendSync(ch('getSections', id))),
-    getPreferences: (id) => ipcRenderer.sendSync(ch('getPreferences', id)),
-    getDefaults: (id) => ipcRenderer.sendSync(ch('getDefaults', id)),
-    getConfig: (id) => ipcRenderer.sendSync(ch('getConfig', id)),
+        deserializeJson(ipcRenderer.sendSync(ch('getSections', withId(id)))),
+    getPreferences: (id) =>
+        ipcRenderer.sendSync(ch('getPreferences', withId(id))),
+    getDefaults: (id) => ipcRenderer.sendSync(ch('getDefaults', withId(id))),
+    getConfig: (id) => ipcRenderer.sendSync(ch('getConfig', withId(id))),
     setPreferences: (preferences, id) =>
-        ipcRenderer.send(ch('setPreferences', id), preferences),
+        ipcRenderer.send(ch('setPreferences', withId(id)), preferences),
     showOpenDialog: (dialogOptions, id) =>
-        ipcRenderer.sendSync(ch('showOpenDialog', id), dialogOptions),
+        ipcRenderer.sendSync(ch('showOpenDialog', withId(id)), dialogOptions),
     sendButtonClick: (channel, id) =>
-        ipcRenderer.send(ch('sendButtonClick', id), channel),
-    encrypt: (secret, id) => ipcRenderer.sendSync(ch('encrypt', id), secret),
+        ipcRenderer.send(ch('sendButtonClick', withId(id)), channel),
+    encrypt: (secret, id) =>
+        ipcRenderer.sendSync(ch('encrypt', withId(id)), secret),
     onPreferencesUpdated(handler) {
         onPreferencesUpdatedHandler = handler;
     },
 });
-ipcRenderer.on(ch('preferencesUpdated'), (e, preferences) => {
+ipcRenderer.on(ch('preferencesUpdated', defaultId), (e, preferences) => {
     if (typeof onPreferencesUpdatedHandler === 'function') {
         onPreferencesUpdatedHandler(preferences);
     }
