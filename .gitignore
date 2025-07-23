@@ -9,3 +9,4 @@ example/preferences.json
 node_modules
 build
 dist
+/example/preferences2.json

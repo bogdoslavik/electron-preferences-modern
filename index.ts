@@ -344,7 +344,8 @@ class ElectronPreferences extends EventEmitter2 {
 
         if (this.id) {
             browserWindowOptions.webPreferences.additionalArguments = [
-                ...(browserWindowOptions.webPreferences.additionalArguments || []),
+                ...(browserWindowOptions.webPreferences.additionalArguments ||
+                    []),
                 `--preferences-id=${this.id}`,
             ];
         }
