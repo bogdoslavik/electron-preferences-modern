@@ -7,7 +7,7 @@ const { nativeTheme } = electron;
 const { BrowserWindow } = electron;
 const path = require('path');
 const url = require('url');
-const preferences = require('./preferences');
+const { preferences, preferences2 } = require('./preferences');
 
 app.commandLine.appendSwitch('enable-smooth-scrolling');
 nativeTheme.themeSource = preferences.preferences?.theme?.theme ?? 'system';
@@ -28,6 +28,10 @@ preferences.on('click', (key) => {
             'We are logging something in the main process because of a button click in the preferences window!',
         );
     }
+});
+
+preferences2.on('save', (prefs) => {
+    console.log('Preferences2 were saved.', JSON.stringify(prefs, null, 4));
 });
 
 let mainWindow;

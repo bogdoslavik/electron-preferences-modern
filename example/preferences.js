@@ -471,4 +471,65 @@ const preferences = new ElectronPreferences({
     ],
 });
 
-module.exports = preferences;
+const preferences2 = new ElectronPreferences({
+    id: 'preferences2',
+    debug: true,
+    config: {
+        debounce: 10,
+        css: 'custom-style.css',
+        dataStore: path.resolve(__dirname, 'preferences2.json'),
+    },
+    defaults: {
+        basic: {
+            foo: 'bar',
+        },
+        misc: {
+            enableFeature: false,
+        },
+    },
+    browserWindowOverrides: {
+        title: 'My Electron Preferences 2',
+    },
+    sections: [
+        {
+            id: 'basic',
+            label: 'Basic',
+            icon: 'single-01',
+            form: {
+                groups: [
+                    {
+                        fields: [
+                            {
+                                label: 'Foo',
+                                key: 'foo',
+                                type: 'text',
+                                help: 'Example text field',
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+        {
+            id: 'misc',
+            label: 'Misc',
+            icon: 'lock',
+            form: {
+                groups: [
+                    {
+                        fields: [
+                            {
+                                label: 'Enable feature',
+                                key: 'enableFeature',
+                                type: 'checkbox',
+                                options: [{ label: 'Yes', value: true }],
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    ],
+});
+
+module.exports = { preferences, preferences2 };
