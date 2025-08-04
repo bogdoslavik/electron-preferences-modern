@@ -226,7 +226,7 @@ const preferences = new ElectronPreferences({
                             {
                                 heading: 'Important Message',
                                 content:
-                                    '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
+                                    '<p>Test external link: <a href="http://www.localhelper.ai" target="_blank">www.localhelper.ai</a>. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
                                 type: 'message',
                             },
                             {

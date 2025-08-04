@@ -8,6 +8,7 @@ import {
     dialog,
     safeStorage,
     systemPreferences,
+    shell,
 } from 'electron';
 import path from 'path';
 import url from 'url';
@@ -384,6 +385,13 @@ class ElectronPreferences extends EventEmitter2 {
         }
 
         this.prefsWindow = new BrowserWindow(this.getBrowserWindowOptions());
+
+        this.prefsWindow.webContents.setWindowOpenHandler(({ url }) => {
+            if (url.startsWith('https://') || url.startsWith('http://')) {
+                shell.openExternal(url).then().catch(console.error);
+            } else console.error('Invalid HTTP(S) URL: ' + url);
+            return { action: 'deny' };
+        });
 
         if (this.options.menuBar) {
             this.prefsWindow.setMenu(this.options.menuBar);
