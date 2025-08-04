@@ -25,10 +25,14 @@ class Sidebar extends React.Component<SidebarProps> {
             const iconUrl = rawPath.replace(/\\/g, '/');
             const safeUrl = encodeURI(iconUrl);
 
-            const iconStyle = {
-                mask: `url("${safeUrl}") no-repeat center / contain`,
-                WebkitMask: `url("${safeUrl}") no-repeat center / contain`,
-            };
+            const iconStyle = section.unmaskedIcon
+                ? {
+                      background: `transparent url("${safeUrl}") no-repeat center / contain`,
+                  }
+                : {
+                      mask: `url("${safeUrl}") no-repeat center / contain`,
+                      WebkitMask: `url("${safeUrl}") no-repeat center / contain`,
+                  };
 
             const liStyle: CSSProperties = section.iconColor
                 ? ({ '--icon-clr': section.iconColor } as CSSProperties)

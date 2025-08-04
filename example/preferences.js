@@ -53,8 +53,9 @@ const preferences = new ElectronPreferences({
         {
             id: 'about',
             label: 'About You',
-            icon: 'single-01',
-            iconColor: '#f7630c',
+            icon: 'localhelper_icon_simple',
+            unmaskedIcon: true,
+            // iconColor: '#f7630c',
             form: {
                 groups: [
                     {

@@ -53,6 +53,7 @@ export interface PreferencesSection extends PreferenceField {
     customIcon?: string;
     iconColor?: string;
     enabled?: boolean;
+    unmaskedIcon?: boolean;
 
     form?: { groups: PreferencesGroup[] };
 }
